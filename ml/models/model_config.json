@@ -1,0 +1,5 @@
+{
+  "lookback": 48,
+  "water_features": ["do", "temperature", "ph", "turbidity"],
+  "nitrogen_features": ["ammonia", "nitrate"]
+}

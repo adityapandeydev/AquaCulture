@@ -1,0 +1,13 @@
+__pycache__
+.venv
+Datasets
+Pictures
+.env
+X1_test.npy
+X1_train.npy
+y1_test.npy
+y1_train.npy
+X2_test.npy
+X2_train.npy
+y2_test.npy
+y2_train.npy
