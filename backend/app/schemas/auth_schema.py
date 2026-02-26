@@ -3,8 +3,10 @@ from pydantic import BaseModel, EmailStr
 
 class UserRegister(BaseModel):
 
-    email: EmailStr
+    name: str
 
+    email: EmailStr
+    
     password: str
 
 

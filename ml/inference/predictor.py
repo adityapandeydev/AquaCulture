@@ -7,7 +7,8 @@ import joblib
 import tensorflow as tf
 import pandas as pd
 from .risk_engine import compute_risk
-
+import warnings
+warnings.filterwarnings("ignore")
 
 # ============================
 # PATH SETUP
@@ -16,7 +17,6 @@ from .risk_engine import compute_risk
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 ML_DIR = os.path.dirname(BASE_DIR)
 MODELS_DIR = os.path.join(ML_DIR, "models")
-
 
 # ============================
 # LOAD CONFIG
@@ -34,7 +34,6 @@ if os.path.exists(CONFIG_PATH):
 else:
     LOOKBACK = 48
 
-
 # ============================
 # LOAD SCALER
 # ============================
@@ -42,7 +41,6 @@ else:
 SCALER = joblib.load(
     os.path.join(MODELS_DIR, "scaler.save")
 )
-
 
 # ============================
 # LOAD MODELS
@@ -56,19 +54,11 @@ MODEL_NITROGEN = tf.keras.models.load_model(
     os.path.join(MODELS_DIR, "model2_nitrogen_lstm.keras")
 )
 
-
 # ============================
 # SCALING FUNCTIONS
 # ============================
 
 def scale_input_window(raw_window, timestamps):
-    """
-    raw_window shape: (lookback, 7)
-    Order:
-    [nitrate, ph, ammonia, temperature, do, turbidity, manganese]
-
-    timestamps: list of datetime objects
-    """
 
     raw_window = np.array(raw_window)
 
@@ -78,7 +68,6 @@ def scale_input_window(raw_window, timestamps):
     temperature = raw_window[:, 3]
     do = raw_window[:, 4]
     turbidity = raw_window[:, 5]
-    manganese = raw_window[:, 6]
 
     # Time features
     hours = pd.to_datetime(timestamps).hour
@@ -89,7 +78,6 @@ def scale_input_window(raw_window, timestamps):
     ammonia_ph = ammonia * ph
     ammonia_temp = ammonia * temperature
 
-    # Stack features in training order
     full_features = np.column_stack([
         nitrate,
         ph,
@@ -97,7 +85,6 @@ def scale_input_window(raw_window, timestamps):
         temperature,
         do,
         turbidity,
-        manganese,
         hour_sin,
         hour_cos,
         ammonia_ph,
@@ -150,16 +137,11 @@ def inverse_scale_nitrogen(forecast_array):
 
     return np.stack(result, axis=1)
 
-
 # ============================
 # CORE PREDICTION FUNCTION
 # ============================
 
 def predict_from_window(raw_window, timestamps):
-    """
-    raw_window: (lookback, 7)
-    timestamps: list of datetime objects
-    """
 
     if raw_window.shape[0] != LOOKBACK:
         raise ValueError(
@@ -171,30 +153,49 @@ def predict_from_window(raw_window, timestamps):
             f"Timestamps length mismatch. Expected {LOOKBACK}"
         )
 
-    # Step 1: scale input
+    # Step 1: Scale
     scaled_window = scale_input_window(raw_window, timestamps)
 
-    # Step 2: expand batch dimension
+    # Step 2: Add batch dimension
     input_window = np.expand_dims(scaled_window, axis=0)
 
-    # Step 3: water prediction
+    # Step 3: Water prediction
     water_scaled = MODEL_WATER.predict(input_window, verbose=0)[0]
 
-    # Step 4: sequential injection
+    # Step 4: ALL-WATER CASCADE
     nitrogen_input = input_window.copy()
 
     temp_idx = FEATURE_COLUMNS.index("temperature")
     ph_idx = FEATURE_COLUMNS.index("ph")
+    do_idx = FEATURE_COLUMNS.index("do")
+    turb_idx = FEATURE_COLUMNS.index("turbidity")
 
+    nitrogen_input[0, -1, do_idx] = water_scaled[0, 0]
     nitrogen_input[0, -1, temp_idx] = water_scaled[0, 1]
     nitrogen_input[0, -1, ph_idx] = water_scaled[0, 2]
+    nitrogen_input[0, -1, turb_idx] = water_scaled[0, 3]
 
-    # Step 5: nitrogen prediction
+    # Recalculate interaction features
+    ammonia_idx = FEATURE_COLUMNS.index("ammonia")
+    ammonia_ph_idx = FEATURE_COLUMNS.index("ammonia_ph")
+    ammonia_temp_idx = FEATURE_COLUMNS.index("ammonia_temp")
+
+    ammonia_val = nitrogen_input[0, -1, ammonia_idx]
+
+    nitrogen_input[0, -1, ammonia_ph_idx] = (
+        ammonia_val * nitrogen_input[0, -1, ph_idx]
+    )
+    nitrogen_input[0, -1, ammonia_temp_idx] = (
+        ammonia_val * nitrogen_input[0, -1, temp_idx]
+    )
+
+    # Step 5: Nitrogen prediction
     nitrogen_scaled = MODEL_NITROGEN.predict(nitrogen_input, verbose=0)[0]
 
-    # Step 6: inverse scaling
+    # Step 6: Inverse scaling
     water_real = inverse_scale_water(water_scaled)
     nitrogen_real = inverse_scale_nitrogen(nitrogen_scaled)
+
     risk_info = compute_risk(water_real, nitrogen_real)
 
     return {
@@ -202,7 +203,6 @@ def predict_from_window(raw_window, timestamps):
         "nitrogen_forecast": nitrogen_real.tolist(),
         "risk": risk_info
     }
-
 
 # ============================
 # HEALTH CHECK

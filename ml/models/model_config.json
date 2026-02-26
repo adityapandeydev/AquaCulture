@@ -1,5 +1,6 @@
 {
   "lookback": 48,
+  "forecast_horizon": 6,
   "water_features": ["do", "temperature", "ph", "turbidity"],
   "nitrogen_features": ["ammonia", "nitrate"]
 }

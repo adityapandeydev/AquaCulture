@@ -11,16 +11,12 @@ class AuthController:
 
         return await AuthService.register(
             db,
+            data.name,
             data.email,
             data.password
         )
 
 
     @staticmethod
-    async def login(db: AsyncSession, data):
-
-        return await AuthService.login(
-            db,
-            data.email,
-            data.password
-        )
+    async def login(db: AsyncSession, email: str, password: str):
+        return await AuthService.login(db, email, password)

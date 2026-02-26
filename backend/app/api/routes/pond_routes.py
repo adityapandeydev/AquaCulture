@@ -12,16 +12,18 @@ from app.core.database import get_db
 router = APIRouter(prefix="/ponds")
 
 
+from app.core.security import get_current_user
+from app.models.user import User
+
 @router.post("/")
 async def create_pond(
     data: PondCreate,
-    db: AsyncSession = Depends(get_db)
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
 ):
-
-    owner_id = 1  # temporary
 
     return await PondController.create(
         db,
         data,
-        owner_id
+        current_user.id
     )

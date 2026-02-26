@@ -7,7 +7,7 @@ class PondService:
 
 
     @staticmethod
-    async def create(db: AsyncSession, name: str, owner_id: int):
+    async def create(db: AsyncSession, name: str, owner_id):
 
         pond = Pond(
             name=name,

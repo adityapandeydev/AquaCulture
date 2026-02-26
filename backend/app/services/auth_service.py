@@ -9,7 +9,7 @@ class AuthService:
 
 
     @staticmethod
-    async def register(db: AsyncSession, email: str, password: str):
+    async def register(db: AsyncSession, name: str, email: str, password: str):
 
         result = await db.execute(
             select(User).where(User.email == email)
@@ -19,14 +19,17 @@ class AuthService:
 
         if user:
             raise Exception("User already exists")
+        
+        print("Password length:", len(password))
+        print("Password type:", type(password))
 
         new_user = User(
+            name=name,
             email=email,
             hashed_password=hash_password(password)
         )
 
         db.add(new_user)
-
         await db.commit()
 
         return {"message": "User created"}

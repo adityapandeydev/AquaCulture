@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-
+from uuid import UUID
 
 class PondCreate(BaseModel):
 
@@ -8,11 +8,11 @@ class PondCreate(BaseModel):
 
 class PondResponse(BaseModel):
 
-    id: int
+    id: UUID
 
     name: str
 
-    owner_id: int
+    owner_id: UUID
 
     class Config:
 
