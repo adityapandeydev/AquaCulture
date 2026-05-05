@@ -57,13 +57,16 @@ class OrchestratorService:
         # ---------------------------------------------
         # 3️⃣ Sequential simulation (like real-time)
         # ---------------------------------------------
-        for raw in raw_rows:
+        for i, raw in enumerate(raw_rows):
 
             # ---- Ingestion step ----
             await IngestionService.process_raw_row(db, raw.id)
 
             raw.is_processed = True
             db.add(raw)
+
+            if i % 20 == 0:
+                await db.commit()
 
             # Fetch the clean row that was just inserted
             result = await db.execute(

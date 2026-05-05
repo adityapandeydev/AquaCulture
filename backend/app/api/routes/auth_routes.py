@@ -31,5 +31,3 @@ async def login(
         form_data.username,
         form_data.password
     )
-
-    return await AuthController.login(db, data)

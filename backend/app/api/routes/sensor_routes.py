@@ -33,8 +33,6 @@ async def ingest_sensor_data(
 
     await db.commit()
 
-    await OrchestratorService.process_pending_raw_rows(db)
-
     return {"status": "ingestion completed"}
 
 @router.post("/simulate/{pond_id}")
