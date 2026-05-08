@@ -38,8 +38,6 @@ async def root():
         "message": "AquaTech API Running"
     }
 
-app.include_router(health_router, prefix="/api/v1")
-app.include_router(auth_router, prefix="/api/v1")
 app.include_router(pond_router, prefix="/api/v1")
 app.include_router(sensor_router, prefix="/api/v1")
 app.include_router(alert_router, prefix="/api/v1")

@@ -1,4 +1,10 @@
-export default function RiskSummary({ data }: any) {
+import type { ChartPoint } from "../types/domain"
+
+interface RiskSummaryProps {
+  data: ChartPoint[]
+}
+
+export default function RiskSummary({ data }: RiskSummaryProps) {
   if (!data.length) return null
 
   const counts = {
@@ -7,7 +13,7 @@ export default function RiskSummary({ data }: any) {
     high: 0,
   }
 
-  data.forEach((d: any) => {
+  data.forEach((d) => {
     counts[d.risk]++
   })
 

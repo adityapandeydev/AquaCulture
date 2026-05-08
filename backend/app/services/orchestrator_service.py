@@ -27,6 +27,23 @@ from ml.inference.predictor import predict_from_window, LOOKBACK
 class OrchestratorService:
 
     @staticmethod
+    async def process_pending_raw_rows(db: AsyncSession):
+        result = await db.execute(
+            select(SensorDataRaw)
+            .where(SensorDataRaw.is_processed.is_(False))
+            .order_by(SensorDataRaw.timestamp.asc())
+        )
+        pending_rows = result.scalars().all()
+
+        for raw in pending_rows:
+            await IngestionService.process_raw_row(db, raw.id)
+            raw.is_processed = True
+            db.add(raw)
+
+        await db.commit()
+        return {"processed_rows": len(pending_rows)}
+
+    @staticmethod
     async def simulate_from_raw(db: AsyncSession, pond_id: uuid.UUID):
 
         # ---------------------------------------------
@@ -59,21 +76,34 @@ class OrchestratorService:
         # ---------------------------------------------
         for i, raw in enumerate(raw_rows):
 
-            # ---- Ingestion step ----
-            await IngestionService.process_raw_row(db, raw.id)
-
-            raw.is_processed = True
-            db.add(raw)
-
-            if i % 20 == 0:
-                await db.commit()
-
-            # Fetch the clean row that was just inserted
+            # Reuse already cleaned rows to avoid duplicate inserts for the same raw_id.
             result = await db.execute(
                 select(SensorDataClean)
                 .where(SensorDataClean.raw_id == raw.id)
+                .order_by(desc(SensorDataClean.created_at))
+                .limit(1)
             )
             clean_row = result.scalar_one_or_none()
+
+            # ---- Ingestion step (only when clean row doesn't exist) ----
+            if not clean_row:
+                await IngestionService.process_raw_row(db, raw.id)
+                raw.is_processed = True
+                db.add(raw)
+
+                if i % 20 == 0:
+                    await db.commit()
+
+                result = await db.execute(
+                    select(SensorDataClean)
+                    .where(SensorDataClean.raw_id == raw.id)
+                    .order_by(desc(SensorDataClean.created_at))
+                    .limit(1)
+                )
+                clean_row = result.scalar_one_or_none()
+            elif not raw.is_processed:
+                raw.is_processed = True
+                db.add(raw)
 
             if not clean_row:
                 continue

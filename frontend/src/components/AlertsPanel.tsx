@@ -1,4 +1,10 @@
-export default function AlertsPanel({ alerts }: any) {
+import type { AlertItem } from "../types/domain"
+
+interface AlertsPanelProps {
+  alerts: AlertItem[]
+}
+
+export default function AlertsPanel({ alerts }: AlertsPanelProps) {
   return (
     <div className="bg-surface p-4 rounded-xl">
       <h2 className="mb-4 font-semibold">Alerts</h2>
@@ -8,7 +14,7 @@ export default function AlertsPanel({ alerts }: any) {
           <p className="text-textSecondary text-sm">No alerts</p>
         )}
 
-        {alerts.map((alert: any) => (
+        {alerts.map((alert) => (
           <div
             key={alert.id}
             className="p-3 rounded-lg border border-primary/10 bg-background"

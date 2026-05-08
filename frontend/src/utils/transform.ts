@@ -1,12 +1,14 @@
-export const transformPredictions = (data: any[]) => {
-  const chartData: any[] = []
+import type { ChartPoint, RiskLevel, SimulationResponse } from "../types/domain"
+
+export const transformPredictions = (data: SimulationResponse["hourly_predictions"]): ChartPoint[] => {
+  const chartData: ChartPoint[] = []
 
   data.forEach((entry) => {
     const baseTime = new Date(entry.window_end)
 
-    entry.water_forecast.forEach((water: any, i: number) => {
+    entry.water_forecast.forEach((water, i: number) => {
       const nitrogen = entry.nitrogen_forecast[i]
-      const risk = entry.risk?.risk_states?.[i] || "low"
+      const risk = (entry.risk?.risk_states?.[i] || "low") as RiskLevel
 
       chartData.push({
         time: new Date(baseTime.getTime() + (i + 1) * 3600000)
@@ -26,7 +28,7 @@ export const transformPredictions = (data: any[]) => {
   return chartData
 }
 
-export const getLatestMetrics = (data: any[]) => {
+export const getLatestMetrics = (data: ChartPoint[]) => {
   if (!data.length) return null
 
   const last = data[data.length - 1]
@@ -39,7 +41,7 @@ export const getLatestMetrics = (data: any[]) => {
   }
 }
 
-export const getCurrentRisk = (data: any[]) => {
+export const getCurrentRisk = (data: ChartPoint[]) => {
   if (!data.length) return "low"
-  return data[0].risk
+  return data[data.length - 1].risk
 }

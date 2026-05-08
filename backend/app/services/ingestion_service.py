@@ -68,6 +68,19 @@ class IngestionService:
         missing_fields = [k for k, v in values.items() if v is None]
 
         # ----------------------------------
+        # Faulty sensor detection
+        # Trigger alert when a metric is empty/out-of-range
+        # for 5 consecutive rows.
+        # ----------------------------------
+        for key, value in values.items():
+            if IngestionService._is_faulty_value(key, value):
+                await IngestionService._check_and_raise_faulty_sensor_alert(
+                    db=db,
+                    raw=raw,
+                    metric_key=key,
+                )
+
+        # ----------------------------------
         # STOP if more than one missing
         # ----------------------------------
         if len(missing_fields) > 1:
@@ -229,3 +242,67 @@ class IngestionService:
         )
 
         db.add(alert)
+
+    @staticmethod
+    def _is_faulty_value(metric_key: str, value) -> bool:
+        if value is None:
+            return True
+
+        min_v, max_v = RANGES[metric_key]
+        return value < min_v or value > max_v
+
+    @staticmethod
+    async def _check_and_raise_faulty_sensor_alert(
+        db: AsyncSession,
+        raw: SensorDataRaw,
+        metric_key: str,
+    ) -> None:
+        previous_rows_result = await db.execute(
+            select(SensorDataRaw)
+            .where(
+                SensorDataRaw.pond_id == raw.pond_id,
+                SensorDataRaw.timestamp < raw.timestamp,
+            )
+            .order_by(desc(SensorDataRaw.timestamp))
+            .limit(4)
+        )
+        previous_rows = previous_rows_result.scalars().all()
+
+        if len(previous_rows) < 4:
+            return
+
+        if not all(
+            IngestionService._is_faulty_value(metric_key, getattr(row, metric_key))
+            for row in previous_rows
+        ):
+            return
+
+        alert_message = (
+            f"Faulty sensor suspected for {metric_key}: "
+            "5 consecutive empty/out-of-range rows."
+        )
+
+        existing_alert_result = await db.execute(
+            select(Alert)
+            .where(
+                Alert.pond_id == raw.pond_id,
+                Alert.alert_type == "sensor_faulty_consecutive",
+                Alert.message == alert_message,
+                Alert.resolved.is_(False),
+            )
+            .order_by(desc(Alert.timestamp))
+            .limit(1)
+        )
+        existing_alert = existing_alert_result.scalar_one_or_none()
+
+        if existing_alert:
+            return
+
+        await IngestionService._create_alert(
+            db=db,
+            pond_id=raw.pond_id,
+            alert_type="sensor_faulty_consecutive",
+            severity="high",
+            message=alert_message,
+            event_timestamp=raw.timestamp,
+        )

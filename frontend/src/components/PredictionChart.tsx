@@ -7,6 +7,7 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts"
+import type { ChartPoint } from "../types/domain"
 
 const getDotColor = (risk: string) => {
   if (risk === "low") return "#84CC16"
@@ -14,7 +15,15 @@ const getDotColor = (risk: string) => {
   return "#EF4444"
 }
 
-export default function PredictionChart({ data, dataKey, color }: any) {
+type MetricKey = "do" | "temperature" | "ammonia" | "nitrate"
+
+interface PredictionChartProps {
+  data: ChartPoint[]
+  dataKey: MetricKey
+  color: string
+}
+
+export default function PredictionChart({ data, dataKey, color }: PredictionChartProps) {
   return (
     <div className="bg-surface p-4 rounded-xl h-64">
       <h2 className="mb-2 text-sm text-textSecondary uppercase">
@@ -38,14 +47,14 @@ export default function PredictionChart({ data, dataKey, color }: any) {
             dataKey={dataKey}
             stroke={color}
             strokeWidth={2}
-            dot={(props: any) => {
+            dot={(props) => {
               const { cx, cy, payload } = props
               return (
                 <circle
                   cx={cx}
                   cy={cy}
                   r={3}
-                  fill={getDotColor(payload.risk)}
+                  fill={getDotColor(payload.risk as string)}
                 />
               )
             }}
