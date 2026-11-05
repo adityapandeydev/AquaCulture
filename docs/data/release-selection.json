@@ -1,0 +1,34 @@
+{
+  "version": "oman-first-release-selection-v1",
+  "status": "selected_for_partition_feasibility",
+  "training_approved": false,
+  "source_id": "oman_tilapia",
+  "species": "Nile tilapia (publisher-declared)",
+  "aggregation_policy": "oman-hourly-v1",
+  "primary_history_hours": 6,
+  "primary_horizon_hours": 1,
+  "secondary_horizon_hours": [3],
+  "deferred_history_hours": [12, 24],
+  "deferred_horizon_hours": [6],
+  "input_configurations": ["do_only", "do_temperature_ph"],
+  "target": "Future DO mean of supported minute medians, mg/L",
+  "evaluation_claim": "chronological_within_study",
+  "independent_site_verified": false,
+  "session_roles": {
+    "oman-2cbad87a2dbd2a81d6e1": "primary_tank_pilot",
+    "oman-d2a9072243df68854549": "excluded_no_eligible_hours",
+    "oman-4aa66291b0a6af9fd6a7": "excluded_ordering_review",
+    "oman-5be584c894082740491f": "excluded_no_eligible_hours",
+    "oman-87c10c86fe6e1b54d7c6": "pond_context_only",
+    "oman-af7b8feb5e74019b0afc": "pond_context_only",
+    "oman-c58a4e8c880d2a6a5258": "pond_context_only"
+  },
+  "limitations": [
+    "No partitions or final supervised indices are frozen.",
+    "Hourly summaries retain unresolved measurement-review flags; calibration accuracy is unverified.",
+    "Pond recordings are context diagnostics, not part of the primary fitting release or an independent-site holdout.",
+    "Overlapping windows are dependent and pre-split counts overstate final usable examples.",
+    "Shrimp, other species, low-DO event detection and disease prediction are unsupported.",
+    "Partition and calibration-period sufficiency may require further narrowing; interval reliability is not established."
+  ]
+}
