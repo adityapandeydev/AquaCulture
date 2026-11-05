@@ -1,0 +1,428 @@
+{
+  "sources": [
+    {
+      "id": "oman_tilapia",
+      "title": "Dissolved Oxygen Forecasting Dataset for Nile Tilapia Aquaculture",
+      "url": "https://github.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset",
+      "version": "d95207b6f129c3de1f426ec90eed5a38f46832b8",
+      "license": "CC BY 4.0 (LICENSE file retrieved)",
+      "status": "downloaded_not_training_approved",
+      "species": "Nile tilapia",
+      "role": "DO forecasting candidate; separate offline pond and controlled-tank live validation",
+      "limitations": [
+        "Short study; does not validate shrimp transfer.",
+        "Repository attribution and calibration must be reviewed against the original publication.",
+        "Author aggregates overlap raw data; never treat as independent validation.",
+        "Dictionary documents local Oman GMT+4; clock synchronization and received times remain unverified.",
+        "Only stated March26-April1 pond dates advance to preparation; 3207 later raw rows excluded pending context.",
+        "65 pond and 188 live hourly bins pass 11/12 subslot occupancy; candidate windows are very limited before partitioning.",
+        "Five pond/two tank one-hour-gap continuity candidates; earliest 5714-row pond group excluded pending source-order evidence. Physical site independence unknown.",
+        "High-frequency rapid DO changes and temperature plateaus are diagnostic review flags; broad numeric validity is not proof of independent calibration accuracy. Final target/input quality and bin policy pending."
+      ],
+      "review_date": "2026-11-05",
+      "downloads": [
+        {
+          "relative_path": "oman_tilapia/LICENSE",
+          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/LICENSE",
+          "sha256": "8c9cb0592825dd1593eaef5530568035ddb384a14c3d3badb56595a20eda6cd9",
+          "bytes": 905
+        },
+        {
+          "relative_path": "oman_tilapia/README.md",
+          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/README.md",
+          "sha256": "2188cd14f04ed4d4aa01dadaf6a0519f1f967fae5dd6b6457c197daa0f268c16",
+          "bytes": 9123
+        },
+        {
+          "relative_path": "oman_tilapia/docs/data_dictionary.md",
+          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/docs/data_dictionary.md",
+          "sha256": "30469bf17eca6ea36f76c25af3da2f63beb85bf238b4c5c8b066851a1a821cd6",
+          "bytes": 8660
+        },
+        {
+          "relative_path": "oman_tilapia/data/calibration/calibration_do.json",
+          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/data/calibration/calibration_do.json",
+          "sha256": "cdc16cfa9b71b6a040114ddcf9f03b030ed450129fbac1e0ff060621950763e6",
+          "bytes": 213
+        },
+        {
+          "relative_path": "oman_tilapia/data/calibration/calibration_ph.json",
+          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/data/calibration/calibration_ph.json",
+          "sha256": "286f7d216fb8a6e0c20642d1d3005fadcddad442619418a3eaf44917da594e41",
+          "bytes": 574
+        },
+        {
+          "relative_path": "oman_tilapia/data/calibration/calibration_temp.json",
+          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/data/calibration/calibration_temp.json",
+          "sha256": "d142dcc183f61959b415c0900320cc844ebd4a1ec41364791496d54c906ab2bc",
+          "bytes": 107
+        },
+        {
+          "relative_path": "oman_tilapia/data/events/event_logs_new.csv",
+          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/data/events/event_logs_new.csv",
+          "sha256": "663d26dd938c7df39d52bf17bbb96a3f6b23ca2bd5bd36620d712f23c2929421",
+          "bytes": 5310
+        },
+        {
+          "relative_path": "oman_tilapia/data/processed/aggregated_data.csv",
+          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/data/processed/aggregated_data.csv",
+          "sha256": "4c5c8631799f28c87d7cf5861b12e62348713716e18f7b514ae117b69d3eed98",
+          "bytes": 130779
+        },
+        {
+          "relative_path": "oman_tilapia/data/raw/live/raw_readings_new.csv",
+          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/data/raw/live/raw_readings_new.csv",
+          "sha256": "2bcac5df93a84eaec2d4be477254673d2aa72bdd37c3b76d3d4b27ed29969f95",
+          "bytes": 5719435
+        },
+        {
+          "relative_path": "oman_tilapia/data/raw/offline/raw_readings.csv",
+          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/data/raw/offline/raw_readings.csv",
+          "sha256": "8ecfdaaeba6d996a6000503a7323d82e26087bc2cf6fe3b6d0c9fe0bf477c73b",
+          "bytes": 2320462
+        }
+      ],
+      "disposition": "eligible_candidate",
+      "identity_evidence": "verified_pinned_repository_download",
+      "reuse_evidence": "declared_cc_by_4_0",
+      "benchmark_status": "restricted_candidate_pending_quality_and_split_sufficiency",
+      "training_approved": false,
+      "local_path_patterns": [
+        "external/oman_tilapia/**"
+      ],
+      "decision_reason": "Traceable raw recordings and pinned license; usable sessions, calibration and timezone remain under scientific review.",
+      "raw_redistribution_approved": true,
+      "scientific_review": "docs/data/oman-review.md",
+      "session_review": "docs/data/session-review.md",
+      "lineage_group_id": "oman_single_study_unverified_site_independence",
+      "quality_review": "docs/data/quality-review.md",
+      "aggregation_policy": {
+        "version": "oman-hourly-v1",
+        "report": "docs/data/aggregation-policy.md",
+        "output": "Datasets/processed/oman-aggregation-2026-11-05",
+        "candidate_pond_hours": 58,
+        "candidate_tank_hours": 188,
+        "filling": "none",
+        "training_approved": false
+      },
+      "release_selection": {
+        "version": "oman-first-release-selection-v1",
+        "report": "docs/data/eligibility-review.md",
+        "policy": "docs/data/release-selection.json",
+        "primary_session": "oman-2cbad87a2dbd2a81d6e1",
+        "primary_eligible_hours": 188,
+        "history_hours": 6,
+        "primary_horizon_hours": 1,
+        "pre_split_primary_examples": 182,
+        "training_approved": false
+      }
+    },
+    {
+      "id": "cure4aqua",
+      "title": "Dataset of water quality parameters (WP6 Cure4Aqua)",
+      "url": "https://zenodo.org/records/17278396",
+      "doi": "10.5281/zenodo.17278396",
+      "version": "v2",
+      "license": "CC BY 4.0 (Zenodo record metadata retrieved)",
+      "status": "downloaded_not_training_approved",
+      "role": "Tank-level chemistry reference; establish cadence before forecasting",
+      "limitations": [
+        "Flow-through/RAS tanks; species not established in downloaded metadata.",
+        "Parameter units differ; no automatic mmol/L, mg/L or percent-saturation conversion.",
+        "Zero values may be legitimate or missing placeholders; not reinterpreted."
+      ],
+      "review_date": "2026-11-05",
+      "downloads": [
+        {
+          "relative_path": "cure4aqua/environmental_parameters.xlsx",
+          "url": "https://zenodo.org/api/records/17278396/files/Cure4Aqua%20WP6%20-%20environmental%20parameters.xlsx/content",
+          "sha256": "06d565a3a9fbd39af24b50e43b69fc05aa2c4ea908554389eb09f1d3d05fb584",
+          "bytes": 60219
+        },
+        {
+          "relative_path": "cure4aqua/record.json",
+          "url": "https://zenodo.org/api/records/17278396",
+          "sha256": "98575d74dfcc1620604413275120ae6f1f5d1916cc056e698a0693831ecafbf3",
+          "bytes": 4626
+        }
+      ],
+      "disposition": "reference_only",
+      "identity_evidence": "publisher_checksum_matched",
+      "reuse_evidence": "declared_cc_by_4_0",
+      "benchmark_status": "not_selected_for_initial_forecasting",
+      "training_approved": false,
+      "local_path_patterns": [
+        "external/cure4aqua/**"
+      ],
+      "decision_reason": "Downloaded workbook MD5 matches the saved Zenodo record; retain as tank-chemistry reference, not the initial hourly pond benchmark.",
+      "raw_redistribution_approved": true,
+      "publisher_checksum_verification": {
+        "algorithm": "md5",
+        "expected": "512e950c7137facc4372214c3b9873b7",
+        "matched": true,
+        "evidence_file": "Datasets/external/cure4aqua/record.json"
+      },
+      "lineage_group_id": "cure4aqua_wp6_tank_study"
+    },
+    {
+      "id": "shrimp_buoy",
+      "title": "Tiny ML Based Reconfigurable Water Buoy for Intensive Brackishwater Aquaculture",
+      "url": "https://data.mendeley.com/datasets/k2jpng5vy6/1",
+      "doi": "10.17632/k2jpng5vy6.1",
+      "license": "CC BY 4.0 listed by repository",
+      "status": "user_downloaded_under_review",
+      "role": "Priority shrimp candidate",
+      "file_url": "https://data.mendeley.com/public-files/datasets/k2jpng5vy6/files/e2d56ae5-0778-4a2a-ab5a-f798bb65d3ab/file_downloaded",
+      "limitations": [
+        "User supplied the downloaded archive from Downloads; publisher checksum not independently matched.",
+        "Data sheet contains malformed pH strings and values above 14, zero or large DO values, and a separate calculated-pH column requiring calibration review.",
+        "No explicit pond ID or timezone; exact species, concentration units and field-versus-calibration periods need confirmation.",
+        "Sheet2 appears to contain PH7/PH9 calibration readings and is retained as reference data.",
+        "77 timestamp-gap continuity groups are inspection candidates only; none establishes a verified pond or field/calibration session."
+      ],
+      "review_date": "2026-11-05",
+      "downloads": [],
+      "local_archive": "Datasets/external/shrimp_buoy/TestData_DBT6.xlsx.zip",
+      "archive_sha256": "165801341f3ba5546412637e0f8c8e2126ecd1ad4d0ba0e58d8aa6c37fb36e8f",
+      "disposition": "exploratory_only",
+      "identity_evidence": "user_supplied_named_repository_archive",
+      "reuse_evidence": "publisher_license_local_identity_not_independently_matched",
+      "benchmark_status": "excluded_from_current_forecasting_release",
+      "training_approved": false,
+      "local_path_patterns": [
+        "external/shrimp_buoy/**"
+      ],
+      "decision_reason": "Channel/session review completed: no justified pH or DO conversion, units and field identities unverified. Retain for exploration, exclude all channels from current supervised forecasting.",
+      "raw_redistribution_approved": false,
+      "redistribution_note": "Await independent file identity confirmation; publisher page declares CC BY 4.0, but no publisher checksum was matched.",
+      "channel_review": "docs/data/shrimp-calibration.md",
+      "channel_model_use": {
+        "ph": "excluded",
+        "calculated_ph": "excluded",
+        "do": "excluded",
+        "turbidity": "excluded",
+        "tds": "excluded",
+        "humidity": "excluded",
+        "room_temperature": "excluded",
+        "water_temperature": "exploratory_only_not_model_approved"
+      },
+      "lineage_group_id": "shrimp_buoy_archive_and_workbook"
+    },
+    {
+      "id": "worldfish_vietnam_2016",
+      "title": "Nutritious Pond On-farm field experiment in Vietnam-2016",
+      "url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/0RTJP3",
+      "doi": "10.7910/DVN/0RTJP3",
+      "status": "candidate_metadata_api_http_403",
+      "role": "Shrimp farm water quality and management candidate",
+      "limitations": [
+        "Publisher file API inaccessible in this run.",
+        "License, actual file schema and sampling cadence not yet verified."
+      ],
+      "review_date": "2026-11-05",
+      "downloads": [],
+      "disposition": "excluded",
+      "identity_evidence": "not_acquired",
+      "reuse_evidence": "unverified",
+      "benchmark_status": "not_available",
+      "training_approved": false,
+      "local_path_patterns": [],
+      "decision_reason": "Candidate lead only; no acquired file or verified license/schema. Excluded from the current prepared release.",
+      "raw_redistribution_approved": false,
+      "lineage_group_id": "worldfish_vietnam_2016_not_acquired"
+    },
+    {
+      "id": "colombia_local",
+      "title": "IoT Monitoring Dataset of Water Quality and Tilapia Health in Monteria (2024)",
+      "url": "https://data.mendeley.com/datasets/3g2b4sh65m/1",
+      "license": "Unverified for local file; candidate publisher page license does not establish local-file identity",
+      "status": "local_file_candidate_identity_unverified",
+      "role": "Audit hourly water measurements; exclude rule-derived health/alert fields",
+      "limitations": [
+        "Publisher says already interpolated.",
+        "Related release 8s73jfvgr5/3 describes six-hour readings; versions are not independent sources.",
+        "Local source identity/hash has not been matched to publisher file.",
+        "Many consecutive unchanged measurement vectors; investigate construction/interpolation.",
+        "Hourly row grid is verified but original sensor cadence is not; 90 fractional case rows and zero observed DO values below 5 prevent independent disease/hypoxia benchmark claims."
+      ],
+      "review_date": "2026-11-05",
+      "downloads": [],
+      "local_provenance_note": "User confirms files were collected online; original source links are unavailable. Listed publisher is a candidate, not verified local-file provenance.",
+      "disposition": "exploratory_only",
+      "identity_evidence": "unverified_publisher_match",
+      "reuse_evidence": "unverified_for_local_file",
+      "benchmark_status": "excluded_from_current_forecasting_and_biological_outcome_release",
+      "training_approved": false,
+      "local_path_patterns": [
+        "O1D3/**"
+      ],
+      "decision_reason": "Cadence/label review found five 654-row and one 759-row constant water runs, fractional calendar/case fields and exact health-to-thermal-label mapping. Original measured-versus-filled status unknown; retain exploratory inspection only.",
+      "raw_redistribution_approved": false,
+      "url_relationship": "candidate_publisher_match_only",
+      "candidate_doi": "10.17632/3g2b4sh65m.1",
+      "candidate_publisher_license": "CC BY 4.0 listed on candidate page",
+      "scientific_review": "docs/data/colombia-review.md",
+      "lineage_group_id": "colombia_related_2024_releases"
+    },
+    {
+      "id": "nigeria_aquaponics_local",
+      "title": "An internet of things labelled dataset for aquaponics fish pond water quality monitoring system",
+      "url": "https://doi.org/10.1016/j.dib.2022.108400",
+      "status": "local_files_resemble_published_data_identity_unverified",
+      "role": "Candidate source for local O1D2 multi-pond CSVs",
+      "limitations": [
+        "Local g/ml and mg/L headers conflict. No conversion is applied.",
+        "Chemical sensor calibration requires review; extreme concentration values remain flagged.",
+        "Cross-pond shared sequences must be checked before using a pond as holdout.",
+        "License of the exact local dataset release requires confirmation.",
+        "81,215 matching recorded timestamp/four-channel rows across Pond1/Pond2; longest adjacent source-order run is 54,501 rows. Local median positive source-order interval is 20 seconds, not proof of original cadence."
+      ],
+      "review_date": "2026-11-05",
+      "downloads": [],
+      "local_provenance_note": "User confirms files were collected online; original source links are unavailable. Listed publisher is a candidate, not verified local-file provenance.",
+      "disposition": "exploratory_only",
+      "identity_evidence": "unverified_publisher_match",
+      "reuse_evidence": "unverified_for_local_files",
+      "benchmark_status": "excluded_from_current_model_data_release",
+      "training_approved": false,
+      "local_path_patterns": [
+        "O1D2/**"
+      ],
+      "decision_reason": "Unit/calibration/source identity unverified; faults and duplicated timestamp/four-water-channel segments documented. All channels exploratory-only; no nitrogen or DO model-target conversion approved.",
+      "raw_redistribution_approved": false,
+      "url_relationship": "candidate_publisher_match_only",
+      "license": "Unverified for local file; candidate publisher page license does not establish local-file identity",
+      "candidate_publisher_license": "Exact dataset release/license not verified",
+      "scientific_review": "docs/data/aquaponics-review.md",
+      "lineage_group_id": "aquaponics_local_collection_independence_unverified"
+    },
+    {
+      "id": "mendeley_wqd_local",
+      "title": "Aquaculture - Water Quality Dataset",
+      "url": "https://data.mendeley.com/datasets/y78ty2g293/1",
+      "license": "Unverified for local file; candidate publisher page license does not establish local-file identity",
+      "status": "local_file_candidate_identity_unverified",
+      "role": "Threshold-derived classification comparison only",
+      "limitations": [
+        "4,300 local rows with no timestamps; not a forecasting dataset.",
+        "Rule-generated labels cannot independently validate disease or mortality prediction.",
+        "Temperature unit and turbidity cm heading must not be silently interpreted as Celsius/NTU."
+      ],
+      "review_date": "2026-11-05",
+      "downloads": [],
+      "local_provenance_note": "User confirms files were collected online; original source links are unavailable. Listed publisher is a candidate, not verified local-file provenance.",
+      "disposition": "reference_only",
+      "identity_evidence": "unverified_publisher_match",
+      "reuse_evidence": "unverified_for_local_file",
+      "benchmark_status": "excluded_from_forecasting",
+      "training_approved": false,
+      "local_path_patterns": [
+        "O3D1/**"
+      ],
+      "decision_reason": "Timestamp-free threshold-label table; the candidate publisher license has not been matched to the local workbook.",
+      "raw_redistribution_approved": false,
+      "url_relationship": "candidate_publisher_match_only",
+      "candidate_doi": "10.17632/y78ty2g293.1",
+      "candidate_publisher_license": "CC BY 4.0 listed on candidate page",
+      "lineage_group_id": "wqd_threshold_classification_local"
+    },
+    {
+      "id": "pond_variants_local",
+      "title": "Local O1D1 pond dataset variants",
+      "status": "local_origin_unknown",
+      "role": "Exploratory lineage and preparation fixtures",
+      "limitations": [
+        "Original source links unavailable.",
+        "All 74,758 core measurement vectors in Fish Ponds occur in Ponds1 and Realtime-env2 at six-decimal comparison precision.",
+        "Timestamp/station provenance and any local transformations are unverified."
+      ],
+      "review_date": "2026-11-05",
+      "disposition": "exploratory_only",
+      "identity_evidence": "unknown_online_origin",
+      "reuse_evidence": "unverified",
+      "benchmark_status": "excluded_pending_provenance",
+      "training_approved": false,
+      "local_path_patterns": [
+        "O1D1/**"
+      ],
+      "decision_reason": "Related local variants with unknown source and transformations; no independent benchmark or release approval.",
+      "raw_redistribution_approved": false,
+      "lineage_group_id": "local_pond_variants_and_compilation"
+    },
+    {
+      "id": "realtime_environment_local",
+      "title": "Local Realtime-env2 water and environmental table",
+      "status": "local_origin_unknown",
+      "role": "Exploratory overlap and timestamp-conflict analysis",
+      "limitations": [
+        "Original source links and environmental-variable origins unavailable.",
+        "Lacks reliable pond identity; repeated times have conflicting water measurements.",
+        "Not independent of O1D1 variants."
+      ],
+      "review_date": "2026-11-05",
+      "disposition": "exploratory_only",
+      "identity_evidence": "unknown_online_origin",
+      "reuse_evidence": "unverified",
+      "benchmark_status": "excluded_pending_identity_and_quality_review",
+      "training_approved": false,
+      "local_path_patterns": [
+        "O2D3/**"
+      ],
+      "decision_reason": "Provenance and pond identity are unresolved; environmental variables are not approved covariates.",
+      "raw_redistribution_approved": false,
+      "lineage_group_id": "local_pond_variants_and_compilation"
+    },
+    {
+      "id": "shrimp_compilation_local",
+      "title": "Local compilation workbook labeled shrimp water sensor data",
+      "status": "mixed_source_compilation_origin_unknown",
+      "role": "Reference compilation and lineage comparison",
+      "limitations": [
+        "Contains summaries, examples, related pond records and river-monitoring data.",
+        "A compilation title is not evidence that its rows are shrimp observations.",
+        "Original sources and reuse terms unavailable."
+      ],
+      "review_date": "2026-11-05",
+      "disposition": "reference_only",
+      "identity_evidence": "unknown_mixed_origins",
+      "reuse_evidence": "unverified",
+      "benchmark_status": "excluded_from_forecasting",
+      "training_approved": false,
+      "local_path_patterns": [
+        "Copy of Shrimp water sensor data.xlsx"
+      ],
+      "decision_reason": "Keep for background/lineage inspection only; individual blocks cannot inherit the workbook title as species provenance.",
+      "raw_redistribution_approved": false,
+      "lineage_group_id": "local_pond_variants_and_compilation"
+    },
+    {
+      "id": "water_assessment_archive_local",
+      "title": "Local archive containing Water_Quality_Assessment.csv",
+      "status": "local_origin_unknown",
+      "role": "Exploratory tabular validation fixture",
+      "limitations": [
+        "No verified author, license, acquisition URL or timestamp provenance.",
+        "The 1,000-row table cannot establish chronological forecasting skill."
+      ],
+      "review_date": "2026-11-05",
+      "disposition": "exploratory_only",
+      "identity_evidence": "unknown_online_origin",
+      "reuse_evidence": "unverified",
+      "benchmark_status": "excluded_from_forecasting",
+      "training_approved": false,
+      "local_path_patterns": [
+        "archive.zip"
+      ],
+      "decision_reason": "Untraceable, timestamp-free table; no supervised forecasting role.",
+      "raw_redistribution_approved": false,
+      "lineage_group_id": "water_assessment_unknown_origin"
+    }
+  ],
+  "review_date": "2026-11-05",
+  "disposition_definitions": {
+    "eligible_candidate": "Traceable source/reuse evidence; eligible for scientific review, not approval for training.",
+    "exploratory_only": "Local inspection and preparation research only; not an approved benchmark, training release or raw-data redistribution.",
+    "reference_only": "Background or schema/chemistry reference; no role as a forecasting target dataset in the first experiment.",
+    "excluded": "Not part of the current prepared release. May be reconsidered with new evidence."
+  }
+}
