@@ -1,0 +1,154 @@
+{
+  "policy_version": "lineage-v1",
+  "review_date": "2026-11-05",
+  "sources": [
+    {
+      "source_id": "oman_tilapia",
+      "lineage_group_id": "oman_single_study_unverified_site_independence",
+      "local_path_patterns": [
+        "external/oman_tilapia/**"
+      ],
+      "independent_site_verified": false,
+      "training_approved": false,
+      "current_disposition": "eligible_candidate"
+    },
+    {
+      "source_id": "cure4aqua",
+      "lineage_group_id": "cure4aqua_wp6_tank_study",
+      "local_path_patterns": [
+        "external/cure4aqua/**"
+      ],
+      "independent_site_verified": false,
+      "training_approved": false,
+      "current_disposition": "reference_only"
+    },
+    {
+      "source_id": "shrimp_buoy",
+      "lineage_group_id": "shrimp_buoy_archive_and_workbook",
+      "local_path_patterns": [
+        "external/shrimp_buoy/**"
+      ],
+      "independent_site_verified": false,
+      "training_approved": false,
+      "current_disposition": "exploratory_only"
+    },
+    {
+      "source_id": "worldfish_vietnam_2016",
+      "lineage_group_id": "worldfish_vietnam_2016_not_acquired",
+      "local_path_patterns": [],
+      "independent_site_verified": false,
+      "training_approved": false,
+      "current_disposition": "excluded"
+    },
+    {
+      "source_id": "colombia_local",
+      "lineage_group_id": "colombia_related_2024_releases",
+      "local_path_patterns": [
+        "O1D3/**"
+      ],
+      "independent_site_verified": false,
+      "training_approved": false,
+      "current_disposition": "exploratory_only"
+    },
+    {
+      "source_id": "nigeria_aquaponics_local",
+      "lineage_group_id": "aquaponics_local_collection_independence_unverified",
+      "local_path_patterns": [
+        "O1D2/**"
+      ],
+      "independent_site_verified": false,
+      "training_approved": false,
+      "current_disposition": "exploratory_only"
+    },
+    {
+      "source_id": "mendeley_wqd_local",
+      "lineage_group_id": "wqd_threshold_classification_local",
+      "local_path_patterns": [
+        "O3D1/**"
+      ],
+      "independent_site_verified": false,
+      "training_approved": false,
+      "current_disposition": "reference_only"
+    },
+    {
+      "source_id": "pond_variants_local",
+      "lineage_group_id": "local_pond_variants_and_compilation",
+      "local_path_patterns": [
+        "O1D1/**"
+      ],
+      "independent_site_verified": false,
+      "training_approved": false,
+      "current_disposition": "exploratory_only"
+    },
+    {
+      "source_id": "realtime_environment_local",
+      "lineage_group_id": "local_pond_variants_and_compilation",
+      "local_path_patterns": [
+        "O2D3/**"
+      ],
+      "independent_site_verified": false,
+      "training_approved": false,
+      "current_disposition": "exploratory_only"
+    },
+    {
+      "source_id": "shrimp_compilation_local",
+      "lineage_group_id": "local_pond_variants_and_compilation",
+      "local_path_patterns": [
+        "Copy of Shrimp water sensor data.xlsx"
+      ],
+      "independent_site_verified": false,
+      "training_approved": false,
+      "current_disposition": "reference_only"
+    },
+    {
+      "source_id": "water_assessment_archive_local",
+      "lineage_group_id": "water_assessment_unknown_origin",
+      "local_path_patterns": [
+        "archive.zip"
+      ],
+      "independent_site_verified": false,
+      "training_approved": false,
+      "current_disposition": "exploratory_only"
+    }
+  ],
+  "rules": {
+    "independent_site_holdout": "Development and test must have disjoint known lineage/study groups AND affirmative physical-site independence evidence; disjoint IDs alone do not suffice.",
+    "chronological_within_study": "Shared study/lineage is allowed only with disjoint source observation identities and target periods, issue-time-available history, no boundary-crossing training labels and source/session/quality approval.",
+    "copied_observations": "One originating observation and its derivatives/copies cannot supply independent train/test labels. Keep one canonical representation with complete parent lineage.",
+    "raw_and_aggregate": "Aggregates and raw parents are dependent representations, not independent holdout sources.",
+    "unknown_independence": "Do not infer separate sites from filenames, pond labels or a continuity-gap boundary.",
+    "new_sources": "Uncataloged source fails release admission until provenance, identity, reuse, quality and overlap reviews complete."
+  },
+  "evidence": [
+    {
+      "members": [
+        "pond_variants_local",
+        "realtime_environment_local",
+        "shrimp_compilation_local"
+      ],
+      "type": "shared_six_channel_vectors",
+      "reference": "docs/data/lineage-review.md"
+    },
+    {
+      "members": [
+        "nigeria_aquaponics_local"
+      ],
+      "type": "Pond1/Pond2 recorded-time ordered four-channel segments",
+      "reference": "docs/data/aquaponics-review.md"
+    },
+    {
+      "members": [
+        "oman_tilapia"
+      ],
+      "type": "One study; pond and tank distinction documented, independent sites unverified; publisher aggregates overlap raw source role",
+      "reference": "docs/data/session-review.md"
+    },
+    {
+      "members": [
+        "shrimp_buoy"
+      ],
+      "type": "ZIP contains extracted workbook; not a second acquired dataset",
+      "reference": "docs/data/shrimp-calibration.md"
+    }
+  ]
+}
