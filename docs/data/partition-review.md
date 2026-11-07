@@ -79,3 +79,5 @@ Authoritative local output: `Datasets/processed/oman-partitions-2026-11-07-v2/`.
 - `split_manifest.json`: frozen policy snapshot, input/output hashes, row accounting, boundary losses and claim limitations. Training approval remains false.
 
 Eight focused tests cover complete-bin boundary ownership, overlapping/gapped periods, missing support, wrong sessions, duplicate labels, contained histories/targets, missing target coverage, shared observation identity rejection and raw-parent boundary mapping. Full supervised input/target index export remains task 13. This freeze does not train or evaluate a predictive model.
+
+The subsequent [supervised-data contract](supervised-data.md) materializes those horizon-specific indices and common-issue mappings against this freeze, with exact count agreement and additional issue-time feature checks.

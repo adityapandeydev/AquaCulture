@@ -1,0 +1,30 @@
+{
+  "version": "oman-do-supervised-v1",
+  "partition_policy_version": "oman-tank-chronological-v1",
+  "aggregation_policy_version": "oman-hourly-v1",
+  "history_hours": 6,
+  "horizons_hours": [1, 3],
+  "cadence_seconds": 3600,
+  "input_configurations": {
+    "do_only": ["do_mgL"],
+    "do_temperature_ph": ["do_mgL", "temperature_c", "ph"]
+  },
+  "units": {"do_mgL": "mg/L", "temperature_c": "degC", "ph": "pH"},
+  "target": {
+    "column": "do_mgL",
+    "unit": "mg/L",
+    "statistic": "mean_of_covered_minute_medians",
+    "value_kind": "aggregate_of_source_reported_measurements",
+    "preparation_imputed": false
+  },
+  "issue_time_rule": "End/availability time of the latest completed input bin.",
+  "availability_assumption": "Source observations are assumed available at their recorded timestamps; hourly summaries are available at bin end. Receipt/transport delays are unobserved, not measured as zero.",
+  "history_order": "Oldest to newest, six adjacent eligible hourly bins, all available by issue time.",
+  "label_rule": "Eligible DO target at issue+horizon, with eligible DO throughout the future path; all support in the same session and partition. Future-path coverage is retrospective label eligibility, never an input feature.",
+  "quality_metadata_suffixes": ["covered_minutes", "valid_rows", "invalid_rows", "end_age_seconds", "maximum_gap_seconds", "zero_review_rows", "rapid_change_review_rows"],
+  "quality_metadata_role": "Retained per historical bin for inspection/gating; excluded from the default numeric feature matrices. Any later feature use must be explicitly versioned or recorded in the experiment.",
+  "plateau_flag_role": "Diagnostic-only in the upstream audit; full-run flagging can depend on future readings and is excluded from supervised input exports.",
+  "learned_transforms": "None in preparation. Fit any scaler, learned imputer or feature selector on training only in model development; validation selects choices, calibration/test do not fit point-model transforms.",
+  "paired_comparisons": "Match issue, partition, session and horizon across configurations. Joint-horizon comparisons use only issues with both horizons; shared labels/windows are dependent.",
+  "training_approved": false
+}

@@ -127,6 +127,17 @@
         "raw_parent_rows": 101666,
         "interval_release_status": "deferred_insufficient_independent_calibration_evidence",
         "training_approved": false
+      },
+      "supervised_contract": {
+        "version": "oman-do-supervised-v1",
+        "date": "2026-11-07",
+        "contract": "docs/data/supervised-contract.json",
+        "report": "docs/data/supervised-data.md",
+        "output": "Datasets/processed/oman-supervised-2026-11-07",
+        "observations": 188,
+        "window_references": 640,
+        "paired_issue_records": 312,
+        "training_approved": false
       }
     },
     {
