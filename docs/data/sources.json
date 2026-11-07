@@ -138,6 +138,15 @@
         "window_references": 640,
         "paired_issue_records": 312,
         "training_approved": false
+      },
+      "evaluation_protocol": {
+        "version": "oman-do-evaluation-v1",
+        "date": "2026-11-07",
+        "policy": "docs/data/evaluation-policy.json",
+        "report": "docs/data/evaluation-protocol.md",
+        "output": "Datasets/processed/oman-evaluation-plan-2026-11-07",
+        "prediction_scores_computed": false,
+        "training_approved": false
       }
     },
     {
