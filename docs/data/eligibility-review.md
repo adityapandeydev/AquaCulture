@@ -4,6 +4,8 @@ Review date: 2026-11-05. Decision: select the main Oman controlled-tank session 
 
 The machine-readable [selection](release-selection.json) records the session roles and initial experiment scope. The [source review](source-review.md), [quality review](quality-review.md) and [aggregation policy](aggregation-policy.md) supply the evidence behind those decisions.
 
+The subsequent [partition freeze](partition-review.md), dated 2026-11-07, assigns the selected tank support to four chronological periods and quantifies boundary losses. The pre-split counts and versioned selection below remain the record of this eligibility decision; final supervised indices and training approval remain separate.
+
 ## Selected data and channels
 
 | Item | Selection and evidence |

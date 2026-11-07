@@ -115,6 +115,18 @@
         "primary_horizon_hours": 1,
         "pre_split_primary_examples": 182,
         "training_approved": false
+      },
+      "partition_review": {
+        "freeze_date": "2026-11-07",
+        "policy": "docs/data/partition-policy.json",
+        "report": "docs/data/partition-review.md",
+        "output": "Datasets/processed/oman-partitions-2026-11-07-v2",
+        "version": "oman-tank-chronological-v1",
+        "evaluation_claim": "chronological_within_study",
+        "hourly_bins": 188,
+        "raw_parent_rows": 101666,
+        "interval_release_status": "deferred_insufficient_independent_calibration_evidence",
+        "training_approved": false
       }
     },
     {
