@@ -156,6 +156,16 @@
         "output": "Datasets/processed/oman-criteria-2026-11-07-v2",
         "model_qualification": "not_assessed_no_new_model_results",
         "training_approved": false
+      },
+      "prepared_release": {
+        "release_id": "oman-do-pilot-data-v1",
+        "descriptor": "docs/data/prepared-release.json",
+        "report": "docs/data/readiness-report.md",
+        "date": "2026-11-07",
+        "scoped_training_approved": true,
+        "source_wide_training_approved": false,
+        "production_approved": false,
+        "scope": "Only the exact checksum-anchored six-hour-history tank DO pilot at 1/3-hour horizons."
       }
     },
     {

@@ -13,6 +13,8 @@ The machine-readable decisions are in [sources.json](sources.json). Current deci
 
 No source is training-approved. Unknown provenance is recorded as unknown; a candidate publisher's DOI or license is not assigned to an unmatched local file as established provenance.
 
+Subsequent scoped decision, 2026-11-07: the [prepared tank release](readiness-report.md) passes the data-readiness checkpoint for the named chronological DO pilot. The source-wide defaults above are retained; that later approval is limited to the exact checksum-anchored subset and does not admit excluded sources or claim field validity.
+
 ## Decisions by source group
 
 | Source group | Disposition | Identity and reuse evidence | Current role and restriction |

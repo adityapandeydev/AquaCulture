@@ -1,0 +1,100 @@
+{
+  "release_id": "oman-do-pilot-data-v1",
+  "date": "2026-11-07",
+  "status": "ready_for_scoped_model_development",
+  "training_approved": true,
+  "model_training_performed": false,
+  "production_approved": false,
+  "local_release": "Datasets/releases/oman-do-pilot-v1-a",
+  "candidate_manifest_sha256": "dee03a70a9c7b50c2fcdcce614d6b72835367178c38604eef95519d429e7cf63",
+  "independent_rebuild_manifest_sha256": "1a2a1d520bfbfc303e0c7f787294227d9707b63a9ad56a8f710b2a8bd3831e48",
+  "verification_report_sha256": "eb917adf9fdcf6f99d47f25776f73f26a54957f2f567805876dba229500e7c5b",
+  "test_report_sha256": "75871a6788999ce1bfd17a85170611d56ba39037365f3f103305f7e6179a693d",
+  "scientific_content_sha256": {
+    "stages/aggregation/hourly_channels.csv.gz": "b9c84ac385bbd1dcb0ee08e9a890e97ffc0bf6b72766e0c0156e1834af2cc1ab",
+    "stages/aggregation/hourly_configurations.csv": "f46ec2c673c6bece4bafd7eb5a339482930e336d8be87172a627935d9cadba30",
+    "stages/criteria/readiness_counts.csv": "0c96f95861ea4e96e8797f95d44f7bb2652645fba106a7c24a4275e3d512de0d",
+    "stages/criteria/readiness_index.csv": "2aa7de5530c7a64f4c0584ecfc5ec453619bc18d5f1b440119e63a0cd36d6d10",
+    "stages/eligibility/example_counts.csv": "b4686dba3edabcb2484a76161e2e2f67d9fb58fbad4aea03d01cd6c3779b6e21",
+    "stages/evaluation/cohort_counts.csv": "0f2818783289b73aaea92907146d496ca76353b8917dd2a001b178e876e62464",
+    "stages/evaluation/evaluation_index.csv": "b5e25507a9141a017a03370720038255ff77e9a7ac6efe98a15bb86c46335eb9",
+    "stages/partitions/observation_partitions.csv": "4690bf5da2c9bca1c5b76ee33854016994055eb38be2093093211e3326a029ce",
+    "stages/partitions/raw_parent_partitions.csv.gz": "d524aae264811cd5a3bc23b9b895f44fa912ba7f8212b65ca0ff54db9c1fe97d",
+    "stages/partitions/split_counts.csv": "cf0cb1c30dde7388ef5d86989bcddeb0ff15a12bcbca7739567c74e669f8f084",
+    "stages/quality/quality.json": "8336fb2c03c5706931c0efe0064e50fe8840ffe77d03b68d869f0d02c512a58d",
+    "stages/quality/row_quality_flags.csv.gz": "c4577d7ea4c4abd6ee8826d63834eaa7438189d9e334486c068f1dacbf3d3d69",
+    "stages/quality/screening_valid_spans.csv": "0071d1b5e0dbce85c5077b87da141cd10fdb2f01fa1fa6e17a7ec09bb4413b09",
+    "stages/sessions/inventory.json": "b344f545d8f8c6bcd190da9ad0883485c82789621f0ed010d9ae0489ab075e98",
+    "stages/sessions/live_excluded_rows.csv.gz": "3a00db76351ecbeb6139c3fdccfc91472fff245fe2e18c97342dfff2c5e45557",
+    "stages/sessions/live_ordering_review.csv": "41039ee8f2639240c4aa5278b27c5bae4e0f5dd325291ed82adf3706876a73d9",
+    "stages/sessions/live_timestamp_rows.csv.gz": "9b1f52f320f2874655583eefa79a08267c30c69211296767b122ff256fe0c3ca",
+    "stages/sessions/offline_excluded_rows.csv.gz": "3cb467d486e9b643ad0cfed37e8fbed04b4bce5c57dd9da981c7c632bc7b82d9",
+    "stages/sessions/offline_ordering_review.csv": "0241ea2aeea0db77ec4929e836ab80b7ad121f49f4ee29402eca56a9c2aecb93",
+    "stages/sessions/offline_timestamp_rows.csv.gz": "c252bcc2cced42e3ce2a8a7e521ca51dd438c4f6fb683f4764ac8fedfcf7998d",
+    "stages/supervised/observations.csv.gz": "4d1b49e2698e739edb012620fc09dd516dcaa26514cbf29ff1c6d640a45a9a06",
+    "stages/supervised/paired_issue_counts.csv": "09c8f1df20208e5461a4b159d49ee1cc402bfce7eda743a861715b5519599045",
+    "stages/supervised/paired_issues.jsonl": "8e1ab6bf89a2d73ae5bc35f24693fb6435e037122add4345b2ff988f8ae5d21e",
+    "stages/supervised/window_counts.csv": "226ebc68971d0ffdf1c1fa239e74ff4b73ed883101368d831dcab73dd95a7cb5",
+    "stages/supervised/windows.jsonl": "9ff48dea6ee25d91e732709ee7fd0b6b7f10fe6e04f56e9726615feb894c67b5"
+  },
+  "source_files_sha256": {
+    "oman_tilapia/LICENSE": "8c9cb0592825dd1593eaef5530568035ddb384a14c3d3badb56595a20eda6cd9",
+    "oman_tilapia/README.md": "2188cd14f04ed4d4aa01dadaf6a0519f1f967fae5dd6b6457c197daa0f268c16",
+    "oman_tilapia/docs/data_dictionary.md": "30469bf17eca6ea36f76c25af3da2f63beb85bf238b4c5c8b066851a1a821cd6",
+    "oman_tilapia/data/calibration/calibration_do.json": "cdc16cfa9b71b6a040114ddcf9f03b030ed450129fbac1e0ff060621950763e6",
+    "oman_tilapia/data/calibration/calibration_ph.json": "286f7d216fb8a6e0c20642d1d3005fadcddad442619418a3eaf44917da594e41",
+    "oman_tilapia/data/calibration/calibration_temp.json": "d142dcc183f61959b415c0900320cc844ebd4a1ec41364791496d54c906ab2bc",
+    "oman_tilapia/data/events/event_logs_new.csv": "663d26dd938c7df39d52bf17bbb96a3f6b23ca2bd5bd36620d712f23c2929421",
+    "oman_tilapia/data/processed/aggregated_data.csv": "4c5c8631799f28c87d7cf5861b12e62348713716e18f7b514ae117b69d3eed98",
+    "oman_tilapia/data/raw/live/raw_readings_new.csv": "2bcac5df93a84eaec2d4be477254673d2aa72bdd37c3b76d3d4b27ed29969f95",
+    "oman_tilapia/data/raw/offline/raw_readings.csv": "8ecfdaaeba6d996a6000503a7323d82e26087bc2cf6fe3b6d0c9fe0bf477c73b"
+  },
+  "environment": {
+    "python": "3.10.11",
+    "implementation": "CPython",
+    "platform": "Windows-10-10.0.26300-SP0",
+    "dependencies": {
+      "numpy": "2.2.6",
+      "pandas": "2.3.3",
+      "openpyxl": "3.1.5",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2025.2",
+      "tzdata": "2025.3",
+      "six": "1.17.0",
+      "et-xmlfile": "2.0.0"
+    },
+    "preparation_only_environment": true
+  },
+  "counts": {
+    "observations": 188,
+    "windows": 640,
+    "paired_issues": 312,
+    "raw_parents": 101666,
+    "readiness_rows": 376,
+    "input_ready_rows": 336
+  },
+  "tests_passed": 84,
+  "scope": {
+    "source_id": "oman_tilapia",
+    "session_id": "oman-2cbad87a2dbd2a81d6e1",
+    "species_environment": "Publisher-declared Nile tilapia, controlled 180 L tank",
+    "history_hours": 6,
+    "horizons_hours": [
+      1,
+      3
+    ],
+    "primary_horizon_hours": 1,
+    "configurations": [
+      "do_only",
+      "do_temperature_ph"
+    ],
+    "evaluation_claim": "chronological_within_study"
+  },
+  "limitations": [
+    "Short dependent recording and unresolved sensor accuracy.",
+    "No independent-site, shrimp or general fish validation.",
+    "Interval reliability and operational intervention claims remain deferred.",
+    "Reproduction verified on Windows CPython 3.10.11 with pinned preparation packages; other platforms are not verified."
+  ],
+  "stage_status_note": "Earlier stage/source-wide training_approved=false flags remain historical and conservative defaults. This approval applies only to the exact named prepared pilot release."
+}
