@@ -147,6 +147,15 @@
         "output": "Datasets/processed/oman-evaluation-plan-2026-11-07",
         "prediction_scores_computed": false,
         "training_approved": false
+      },
+      "pilot_criteria": {
+        "version": "oman-do-pilot-criteria-v1",
+        "date": "2026-11-07",
+        "policy": "docs/data/release-criteria.json",
+        "report": "docs/data/release-criteria.md",
+        "output": "Datasets/processed/oman-criteria-2026-11-07-v2",
+        "model_qualification": "not_assessed_no_new_model_results",
+        "training_approved": false
       }
     },
     {

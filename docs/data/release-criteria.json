@@ -1,0 +1,44 @@
+{
+  "version": "oman-do-pilot-criteria-v1",
+  "date": "2026-11-07",
+  "evaluation_policy_version": "oman-do-evaluation-v1",
+  "supervised_contract_version": "oman-do-supervised-v1",
+  "threshold_status": "Provisional research engineering targets; no stakeholder-approved field error tolerance or sensor-accuracy validation exists.",
+  "qualification_scope": "Small chronological point-forecast pilot on the selected publisher-declared tilapia tank recording; not an operational or independent-site release.",
+  "supported_context": {
+    "session_id": "oman-2cbad87a2dbd2a81d6e1",
+    "source_sha256": "2bcac5df93a84eaec2d4be477254673d2aa72bdd37c3b76d3d4b27ed29969f95",
+    "lineage_group_id": "oman_single_study_unverified_site_independence"
+  },
+  "accuracy_limits_by_horizon_hours": {
+    "1": {"maximum_mae_mgL": 0.5, "maximum_rmse_mgL": 0.75, "maximum_absolute_bias_mgL": 0.2},
+    "3": {"maximum_mae_mgL": 0.75, "maximum_rmse_mgL": 1.0, "maximum_absolute_bias_mgL": 0.3}
+  },
+  "minimum_mae_skill_vs_persistence": 0.05,
+  "rmse_vs_persistence": "Must not exceed persistence RMSE on the identical complete cohort.",
+  "minimum_prediction_coverage": 1.0,
+  "qualifying_periods": ["validation", "test"],
+  "seed_gate": "Require complete coverage for every registered replica. Apply accuracy/improvement gates to primary seed 17 and arithmetic mean per-seed MAE/RMSE/absolute bias/skill across seeds 17/29/43. Do not cancel opposite signed biases or substitute a better test seed.",
+  "zero_baseline_mae": "Learned-model improvement qualification is unavailable; report persistence and do not manufacture a skill denominator.",
+  "horizon_gate": "The 1-hour horizon is mandatory. The 3-hour horizon qualifies separately and cannot substitute for a failing primary horizon.",
+  "cpu_resource_limits": {
+    "maximum_model_only_p95_ms": 100,
+    "maximum_preprocessing_plus_model_p95_ms": 150,
+    "maximum_fresh_process_load_and_first_prediction_seconds": 15,
+    "maximum_primary_artifact_with_transforms_mib": 10,
+    "maximum_peak_process_rss_mib": 1024,
+    "minimum_batch32_windows_per_second": 100,
+    "maximum_trainable_parameters_per_candidate": 10000
+  },
+  "resource_scope": "Per selected configuration/horizon artifact on a declared CPU host, without GPU acceleration; record thread settings, runtime baseline memory and protocol timings. Includes required transforms; excludes HTTP/database latency. Targets are not yet measured or portable SLAs.",
+  "search_limits": {"maximum_settings_per_family_configuration_horizon": 4, "maximum_epochs_per_stochastic_fit": 100, "maximum_wall_seconds_per_fit": 600},
+  "history_requirements": {"hours": 6, "minimum_readings_per_minute": 3, "minimum_covered_minutes": 54, "maximum_gap_seconds": 180, "maximum_end_age_seconds": 60},
+  "maximum_new_issue_delay_seconds": 60,
+  "maximum_latest_raw_age_at_request_seconds": 120,
+  "issue_delay_status": "Provisional new-issue scheduling allowance, not measured ingestion performance. Cached forecasts retain their original issue/target times.",
+  "inputs": {"do_only": ["do_mgL"], "do_temperature_ph": ["do_mgL", "temperature_c", "ph"]},
+  "forbidden_claims": ["shrimp validation", "general fish validation", "independent-site accuracy", "calibrated field confidence", "disease or mortality prediction", "autonomous aeration or treatment decisions"],
+  "interval_release_status": "deferred_insufficient_independent_calibration_evidence",
+  "model_qualification": "not_assessed_no_new_model_results",
+  "training_approved": false
+}
