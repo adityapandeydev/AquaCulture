@@ -1,0 +1,8 @@
+{
+  "version": "do-experiment-foundation-v1",
+  "release_descriptor": "docs/data/prepared-release.json",
+  "configuration": "do_only",
+  "horizon_hours": 1,
+  "seed": 17,
+  "neural_device": "cuda"
+}

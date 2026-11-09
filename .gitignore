@@ -13,6 +13,9 @@ y2_test.npy
 y2_train.npy
 imputation
 
+# Generated experiment records, checkpoints and training logs
+/ml/runs/
+
 
 # Logs
 logs

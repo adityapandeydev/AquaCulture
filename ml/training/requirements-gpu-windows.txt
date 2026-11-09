@@ -1,0 +1,4 @@
+# Install after the preparation dependencies in a separate user-profile environment.
+# Compatibility pin for Python 3.10 and native Windows NVIDIA CUDA.
+--index-url https://download.pytorch.org/whl/cu126
+torch==2.9.1
