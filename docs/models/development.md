@@ -1,6 +1,6 @@
 # Model experiments: Python modules and notebook interfaces
 
-The experiment foundation resolves the [approved DO release](../data/readiness-report.md) into training and validation arrays and records exact configuration, source and dataset hashes. The same Python functions serve the command line and notebook. The [baseline runner](baselines.md) adds development-only scoring; no learned model has been fitted.
+The experiment foundation resolves the [approved DO release](../data/readiness-report.md) into training and validation arrays and records exact configuration, source and dataset hashes. The same Python functions serve the command line and notebook. The [baseline benchmark](baselines.md), [ridge reference](ridge.md) and [CUDA GRU trainer](gru.md) share development-only scoring.
 
 ## Code organization
 
@@ -39,7 +39,7 @@ Each run records exact development window IDs, feature order, shapes, configurat
 
 ## GPU environment on this system
 
-Hardware inspected on 2026-11-09: **NVIDIA GeForce RTX 3050 Ti Laptop GPU, 4,096 MiB VRAM, driver 610.62**. NVIDIA reports a working device, but that does not prove a Python framework can execute CUDA. PyTorch was absent from the existing project/preparation environment, so CUDA execution is not yet verified.
+Hardware verified on 2026-11-09: **NVIDIA GeForce RTX 3050 Ti Laptop GPU, approximately 4 GiB VRAM, driver 610.62**. The separate model environment has PyTorch **2.9.1+cu126**, CUDA runtime **12.6**, and passing device preflight. A synthetic GRU forward/backward fit, best-checkpoint restoration and CPU inference comparison also pass. This verifies the training path; it is not a dataset benchmark or a CPU resource qualification. The original project/preparation environments remain separate.
 
 New neural experiments use PyTorch in a separate user-profile environment. The native-Windows CUDA wheels avoid changing the existing application's TensorFlow environment. TensorFlow documents 2.10 as its last native-Windows CUDA release; newer TensorFlow GPU installations use WSL2. See the official [TensorFlow installation guide](https://www.tensorflow.org/install/pip) and [PyTorch versioned CUDA installation commands](https://pytorch.org/get-started/previous-versions/).
 
@@ -52,6 +52,7 @@ $modelEnvironment = Join-Path $env:USERPROFILE '.codex/tools/aquaculture-models-
 py -3.10 -m venv $modelEnvironment
 $modelPython = Join-Path $modelEnvironment 'Scripts/python.exe'
 & $modelPython -m pip install -r ml/data/requirements.txt
+& $modelPython -m pip install --upgrade pip
 & $modelPython -m pip install -r ml/training/requirements-gpu-windows.txt
 & $modelPython -m pip check
 & $modelPython -u -m ml.training.experiment doctor --device cuda
@@ -73,6 +74,6 @@ Choose the **AquaCulture models** kernel and open `ml/notebooks/05_experiment_se
 
 ## Training progress handoff
 
-The foundation provides `inspect` and `doctor`, while `python -m ml.training.baselines` runs the [baseline benchmark](baselines.md). `python -m ml.training.ridge` fits the [CPU regression reference](ridge.md) with visible trial progress and JSON checkpoints. The GRU entrypoint is the next neural implementation slice; its GPU training command will be documented with that implementation.
+The foundation provides `inspect` and `doctor`, while `python -m ml.training.baselines` runs the [baseline benchmark](baselines.md). `python -m ml.training.ridge` fits the [CPU regression reference](ridge.md) with visible trial progress and JSON checkpoints. `python -m ml.training.gru` runs the [CUDA sequence experiments](gru.md) with per-epoch progress and best-validation checkpoints.
 
-The neural trainer will require successful CUDA preflight, move the model and batches to the selected device, and report epoch, train/validation loss, elapsed time and checkpoint improvements through the same callable used by a notebook. Training commands use unbuffered Python (`-u`) so progress appears immediately. Long training runs will be started by the developer in their own terminal, with logs/checkpoints in the ignored run directory. The final test remains reserved until development choices and artifacts are locked.
+The neural trainer requires successful CUDA preflight, moves the model and batches to the selected device, and reports epoch, train/validation MAE, elapsed time and checkpoint improvements through the same callable used by a notebook. Training commands use unbuffered Python (`-u`) so progress appears immediately. Dataset training runs are launched by the developer in their own terminal, with logs/checkpoints in the ignored run directory. The final test remains reserved until development choices and artifacts are locked.
