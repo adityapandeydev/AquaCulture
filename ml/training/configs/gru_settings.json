@@ -1,0 +1,18 @@
+{
+  "version": "compact-gru-settings-v1",
+  "settings": [
+    {"hidden_size": 8, "learning_rate": 0.001},
+    {"hidden_size": 8, "learning_rate": 0.003},
+    {"hidden_size": 16, "learning_rate": 0.001},
+    {"hidden_size": 16, "learning_rate": 0.003}
+  ],
+  "maximum_epochs": 100,
+  "patience": 15,
+  "batch_size": 16,
+  "weight_decay": 0.01,
+  "gradient_clip_norm": 1.0,
+  "architecture": "single_layer_gru_linear_residual_from_latest_do",
+  "scaling": "training_window_channel_population_mean_std",
+  "loss": "mean_squared_do_change_scaled_by_training_do_std",
+  "selection": "complete_validation_mean_seed_mae_then_parameter_count_then_registered_order"
+}
