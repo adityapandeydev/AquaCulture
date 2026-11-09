@@ -3,11 +3,11 @@ import argparse
 import json
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 
 from ml.data.eligibility import digest
-from ml.evaluation.metrics import lower_do_threshold, score_predictions
+from ml.evaluation.metrics import lower_do_threshold
+from ml.evaluation.reporting import evaluate_predictions, validate_development_case
 from ml.modeling.baselines import predict_references
 from .data import PreparedRelease
 from .experiment import capture_provenance, validate_config
@@ -15,38 +15,9 @@ from .experiment import capture_provenance, validate_config
 
 def evaluate_case(observations, index, threshold, policy):
     """Score one development partition/configuration/horizon, with canonical float64 truth."""
-    if index.empty or not index.partition.isin(['train', 'validation']).all() or index.partition.nunique() != 1:
-        raise ValueError('Only one nonempty development partition may be scored')
-    for column in ['configuration', 'horizon_hours', 'session_id']:
-        if index[column].nunique() != 1:
-            raise ValueError('Score each session/configuration/horizon separately')
-    if not np.isfinite(threshold) or threshold < 0:
-        raise ValueError('Invalid training-frozen lower-DO threshold')
-    expected = index.copy()
-    truth = observations.set_index('observation_id').do_mgL
-    expected['observed_do_mgL'] = expected.target_observation_id.map(truth)
+    validate_development_case(index)
     predictions = {model: predict_references(observations, index, model) for model in policy['baseline_candidates']}
-    all_rows, metrics = [], []
-    context = {column: index[column].iloc[0] for column in ['partition', 'configuration', 'horizon_hours', 'session_id']}
-    context['horizon_hours'] = int(context['horizon_hours'])
-    for model, prediction in predictions.items():
-        details = prediction.merge(expected[['window_id', 'observed_do_mgL'] + policy['comparison_cohorts']],
-                                   on='window_id', validate='one_to_one')
-        details['error_mgL'] = (pd.to_numeric(details.point_mgL, errors='coerce') - details.observed_do_mgL).where(details.status.eq('ok'))
-        details['absolute_error_mgL'] = details.error_mgL.abs()
-        all_rows.append(details)
-    for cohort in policy['comparison_cohorts']:
-        selected = expected[expected[cohort].eq(True)]
-        subsets = {'all_targets': selected, 'training_lower_decile': selected[selected.observed_do_mgL.le(threshold)]}
-        for subset, rows in subsets.items():
-            reference = predictions['persistence'][predictions['persistence'].window_id.isin(rows.window_id)]
-            for model, prediction in predictions.items():
-                scored = prediction[prediction.window_id.isin(rows.window_id)]
-                result = score_predictions(rows, scored, reference)
-                metrics.append({**context, 'model': model, 'cohort': cohort, 'subset': subset, 'seed': None,
-                                'primary_rankable': cohort == 'all_horizon_specific' and subset == 'all_targets'
-                                    and result['complete_predictions'], **result})
-    return pd.concat(all_rows, ignore_index=True), metrics
+    return evaluate_predictions(observations, index, predictions, threshold, policy)
 
 
 def run_baselines(config_path, output, repository=None, matrix=False, dry_run=False):
