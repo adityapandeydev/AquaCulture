@@ -51,3 +51,22 @@ Root `run.json` records code, data, policy and settings hashes, runtime informat
 Checkpoint files contain tensors and primitive metadata, loaded explicitly with `weights_only=True`, strict state shapes and finite-value checks. Use `ml.modeling.gru.load_checkpoint(path, device='cpu')` for CPU inference; keep its case/run metadata alongside it to preserve horizon, feature order and release bindings. Checkpoints contain the selected model and transforms, not optimizer/RNG state; interrupted runs are restarted in a new directory, not resumed mid-fit.
 
 Numerical and time-budget failures are recorded per replica. CUDA/device/runtime failures abort with an error, leaving the experiment incomplete rather than silently changing its execution policy. Only a `development_gru_completed` run with verified outputs represents a completed experiment. It still has no calibrated confidence or production approval. Calibration and final-test partitions remain locked throughout training and selection.
+
+## First dataset training result
+
+The `gru-first` run on 9 November 2026 completed all 48 registered fits on CUDA. Every epoch used the full approved training partition: 94 windows for +1 h and 92 for +3 h. Fits stopped after 18–69 epochs; summed fit time was approximately 42.4 seconds. This is a small single-tank pilot, not training across every collected dataset.
+
+All four cases selected hidden size 16 and learning rate 0.003 by mean validation MAE. Results below average the three registered seeds; seed 17 remains the primary artifact.
+
+| Inputs | Horizon | Mean validation MAE (mg/L) | Mean RMSE (mg/L) | Mean MAE improvement vs persistence | Validation error gates |
+| --- | --- | --- | --- | --- | --- |
+| DO | +1 h | 0.236942 | 0.307798 | 4.00% | Primary and mean miss 5% improvement |
+| DO | +3 h | 0.318983 | 0.415342 | 8.61% | Primary and mean pass |
+| DO, temperature, pH | +1 h | 0.240976 | 0.313063 | 2.37% | Primary and mean miss 5% improvement |
+| DO, temperature, pH | +3 h | 0.329869 | 0.422051 | 5.49% | Mean passes; primary misses 5% improvement |
+
+The DO-only GRU improves mean MAE over the ridge reference at both horizons. Its +3 h mean RMSE is slightly higher than ridge, so the accuracy tradeoff remains visible. No primary +1 h candidate meets the improvement requirement; a secondary-horizon pass cannot substitute for it. Persistence remains the main comparator, and no model is qualified. These results do not justify expanding the registered search in response to validation errors or opening the final test to tune the model.
+
+Source fingerprints, release/descriptor bindings and output checksums were verified, and selected per-seed validation MAE, RMSE and signed bias were independently recomputed from prediction rows. The run used revision `5381302`; `run.json` SHA-256 is `78481be4892ce287cd051b4def3265d55582d286c86f6103e497cc82b28f9db7`. Its 4,248 prediction rows and 576 metric records include paired baseline repetitions and diagnostic subsets, not independent trials. Generated artifacts remain local and untracked.
+
+CPU inference resource measurements remain outstanding. Candidate decisions must consider those measurements alongside accuracy, freeze the chosen settings/artifacts before final evaluation, and preserve the failed primary-horizon gate. Broader fish/shrimp claims and calibrated prediction intervals require additional eligible evidence.
