@@ -21,7 +21,7 @@ For a preflight without fitting:
 & $python -B -u -m ml.training.ridge --matrix --dry-run --output ml/runs/ridge-check
 ```
 
-The dry run checks release integrity, configuration, case counts, dtype and array/index alignment. It fits no scaler, coefficients or diagnostic threshold and computes no prediction scores. Delivery verification used this real-data preflight and synthetic end-to-end fits; the actual dataset fit is left for the developer to launch.
+The dry run checks release integrity, configuration, case counts, dtype and array/index alignment. It fits no scaler, coefficients or diagnostic threshold and computes no prediction scores.
 
 ## Model definition
 
@@ -59,5 +59,18 @@ The lower-DO diagnostic threshold uses only the 100 distinct training bins. Seas
 The [first baseline review](baseline-review.md) establishes persistence as the main comparator. Ridge reports whether its selected validation result meets the provisional physical-unit error, coverage, 5% MAE-skill and no-RMSE-regression gates. A passing validation error check **does not qualify the model**: CPU inference resource tests and locked final evaluation remain outstanding. A failing check remains visible with its reasons; another model is not selected using final-test outcomes.
 
 The matrix has 16 planned fits. If each case selects a model, the root comparison contains 1,416 model/window predictions and 192 metric records, including paired alternatives and diagnostic subsets. They are not independent environmental trials.
+
+## First training result
+
+The developer-run `ridge-first` experiment on 9 November 2026 completed all 16 fits. Output checksums and source fingerprints were verified, and validation MAE/RMSE were independently recomputed from the saved predictions. The run used revision `21df067`; its `run.json` SHA-256 is `23ea8e2300a416b5df6b02c255414d78b7ffccf69595f3aa4e7054ecb6168635`. Generated artifacts remain local under the ignored run directory.
+
+| Inputs | Horizon | Selected alpha | Validation MAE (mg/L) | RMSE (mg/L) | MAE improvement vs persistence |
+| --- | --- | --- | --- | --- | --- |
+| DO | +1 h | 0.1 | 0.244892 | 0.301351 | 0.78% |
+| DO | +3 h | 0.1 | 0.336433 | 0.412586 | 3.61% |
+| DO, temperature, pH | +1 h | 0.1 | 0.276987 | 0.361591 | -12.22% |
+| DO, temperature, pH | +3 h | 100 | 0.437217 | 0.486059 | -25.26% |
+
+No case passed the validation error gates. DO-only improved both MAE and RMSE but did not reach the required 5% MAE improvement. Extended inputs increased MAE and RMSE; their +3 h result also exceeded the absolute-bias cap. These findings support retaining persistence as the main comparator and DO-only ridge as a learned reference. They do not establish that temperature or pH is generally unhelpful: this is one short tank series with 26 or 24 validation targets. Calibration and final test remain locked; no model is qualified by this run.
 
 `ml/notebooks/07_ridge_reference.ipynb` calls the same runner and summarizes chosen alphas. Tests cover analytic solutions, scaling/validation isolation, constant columns, float64 preservation, JSON roundtrips, malformed artifacts, bounded settings, complete-cohort selection and a synthetic full training/reporting run. The next model-development slice is the compact CUDA GRU after reviewing this CPU reference.
