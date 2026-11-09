@@ -73,6 +73,6 @@ Choose the **AquaCulture models** kernel and open `ml/notebooks/05_experiment_se
 
 ## Training progress handoff
 
-The foundation provides `inspect` and `doctor`, while `python -m ml.training.baselines` runs the [baseline benchmark](baselines.md). Regression and GRU training entrypoints are subsequent implementation slices. Their executable commands will be documented when those functions exist; there is no placeholder learned-model training command to run now.
+The foundation provides `inspect` and `doctor`, while `python -m ml.training.baselines` runs the [baseline benchmark](baselines.md). `python -m ml.training.ridge` fits the [CPU regression reference](ridge.md) with visible trial progress and JSON checkpoints. The GRU entrypoint is the next neural implementation slice; its GPU training command will be documented with that implementation.
 
 The neural trainer will require successful CUDA preflight, move the model and batches to the selected device, and report epoch, train/validation loss, elapsed time and checkpoint improvements through the same callable used by a notebook. Training commands use unbuffered Python (`-u`) so progress appears immediately. Long training runs will be started by the developer in their own terminal, with logs/checkpoints in the ignored run directory. The final test remains reserved until development choices and artifacts are locked.

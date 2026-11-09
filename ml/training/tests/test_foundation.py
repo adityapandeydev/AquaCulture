@@ -42,6 +42,14 @@ class FoundationTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 materialize_development(held_out, held_out_windows, contract, partition, 'do_only', 1)
 
+    def test_float64_reference_preserves_canonical_values_without_changing_default(self):
+        obs, contract, windows = self.fixture()
+        obs.loc[0, 'do_mgL'] = 1.234567890123
+        precise = materialize_development(obs, windows, contract, 'train', 'do_only', 1, dtype=np.float64)
+        self.assertEqual(precise.x[0, 0, 0], obs.loc[0, 'do_mgL'])
+        self.assertEqual(precise.x.dtype, np.float64)
+        self.assertEqual(materialize_development(obs, windows, contract, 'train', 'do_only', 1).x.dtype, np.float32)
+
     def test_cross_partition_references_cannot_supply_training_labels(self):
         obs, contract, windows = self.fixture()
         obs.loc[6, 'partition'] = 'test'

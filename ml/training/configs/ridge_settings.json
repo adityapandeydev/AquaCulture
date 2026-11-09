@@ -1,0 +1,9 @@
+{
+  "version": "ridge-lag-settings-v1",
+  "alphas": [0.1, 1.0, 10.0, 100.0],
+  "objective": "sum_squared_training_errors_plus_alpha_times_squared_standardized_coefficients",
+  "standardization": "training_only_population_mean_and_std",
+  "intercept": "training_target_mean_unpenalized",
+  "selection": "minimum_complete_full_cohort_validation_mae_then_registered_order_for_equal_cost_ridge_ties",
+  "dtype": "float64"
+}

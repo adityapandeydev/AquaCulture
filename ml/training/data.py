@@ -25,11 +25,13 @@ class DevelopmentBatch:
                 'features': list(self.features), 'dtype': str(self.x.dtype)}
 
 
-def materialize_development(observations, windows, contract, partition, configuration, horizon):
+def materialize_development(observations, windows, contract, partition, configuration, horizon, dtype=np.float32):
     if partition not in {'train', 'validation'}:
         raise ValueError('Calibration and final-test access is locked during experiment development')
     if configuration not in contract['input_configurations'] or horizon not in contract['horizons_hours']:
         raise ValueError('Unsupported feature configuration or horizon')
+    if np.dtype(dtype) not in [np.dtype('float32'), np.dtype('float64')]:
+        raise ValueError('Use float32 or float64 development arrays')
     selected = sorted([w for w in windows if w['partition'] == partition and w['configuration'] == configuration
                        and w['horizon_hours'] == horizon], key=lambda w: (w['session_id'], w['issue_time']))
     if not selected:
@@ -37,9 +39,9 @@ def materialize_development(observations, windows, contract, partition, configur
     if len({w['window_id'] for w in selected}) != len(selected):
         raise ValueError('Duplicate development window')
     indexed = observations.set_index('observation_id')
-    x = np.stack([input_matrix(observations, w, contract) for w in selected]).astype(np.float32)
+    x = np.stack([input_matrix(observations, w, contract) for w in selected]).astype(dtype)
     y = np.array([indexed.loc[w['target_observation_id'], contract['target']['column']]
-                  for w in selected], dtype=np.float32)
+                  for w in selected], dtype=dtype)
     if not np.isfinite(x).all() or not np.isfinite(y).all():
         raise ValueError('Non-finite development arrays')
     return DevelopmentBatch(x, y, tuple(w['window_id'] for w in selected), tuple(w['issue_time'] for w in selected),
@@ -69,8 +71,8 @@ class PreparedRelease:
         self._counts = pd.read_csv(self.root / 'stages/partitions/split_counts.csv')
         self._evaluation = pd.read_csv(self.root / 'stages/evaluation/evaluation_index.csv')
 
-    def development(self, partition, configuration, horizon):
-        batch = materialize_development(self._observations, self._windows, self.contract, partition, configuration, horizon)
+    def development(self, partition, configuration, horizon, dtype=np.float32):
+        batch = materialize_development(self._observations, self._windows, self.contract, partition, configuration, horizon, dtype=dtype)
         expected = self._counts[self._counts.partition.eq(partition) & self._counts.configuration.eq(configuration)
                                 & self._counts.horizon_hours.eq(horizon)]
         if len(expected) != 1 or int(expected.examples.iloc[0]) != len(batch.window_ids):

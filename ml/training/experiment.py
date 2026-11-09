@@ -2,6 +2,7 @@
 import argparse
 import importlib.metadata
 import json
+import os
 import platform
 import subprocess
 from datetime import datetime, timezone
@@ -38,6 +39,8 @@ def capture_provenance(config_path, config, repository, release):
               'descriptor_sha256': digest(release.descriptor_path), 'git_revision': revision,
               'source_sha256': {p.relative_to(repository).as_posix(): digest(p) for p in files},
               'python': platform.python_version(),
+              'host': {'platform': platform.platform(), 'processor': platform.processor(), 'logical_cpus': os.cpu_count(),
+                       'thread_environment': {key: os.environ.get(key) for key in ['OPENBLAS_NUM_THREADS', 'MKL_NUM_THREADS', 'OMP_NUM_THREADS']}},
               'preparation_dependencies': {name: importlib.metadata.version(name) for name in ['numpy', 'pandas', 'openpyxl']}}
 
 
