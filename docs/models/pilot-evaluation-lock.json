@@ -1,0 +1,140 @@
+{
+  "version": "oman-do-pilot-evaluation-lock-v1",
+  "date": "2026-11-16",
+  "purpose": "descriptive_research_comparison",
+  "operational_release_approved": false,
+  "final_test_status": "reserved",
+  "calibration_status": "reserved",
+  "release": {
+    "id": "oman-do-pilot-data-v1",
+    "descriptor": "docs/data/prepared-release.json",
+    "descriptor_sha256": "266d76b7d7e2e499935a8550568b46e010dd4c2d8cb97faab71920882a5230ae",
+    "manifest_sha256": "dee03a70a9c7b50c2fcdcce614d6b72835367178c38604eef95519d429e7cf63"
+  },
+  "policy_sha256": {
+    "evaluation-policy.json": "7f8f3355ee75ae3bfe2b598cf6e5352aaaa2ab70584fd93b4e32eed27bdf7387",
+    "release-criteria.json": "3a0ed6f5fabb047c8569850f25779fb36083350af06fc6d964cebc5d49428f00",
+    "supervised-contract.json": "cc71fc20a2d43154fc746b2432ea0a1821c8cbcbc5fc90b71eb36a34b214d7a8",
+    "partition-policy.json": "de427079a245677bab37f8cb3ac609bedd7e0eb4ced5c5db3bd99756a4495cc6"
+  },
+  "development_evidence": {
+    "baseline": {
+      "run": "ml/runs/baselines-first/run.json",
+      "sha256": "1dcd65908238a93367a04e06c9c4c41f447dbaab8aff0ac9cbf27aa1bcb05c60"
+    },
+    "ridge": {
+      "run": "ml/runs/ridge-first/run.json",
+      "sha256": "23ea8e2300a416b5df6b02c255414d78b7ffccf69595f3aa4e7054ecb6168635"
+    },
+    "gru": {
+      "run": "ml/runs/gru-first/run.json",
+      "sha256": "78481be4892ce287cd051b4def3265d55582d286c86f6103e497cc82b28f9db7"
+    },
+    "cpu": {
+      "run": "ml/runs/cpu-verified/run.json",
+      "sha256": "8994dabac2a8294c866531da2f65b14d999aa361f11067701fa3fcc9f71bb545"
+    }
+  },
+  "inference_and_scoring_source_sha256": {
+    "ml/modeling/cpu.py": "e2d347c3fb26eec0e6ceb36100ed48c307b66878bbd7bb6974b7c31e32f54534",
+    "ml/modeling/gru.py": "60a6e39c1d1fe3b1adac7d3b642523bed7841540445dfb2a6457fce8160408b0",
+    "ml/modeling/baselines.py": "171c9ac59764a9384f8f4f01b79d2a450254305723af994126d6706373016f41",
+    "ml/evaluation/metrics.py": "adea760860ed2dc8fe4b5f125e882cb50ca7e78e130bd42fbed904e7ed5ef662",
+    "ml/evaluation/replicas.py": "1bc141caffab8c9403a86f52f5f43e3239e900baa19254e36d6d9188e89a8f59",
+    "ml/evaluation/criteria.py": "dc12a12d6af3532a540bffbb78c5133d3ee64f56f629fc36e369ca83227e7551"
+  },
+  "configuration": "do_only",
+  "feature_order": [
+    "do_mgL"
+  ],
+  "history_hours": 6,
+  "candidate": "compact-do-gru-v1",
+  "comparator": "persistence-v1",
+  "primary_seed": 17,
+  "evaluation_partition": "test",
+  "primary_cohort": "all_horizon_specific",
+  "diagnostic_cohorts": [
+    "common_horizons"
+  ],
+  "cpu_parity_tolerance": {
+    "rtol": 1e-06,
+    "atol_mgL": 1e-05
+  },
+  "lower_do_diagnostic": {
+    "threshold_mgL": 6.868759166666667,
+    "fit_partition": "train",
+    "distinct_observations": 100
+  },
+  "cases": [
+    {
+      "horizon_hours": 1,
+      "primary_horizon": true,
+      "expected_final_test_windows": 22,
+      "settings": {
+        "hidden_size": 16,
+        "learning_rate": 0.003
+      },
+      "mean_validation_mae_mgL": 0.23694201304117815,
+      "validation_gates": {
+        "primary_seed_17": false,
+        "mean_seeds": false
+      },
+      "cpu_resource_gates_passed": true,
+      "replicas": [
+        {
+          "seed": 17,
+          "best_epoch": 18,
+          "path": "ml/runs/gru-first/do_only/horizon_1/selected_seed_17.pt",
+          "sha256": "c50b377e11445ccb5c34debc98fea6193a304f179b7f3e52a3fc404b1b342318"
+        },
+        {
+          "seed": 29,
+          "best_epoch": 13,
+          "path": "ml/runs/gru-first/do_only/horizon_1/selected_seed_29.pt",
+          "sha256": "0cd7102fcc48d171e1147a8c6f19b7b3fffd313e7643afbb1af79983339716b2"
+        },
+        {
+          "seed": 43,
+          "best_epoch": 15,
+          "path": "ml/runs/gru-first/do_only/horizon_1/selected_seed_43.pt",
+          "sha256": "330ccd989275de5672f0eb29f081261e4d6fd3dde0130cef0dd11bb5c8c33758"
+        }
+      ]
+    },
+    {
+      "horizon_hours": 3,
+      "primary_horizon": false,
+      "expected_final_test_windows": 20,
+      "settings": {
+        "hidden_size": 16,
+        "learning_rate": 0.003
+      },
+      "mean_validation_mae_mgL": 0.318983331496627,
+      "validation_gates": {
+        "primary_seed_17": true,
+        "mean_seeds": true
+      },
+      "cpu_resource_gates_passed": true,
+      "replicas": [
+        {
+          "seed": 17,
+          "best_epoch": 5,
+          "path": "ml/runs/gru-first/do_only/horizon_3/selected_seed_17.pt",
+          "sha256": "6dcbbd47b1a72be7909957b573f1781e938d214602b18e4ae3dda21d2cdb9b8c"
+        },
+        {
+          "seed": 29,
+          "best_epoch": 9,
+          "path": "ml/runs/gru-first/do_only/horizon_3/selected_seed_29.pt",
+          "sha256": "b5c4a83c2636d13873fd82746d858d6bd9aa7841a063a5aa7e2407b7ff9ba7eb"
+        },
+        {
+          "seed": 43,
+          "best_epoch": 32,
+          "path": "ml/runs/gru-first/do_only/horizon_3/selected_seed_43.pt",
+          "sha256": "84c6c0534562d6c5e3cac374d74c8a874feebcbaff9c219438e255b89a900599"
+        }
+      ]
+    }
+  ]
+}

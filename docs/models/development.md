@@ -2,6 +2,8 @@
 
 The experiment foundation resolves the [approved DO release](../data/readiness-report.md) into training and validation arrays and records exact configuration, source and dataset hashes. The same Python functions serve the command line and notebook. The [baseline benchmark](baselines.md), [ridge reference](ridge.md) and [CUDA GRU trainer](gru.md) share development-only scoring. The [CPU benchmark](cpu-benchmark.md) measures the selected artifacts' inference costs without retraining or opening held-out data.
 
+The [pilot closeout](pilot-closeout.md) records the candidate decision, frozen final evaluation scope and forecast interface for the Go backend and Python model service.
+
 ## Code organization
 
 ```text
