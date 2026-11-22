@@ -21,6 +21,25 @@ Before scoring, verify the release manifest, policy and artifact hashes against 
 
 Report both horizons and every registered replica together. Treat missing or invalid forecasts under the frozen coverage rules and record any failed evaluation attempt. Once test results are exposed, any rerun must disclose the prior exposure and the reason. Calibration stays reserved, and interval release is deferred. This evaluation leaves the recorded +1 h validation result in force. The lock was prepared before final scoring using the [frozen evaluation protocol](../data/evaluation-protocol.md) and [acceptance criteria](../data/release-criteria.md).
 
+## Final evaluation result
+
+The evaluation ran once on 22 November 2026, after the evaluator was committed as `ad53d3c`. All 21 locked files matched. The saved validation forecasts were reproduced within 9.6e-7 mg/L. Persistence and all three seeds returned a forecast for every window. No earlier attempt scored test data.
+
+| Horizon | Windows | Forecast | MAE (mg/L) | RMSE (mg/L) | Signed bias (mg/L) | MAE improvement |
+| --- | ---: | --- | ---: | ---: | ---: | ---: |
+| +1 h | 22 | Persistence | 0.4035 | 0.6578 | -0.018 | |
+| | | GRU seed 17 | 0.3946 | 0.6257 | -0.095 | 2.2% |
+| | | GRU seed 29 | 0.3918 | 0.6239 | -0.091 | 2.9% |
+| | | GRU seed 43 | 0.3934 | 0.6242 | -0.094 | 2.5% |
+| +3 h | 20 | Persistence | 0.6385 | 1.0094 | -0.167 | |
+| | | GRU seed 17 | 0.6301 | 0.9373 | -0.296 | 1.3% |
+| | | GRU seed 29 | 0.6327 | 0.9286 | -0.328 | 0.9% |
+| | | GRU seed 43 | 0.6091 | 0.9095 | -0.333 | 4.6% |
+
+The candidate fails both horizons. Seed 17 and the seed mean miss the 5% improvement gate at +1 h and +3 h. The mean absolute bias at +3 h is 0.319 mg/L, above its 0.30 limit. The +3 h validation pass did not carry over to the test period. Persistence and the GRU both have larger errors on the test period than on validation. The lower-DO subgroup has one target at +1 h and none at +3 h, so it provides no usable evidence.
+
+The calibration partition remains unused. Any further scoring of these test windows must state that they were exposed on this date. Reproduce the checks without scoring with `python -B -m ml.evaluation.pilot_final --check-only` in the model environment. Outputs are in `ml/runs/pilot-final/`, and `run.json` has SHA-256 `2ba8831f5763bb6e61e3cecfe1ec7250fed892d0f10c2832e6d15146f92c4055`.
+
 ## Forecast interface v1
 
 The Go backend will call the internal Python service with `POST /v1/forecasts` and a JSON body. The operation computes a point forecast without writing records. Go owns authorization, trusted observation assembly and forecast history. The Python service owns history readiness checks, configured artifact loading, inference and forecast identity. Both pilot profiles are restricted to authorized research replay of the frozen Oman tank context. Go returns `model_unavailable` for operational forecast requests under the current release policy.
