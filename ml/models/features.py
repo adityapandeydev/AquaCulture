@@ -1,7 +1,9 @@
-"""Tabular features shared by ridge and boosted trees."""
+"""Features for tabular and neural models. Depends on NumPy only."""
 import numpy as np
 
-from ml.data.arrays import fill_history
+from .history import CHANNELS, HISTORY, fill_history
+
+INPUTS = 2 * len(CHANNELS) + 3
 
 
 def clock(hour):
@@ -20,3 +22,14 @@ def tabular(samples):
     stats = [f(do, axis=1, keepdims=True) for f in (np.mean, np.min, np.max, np.std)]
     return np.concatenate([last, do[:, :-1] - last, recent, *context, *stats,
                            present[:, :, 0].sum(axis=1, keepdims=True), clock(samples.hour)], axis=1)
+
+
+def inputs(samples, mean, scale):
+    """Standardized channels, presence flags, DO relative to the latest value, and the clock."""
+    filled, present = fill_history(samples.x)
+    values = np.where(np.isfinite(filled), (filled - mean) / scale, 0.)
+    relative = values[:, :, :1] - values[:, -1:, :1]
+    hours = (samples.hour[:, None] - np.arange(HISTORY - 1, -1, -1)[None]) % 24
+    angle = 2 * np.pi * hours / 24
+    time = np.stack([np.sin(angle), np.cos(angle)], axis=2)
+    return np.concatenate([values, present, relative, time], axis=2).astype(np.float32)

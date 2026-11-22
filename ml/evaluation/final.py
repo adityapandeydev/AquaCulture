@@ -6,9 +6,9 @@ from pathlib import Path
 
 import numpy as np
 
-from ml.data.arrays import HORIZONS
 from ml.data.files import digest
 from ml.models.blend import blend, load_families
+from ml.models.history import HORIZONS
 from ml.models.naive import naive_forecasts
 from ml.training.common import CRITERIA, DESCRIPTOR, Development, provenance, write_json
 

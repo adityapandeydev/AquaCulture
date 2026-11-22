@@ -8,7 +8,7 @@ AquaTech is a pond monitoring and early-warning system for aquaculture. It is be
 | --- | --- |
 | Data | A 17-pond carp dataset is prepared. [Dataset record](docs/data/carp.md) |
 | Forecast models | Tested for research and demonstration use: point forecasts to +6 h, an interval at +1 h and low-oxygen probabilities. [Results](docs/models/results.md) |
-| Model service | Planned, Python |
+| Model service | Working on localhost. [Contract and performance](docs/models/service.md) |
 | Backend | The Python backend in `backend/` no longer runs and will be replaced by a Go service. |
 | Frontend | The existing React app in `frontend/` will be rebuilt. |
 
@@ -25,6 +25,7 @@ AquaCulture/
 │   ├── models/     Naive, ridge, tree and neural forecasters
 │   ├── training/   Training runs
 │   ├── evaluation/ Metrics, calibration and testing
+│   ├── service/    Forecast HTTP service
 │   └── tests/      Python tests
 └── docs/
     ├── data/       Current dataset, sources and policy
@@ -32,9 +33,11 @@ AquaCulture/
     └── pilot/      Archive of the first experiment
 ```
 
-Datasets, experiment runs and credentials are not tracked.
+Datasets, experiment runs, model bundles and credentials are not tracked.
 
 ## Tests
+
+Training and service packages are installed in separate environments. Each skips the tests it has no packages for.
 
 ```powershell
 python -B -m unittest discover -s ml/tests -t .

@@ -3,9 +3,10 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from ml.data.arrays import CarpRelease, Samples, assemble, fill_history
+from ml.data.arrays import CarpRelease, assemble
 from ml.evaluation.metrics import (alert_metrics, event_rate, point_metrics, probability_below, quantile_metrics,
                                    relative_score)
+from ml.models.history import Samples, fill_history
 from ml.models.naive import fit_profile, persistence, profile, yesterday
 from ml.models.ridge import Ridge
 
@@ -91,7 +92,8 @@ class ModelTest(unittest.TestCase):
     def test_networks_are_causal_shaped_and_ordered(self):
         try:
             import torch
-            from ml.models.network import QuantileNetwork, inputs, pinball
+            from ml.models.features import inputs
+            from ml.models.network import QuantileNetwork, pinball
         except ImportError:
             self.skipTest('PyTorch is not installed')
         s = synthetic(64)

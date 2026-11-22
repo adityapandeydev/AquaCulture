@@ -2,9 +2,8 @@
 import numpy as np
 from sklearn.ensemble import HistGradientBoostingRegressor
 
-from ml.data.arrays import HORIZONS
-
 from .features import tabular
+from .history import HORIZONS
 
 
 class Trees:

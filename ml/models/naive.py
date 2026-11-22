@@ -1,7 +1,7 @@
 """Naive point forecasts used as references."""
 import numpy as np
 
-from ml.data.arrays import HISTORY, HORIZONS
+from .history import HISTORY, HORIZONS
 
 
 def persistence(samples):

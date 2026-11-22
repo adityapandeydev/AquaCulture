@@ -1,0 +1,10 @@
+# Runtime
+numpy==2.2.6
+onnxruntime==1.23.2
+fastapi==0.162.5
+pydantic==2.14.4
+uvicorn==0.54.0
+tzdata==2026.6
+# Tests and benchmark
+httpx==0.28.1
+psutil==7.2.2

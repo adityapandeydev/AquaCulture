@@ -1,9 +1,8 @@
 """Ridge regression on the change from the latest value, with fitted residual quantiles."""
 import numpy as np
 
-from ml.data.arrays import HORIZONS
-
 from .features import clock, tabular
+from .history import HORIZONS
 
 
 class Ridge:

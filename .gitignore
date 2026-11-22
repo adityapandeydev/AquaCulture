@@ -5,6 +5,7 @@ __pycache__/
 # Local data, runs and credentials
 /Datasets/
 /ml/runs/
+/ml/bundles/
 .env
 
 # Logs

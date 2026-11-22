@@ -1,0 +1,40 @@
+{
+ "model_id": "carp-blend-1",
+ "local_bundle": "ml/bundles/carp-1",
+ "manifest_sha256": "e3a10350950b2584807f465ddf8fa314e40b4574ddf65fb1e088c6056904fca0",
+ "files_sha256": {
+  "ridge.npz": "92162e1e633ed9727a6fafce81d554d81c37c2031f0f3a772b8e2aaa61791c22",
+  "trees.npz": "a4af49f55d2ff49d081bf9393b186648c9e974b2b4ee7a7da287b40548a7e03a",
+  "gru1.onnx": "7cd663b8f56959c2495b342cac01afc49fb9db9cb0ac27ea64f37777114a8236",
+  "gru2.onnx": "e251b7c3148365a0eabb56228b2a4e8ba90ae8b795071653dfce4e4640ebca65",
+  "gru3.onnx": "a704bb8a1c740336898728b18406511d11a8a192761b68d1b33ed89b2d927f0b",
+  "tcn1.onnx": "e821d47b4e65349169bb4b3a53a8ade0d5d1043201ea7fa801a50b8fab164041",
+  "tcn2.onnx": "227309569c187dc0d657dc704b5da21642d0f513f76b9c1731a4d567272a701d",
+  "tcn3.onnx": "ee4a742d090c965e451f0c4b112b2e1892a863d3a7df8047d2e7cd445bffdd68"
+ },
+ "released": {
+  "1": {
+   "point": true,
+   "interval": true,
+   "alert": true
+  },
+  "3": {
+   "point": true,
+   "interval": false,
+   "alert": true
+  },
+  "6": {
+   "point": true,
+   "interval": false,
+   "alert": true
+  },
+  "12": {
+   "point": false,
+   "interval": false,
+   "alert": true
+  }
+ },
+ "size_mib": 3.95,
+ "parity_max_mgL": 1.2715657575768091e-06,
+ "final_run_sha256": "7cf6cd2e3c4a4231b43a25c971a18eb773a418bfc47cb9699ea6fa99823adcf7"
+}

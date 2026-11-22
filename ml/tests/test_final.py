@@ -5,11 +5,11 @@ from pathlib import Path
 
 import numpy as np
 
-from ml.data.arrays import Samples
 from ml.evaluation.conformal import apply_offsets, fit_offsets
 from ml.evaluation.final import evaluate, gates
 from ml.evaluation.metrics import alert_metrics, gain_interval
 from ml.models.blend import blend
+from ml.models.history import Samples
 from ml.models.naive import fit_profile
 
 from .test_forecast import QUANTILES, synthetic

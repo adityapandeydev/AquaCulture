@@ -3,21 +3,8 @@ import numpy as np
 import torch
 from torch import nn
 
-from ml.data.arrays import CHANNELS, HISTORY, HORIZONS, fill_history
-
-INPUTS = 2 * len(CHANNELS) + 3
-
-
-def inputs(samples, mean, scale):
-    """Standardized channels, presence flags, DO relative to the latest value, and the clock."""
-    filled, present = fill_history(samples.x)
-    values = np.where(np.isfinite(filled), (filled - mean) / scale, 0.)
-    relative = values[:, :, :1] - values[:, -1:, :1]
-    hours = (samples.hour[:, None] - np.arange(HISTORY - 1, -1, -1)[None]) % 24
-    angle = 2 * np.pi * hours / 24
-    time = np.stack([np.sin(angle), np.cos(angle)], axis=2)
-    return np.concatenate([values, present, relative, time], axis=2).astype(np.float32)
-
+from .features import INPUTS, inputs
+from .history import HORIZONS
 
 class CausalBlock(nn.Module):
     def __init__(self, width, dilation, dropout):

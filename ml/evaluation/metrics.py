@@ -1,7 +1,7 @@
 """Pond-averaged forecast metrics in physical units."""
 import numpy as np
 
-from ml.data.arrays import HORIZONS
+from ml.models.history import HORIZONS
 
 
 def by_pond(values, pond):

@@ -8,8 +8,8 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from ml.data.arrays import CHANNELS
 from ml.data.files import digest
+from ml.models.history import CHANNELS
 from ml.models.network import QuantileNetwork, load_network, pinball, predict, tensors
 
 from .common import Development, provenance, summary, write_json
