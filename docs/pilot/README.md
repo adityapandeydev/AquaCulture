@@ -7,7 +7,7 @@ The first experiment forecast dissolved oxygen in one Nile tilapia tank. It ende
 - [Model development](development.md), [ridge](ridge.md), [GRU](gru.md), [CPU benchmark](cpu-benchmark.md)
 - [Prepared data](readiness-report.md) and [source review](source-review.md)
 
-The code is at commit `1ada193`, tagged `pilot-v1` locally. Commands and paths in these documents refer to that commit, where they were under `docs/data/` and `docs/models/`. To recheck the locked artifacts without scoring, use a separate worktree. `Datasets/` and `ml/runs/` from this machine must be available inside it.
+The code is at commit `1ada193`, tagged `pilot-v1` locally. Commands and paths in these documents refer to that commit, where they were under `docs/data/` and `docs/models/`. To recheck the locked artifacts without scoring, use a separate worktree. `Datasets/` and `ml/runs/` from this machine must be available inside it. The pilot's GPU environment has been removed. Recreate it from `ml/data/requirements.txt` and `ml/training/requirements-gpu-windows.txt` at that commit.
 
 ```powershell
 git worktree add ../aquaculture-pilot 1ada193
