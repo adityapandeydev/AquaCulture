@@ -1,0 +1,9 @@
+# Recorded checksums depend on exact bytes, so line endings stay LF on every checkout.
+*.json text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.csv text eol=lf
+
+# The pilot evaluation lock recorded these two files with CRLF endings.
+ml/evaluation/metrics.py text eol=crlf
+docs/data/prepared-release.json text eol=crlf
