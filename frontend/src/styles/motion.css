@@ -1,0 +1,104 @@
+/* Movement uses transform, opacity and clip-path. Colours may fade. Nothing here changes layout.
+   scripts/motion.mjs checks this in every lint run. */
+
+/* Pages: the old page leaves quickly, the new one settles. Only the main area takes part. */
+main { view-transition-name: page; }
+.rail-mark { view-transition-name: rail-mark; }
+.tab-mark { view-transition-name: tab-mark; }
+.hero-name { view-transition-name: pond-name; }
+::view-transition-group(*) { animation-duration: 300ms; animation-timing-function: var(--ease-out); }
+::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+::view-transition-old(page) { animation: page-out 120ms ease-out both; }
+::view-transition-new(page) { animation: page-in 280ms var(--ease-out) 60ms both; }
+@keyframes page-out { to { opacity: 0; transform: translateY(-6px); } }
+@keyframes page-in { from { opacity: 0; transform: translateY(14px); } }
+
+/* Lists and panels arrive in order. The delay is capped, and content is usable at once. */
+.arrive { animation: arrive 420ms var(--ease-out) both; animation-delay: calc(min(var(--i, 0), 8) * 45ms); }
+@keyframes arrive { from { opacity: 0; transform: translateY(12px); } }
+
+/* Buttons give under the finger and answer with a ripple from the point of contact. */
+.btn, .press { transition: transform 160ms var(--ease-out), background-color 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease; }
+.btn:active:not(:disabled), .press:active { transform: scale(0.97); }
+.btn .ripple { position: absolute; border-radius: 50%; background: currentColor; pointer-events: none; opacity: 0; }
+.btn .face, .btn .busy, .btn .tick { transition: transform 200ms var(--ease-out), opacity 160ms ease; }
+.btn .busy, .btn .tick { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; transform: translateY(40%); }
+.btn[data-state='busy'] .face, .btn[data-state='done'] .face { opacity: 0; transform: translateY(-40%); }
+.btn[data-state='busy'] .busy, .btn[data-state='done'] .tick { opacity: 1; transform: none; }
+.btn[data-state='done'] .tick path { animation: tick 320ms var(--ease-out) both; }
+@keyframes tick { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+.spin { animation: spin 700ms linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover:not(:disabled):not(:active) { transform: translateY(-1px); }
+  .btn .nudge { transition: transform 200ms var(--ease-out); }
+  .btn:hover .nudge, .row:hover .nudge { transform: translateX(3px); }
+  .row::after { opacity: 0; transition: opacity 180ms ease; }
+  .row:hover::after { opacity: 1; }
+}
+
+/* Rolling digits. */
+.roll { display: inline-flex; overflow: hidden; height: 1.1em; line-height: 1.1; font-variant-numeric: tabular-nums; vertical-align: bottom; }
+.roll > span { display: block; transition: transform 700ms var(--ease-out); }
+.roll > span > i { display: block; font-style: normal; height: 1.1em; }
+
+/* The water column. The level moves by transform and the wave drifts only while it is on screen. */
+.column .level { transition: transform 1100ms var(--ease-out); }
+.column .wave { animation: drift 5s linear infinite; animation-play-state: paused; }
+.column.seen .wave { animation-play-state: running; }
+.column .body { transition: opacity 400ms ease; }
+@keyframes drift { to { transform: translateX(-50%); } }
+
+/* Charts draw once, from left to right. */
+.draw { animation: draw 900ms var(--ease-move) both; }
+@keyframes draw { from { clip-path: inset(-10px 100% -10px -10px); } to { clip-path: inset(-10px -10px -10px -10px); } }
+.pop { animation: pop 360ms var(--ease-out) both; animation-delay: calc(500ms + var(--i, 0) * 70ms); transform-box: fill-box; transform-origin: center; }
+@keyframes pop { from { opacity: 0; transform: scale(0.6); } }
+.grow { transform-origin: left center; transition: transform 800ms var(--ease-out); }
+.cross { transition: transform 90ms linear, opacity 120ms ease; }
+
+/* Placeholders shimmer while data loads. */
+.skeleton { position: relative; overflow: hidden; background: var(--sunken); border-radius: var(--radius-small); }
+.skeleton::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, var(--surface), transparent); opacity: 0.7; transform: translateX(-100%); animation: shimmer 1.3s var(--ease-move) infinite; }
+@keyframes shimmer { to { transform: translateX(100%); } }
+
+/* Sliding choices. */
+.segments .thumb { transition: transform 260ms var(--ease-out); }
+.field .underline { transform: scaleX(0); transition: transform 240ms var(--ease-out); }
+.field:focus-within .underline { transform: scaleX(1); }
+.field .problem { animation: arrive 220ms var(--ease-out) both; }
+
+/* Dialogs, notices and disclosure. */
+dialog { opacity: 0; transform: translateY(12px) scale(0.98); transition: opacity 160ms ease, transform 160ms ease, overlay 160ms allow-discrete, display 160ms allow-discrete; }
+dialog[open] { opacity: 1; transform: none; transition-duration: 260ms; transition-timing-function: var(--ease-out); }
+dialog::backdrop { opacity: 0; background: rgb(5 25 26 / 0.5); transition: opacity 200ms ease, overlay 200ms allow-discrete, display 200ms allow-discrete; }
+dialog[open]::backdrop { opacity: 1; }
+@starting-style {
+  dialog[open] { opacity: 0; transform: translateY(18px) scale(0.97); }
+  dialog[open]::backdrop { opacity: 0; }
+  .toast { opacity: 0; transform: translateY(100%); }
+}
+.toast { transition: transform 320ms var(--ease-out), opacity 220ms ease; }
+.toast[data-leaving] { opacity: 0; transform: translateX(40%); transition-duration: 180ms; }
+.drop { transition: background-color 180ms ease, border-color 180ms ease, transform 200ms var(--ease-out); }
+.drop[data-over] { transform: scale(1.01); }
+.drop .lift { transition: transform 260ms var(--ease-out); }
+.drop[data-over] .lift { transform: translateY(-6px); }
+
+/* An alert that opens while you watch draws the eye twice, then rests. */
+.beacon { animation: beacon 900ms ease-out 2; }
+@keyframes beacon { 40% { opacity: 0.35; } }
+
+.sun, .moon { transition: transform 320ms var(--ease-out), opacity 200ms ease; }
+
+/* Less motion, not none: meaning is kept through opacity. */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*) { animation-duration: 1ms; }
+  ::view-transition-new(page), .arrive, .pop, .draw, .field .problem { animation-name: fade; animation-duration: 180ms; animation-delay: 0ms; }
+  ::view-transition-old(page) { animation: none; opacity: 0; }
+  .column .wave, .skeleton::after, .beacon { animation: none; }
+  .column .level, .roll > span, .segments .thumb, .grow, .cross { transition-duration: 1ms; }
+  .btn:active:not(:disabled), .press:active, .btn:hover:not(:disabled):not(:active) { transform: none; }
+  .toast, dialog, dialog[open] { transform: none; }
+}
+@keyframes fade { from { opacity: 0; } }

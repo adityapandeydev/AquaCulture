@@ -2,12 +2,68 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Pond monitoring, oxygen forecasts and alerts." />
+    <meta name="theme-color" content="#0d3b3e" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
+    <title>AquaTech</title>
+    <script>
+      // Runs before paint, so the theme never flashes.
+      try {
+        const t = localStorage.getItem('theme')
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t
+        if (sessionStorage.getItem('booted')) document.documentElement.dataset.boot = 'quick'
+      } catch {}
+    </script>
+    <style>
+      /* The boot screen is inline so it can play before any script arrives. Only transform, opacity and clip-path move. */
+      #boot { position: fixed; inset: 0; z-index: 1000; overflow: hidden; background: #0d3b3e; color: #e9f5f2;
+        display: grid; place-items: center; font: 600 1.75rem/1 'Hanken Grotesk Variable', system-ui, sans-serif; letter-spacing: -0.02em; }
+      #boot .scene { position: relative; width: 12rem; height: 9rem; margin-bottom: 16vh; }
+      #boot .drop { position: absolute; left: calc(50% - 0.5rem); top: 0; width: 1rem; height: 1.4rem; animation: boot-drop 420ms cubic-bezier(0.55, 0, 0.8, 0.4) both; }
+      #boot .ring { position: absolute; left: calc(50% - 3rem); top: 4rem; width: 6rem; height: 1.9rem; border: 2px solid #7fd6c6; border-radius: 50%; opacity: 0;
+        animation: boot-ring 900ms cubic-bezier(0.16, 1, 0.3, 1) 400ms both; }
+      #boot .ring + .ring { animation-delay: 540ms; }
+      #boot .name { position: absolute; inset: auto 0 0; text-align: center; animation: boot-name 620ms cubic-bezier(0.16, 1, 0.3, 1) 520ms both; }
+      #boot .water { position: absolute; left: 0; right: 0; bottom: 0; height: 120%; transform: translateY(86%); animation: boot-rise 1100ms cubic-bezier(0.16, 1, 0.3, 1) 380ms both; }
+      #boot .water svg { position: absolute; left: 0; bottom: calc(100% - 1px); width: 200%; height: 2.5rem; animation: boot-wave 3.2s linear infinite; }
+      #boot .water i { position: absolute; inset: 0; background: #135a5c; }
+      #boot .slow { position: absolute; inset: auto 1rem 2rem; text-align: center; font-size: 0.95rem; font-weight: 450; letter-spacing: 0; line-height: 1.5; opacity: 0; }
+      #boot.late .slow { opacity: 1; transition: opacity 300ms; }
+      #boot .slow button { font: inherit; color: inherit; background: none; border: 1px solid currentColor; border-radius: 0.6rem; padding: 0.4rem 0.9rem; margin-left: 0.5rem; cursor: pointer; }
+      #boot.done { animation: boot-leave 520ms cubic-bezier(0.77, 0, 0.175, 1) both; pointer-events: none; }
+      [data-boot='quick'] #boot :is(.drop, .ring, .name, .water) { animation-duration: 1ms; animation-delay: 0ms; }
+      [data-boot='quick'] #boot.done { animation-duration: 260ms; }
+      @keyframes boot-drop { from { transform: translateY(-40vh); } 90% { opacity: 1; } to { transform: translateY(4.2rem); opacity: 0; } }
+      @keyframes boot-ring { from { transform: scale(0.2); opacity: 0.9; } to { transform: scale(1.5); opacity: 0; } }
+      @keyframes boot-name { from { clip-path: inset(100% 0 0 0); transform: translateY(0.6rem); } to { clip-path: inset(-20% 0 -20% 0); transform: none; } }
+      @keyframes boot-rise { from { transform: translateY(100%); } to { transform: translateY(74%); } }
+      @keyframes boot-wave { to { transform: translateX(-50%); } }
+      @keyframes boot-leave { to { transform: translateY(-100%); } }
+      @media (prefers-reduced-motion: reduce) {
+        #boot :is(.drop, .ring) { display: none; }
+        #boot :is(.name, .water, .water svg) { animation: none; }
+        #boot.done { animation: boot-fade 200ms both; }
+        @keyframes boot-fade { to { opacity: 0; } }
+      }
+    </style>
   </head>
   <body>
+    <div id="boot" role="status" aria-label="Loading AquaTech">
+      <div class="water" aria-hidden="true">
+        <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path fill="#135a5c" d="M0 22c75-18 150-18 225 0s150 18 225 0 100-18 150 0 150 18 225 0 150-18 225 0 100 18 150 0v18H0z" /></svg>
+        <i></i>
+      </div>
+      <div class="scene" aria-hidden="true">
+        <svg class="drop" viewBox="0 0 10 14"><path fill="#bdf0e4" d="M5 0c2 3 5 6 5 9a5 5 0 0 1-10 0c0-3 3-6 5-9z" /></svg>
+        <span class="ring"></span><span class="ring"></span>
+        <span class="name">AquaTech</span>
+      </div>
+      <p class="slow">This is taking longer than usual.<button type="button" onclick="location.reload()">Reload</button></p>
+    </div>
     <div id="root"></div>
+    <script>setTimeout(() => document.getElementById('boot')?.classList.add('late'), 9000)</script>
+    <noscript>AquaTech needs JavaScript.</noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

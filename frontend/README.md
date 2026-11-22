@@ -1,73 +1,60 @@
-# React + TypeScript + Vite
+# Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React app for ponds, forecasts and alerts. It talks only to the [Go backend](../backend/README.md).
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```powershell
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+It opens on `http://127.0.0.1:5190` and passes `/api` to `http://127.0.0.1:8090`. Set `API_URL` to use another backend.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| Folder | Purpose |
+| --- | --- |
+| `src/api` | Requests, types, cached queries |
+| `src/charts` | Water column, oxygen chart, trend, all plain SVG |
+| `src/lib` | Time, pond states, scales, motion helpers |
+| `src/pages` | One file per page, loaded when opened |
+| `src/styles` | Colours and type, layout, motion |
+| `src/ui` | Buttons, fields, dialogs, notices, page frame |
+| `e2e` | Browser tour with measurements |
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Rules the interface keeps
+
+- It never calls a pond safe. Having no alert is shown as having no alert.
+- A withheld forecast output stays hidden. The only 90% range is at +1 h, and there is no value at +12 h.
+- Demo data carries a demo label everywhere it appears.
+- Colours judge a reading only against limits the operator chose. They always come with words or an icon.
+- Times use the pond's timezone. A missing or partial hour breaks the chart line.
+
+## Motion
+
+There is no animation library. Effects are CSS, the Web Animations API and browser view transitions.
+
+- Only `transform`, `opacity`, `clip-path` and colours animate. `npm run lint` fails on anything that moves layout.
+- The boot story plays once per visit and any key or tap skips it. It waits for real loading, not the reverse.
+- Endless motion is limited to water waves, which rest when off screen.
+- The app times its own page transitions. A device that is slow twice keeps the lighter entrances only.
+- `prefers-reduced-motion` removes movement and keeps fades.
+
+Measured in Chrome on 22 November 2026 on a 144 Hz laptop, on a production build.
+
+| | Result |
+| --- | ---: |
+| JavaScript to first page, compressed | 116 KB, plus 1 to 5 KB per page |
+| Frame time during page changes and chart drawing, 95th percentile | 7.1 ms |
+| Tasks over 50 ms during the tour | 0 |
+| Main thread in use when idle | 0.2 to 0.4% |
+| Layout shift | 0.009 |
+| Boot, first visit and later | 2.0 s, 0.4 s |
+| Worst frame on page change, processor slowed 6 times | about 240 ms before adapting, 35 to 83 ms after |
+
+## Checks
+
+```powershell
+npm run lint
+npm test
+npm run build
 ```
+
+`node e2e/tour.mjs <folder> <file.csv>` drives the whole product in an installed Chrome, saves screenshots and prints the measurements. Run it against `npm run preview` and an empty test database. It creates accounts and ponds.
