@@ -6,6 +6,7 @@ import { finishBoot } from '../lib/motion'
 import { messageOf } from '../lib/action'
 import { Button, Field, Segments } from '../ui/kit'
 import { Drop } from '../ui/shell'
+import * as ui from '../ui/styles'
 
 export function Component() {
   const me = useMe()
@@ -39,25 +40,25 @@ export function Component() {
   const input = (key: keyof typeof form) => ({ value: form[key], onChange: (e: { target: { value: string } }) => setForm({ ...form, [key]: e.target.value }) })
 
   return (
-    <div className="gate">
-      <div className="side">
-        <div className="sea" aria-hidden="true">
-          <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path fill="#135a5c" d="M0 22c75-18 150-18 225 0s150 18 225 0 100-18 150 0 150 18 225 0 150-18 225 0 100 18 150 0v18H0z" /></svg><i />
+    <div className="grid min-h-dvh grid-cols-[minmax(0,1.1fr)_minmax(22rem,0.9fr)] max-md:grid-cols-1 max-md:grid-rows-[auto_1fr]">
+      <div className="relative grid content-end overflow-hidden bg-rail p-[clamp(1.5rem,5vw,4rem)] text-rail-ink max-md:pt-18 max-md:pb-6">
+        <div className="sea absolute inset-x-0 bottom-0 h-[62%]" aria-hidden="true">
+          <svg className="absolute bottom-[calc(100%-1px)] left-0 h-10.5 w-[200%]" viewBox="0 0 1200 40" preserveAspectRatio="none"><path fill="#135a5c" d="M0 22c75-18 150-18 225 0s150 18 225 0 100-18 150 0 150 18 225 0 150-18 225 0 100 18 150 0v18H0z" /></svg><i className="absolute inset-0 bg-sea" />
         </div>
-        <span className="brand"><Drop />AquaTech</span>
-        <h1 className="arrive">Your ponds, through the night.</h1>
-        <p className="arrive" style={{ '--i': 2 } as React.CSSProperties}>Oxygen falls after dark. See the readings, the hours ahead and the warnings in one place.</p>
+        <span className={ui.cx(ui.brand, 'absolute top-[clamp(1rem,3vw,2.25rem)] left-[clamp(0.8rem,4.4vw,3.4rem)]')}><Drop />AquaTech</span>
+        <h1 className="arrive relative max-w-[16ch] text-[clamp(2rem,1.2rem+3vw,3.4rem)]">Your ponds, through the night.</h1>
+        <p className="arrive relative mt-4 max-w-[46ch] text-foam max-md:hidden" style={{ '--i': 2 } as React.CSSProperties}>Oxygen falls after dark. See the readings, the hours ahead and the warnings in one place.</p>
       </div>
-      <div className="form-side">
-        <div>
+      <div className="grid place-items-center bg-page px-[clamp(1.25rem,4vw,3rem)] py-8">
+        <div className="grid w-[min(24rem,100%)] gap-6">
           <div className="arrive" style={{ '--i': 1 } as React.CSSProperties}>
             <Segments legend="Account" hidden value={mode} onChange={(m) => { setMode(m); setProblem('') }} options={[{ value: 'in', label: 'Sign in' }, { value: 'up', label: 'Create account' }]} />
           </div>
-          <form className="form arrive" style={{ '--i': 2 } as React.CSSProperties} onSubmit={submit}>
+          <form className={ui.cx(ui.form, 'arrive')} style={{ '--i': 2 } as React.CSSProperties} onSubmit={submit}>
             {mode === 'up' && <div className="arrive"><Field label="Name" autoComplete="name" required maxLength={80} {...input('name')} /></div>}
             <Field label="Email" type="email" autoComplete="email" required {...input('email')} />
             <Field label="Password" type="password" autoComplete={mode === 'in' ? 'current-password' : 'new-password'} required minLength={mode === 'up' ? 10 : undefined} hint={mode === 'up' ? 'At least 10 characters.' : undefined} {...input('password')} />
-            {problem && <p className="problem arrive" role="alert">{problem}</p>}
+            {problem && <p className={ui.cx(ui.problem, 'arrive')} role="alert">{problem}</p>}
             <Button type="submit" state={state}>{mode === 'in' ? 'Sign in' : 'Create account'}</Button>
           </form>
         </div>

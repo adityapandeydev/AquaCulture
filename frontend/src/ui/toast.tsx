@@ -19,8 +19,8 @@ export function toast(text: string, icon: IconName = 'check') {
 export function Toasts() {
   const items = useSyncExternalStore((l) => { listeners.add(l); return () => listeners.delete(l) }, () => list)
   return (
-    <div className="toasts" role="status" aria-live="polite">
-      {items.map((t) => <div key={t.id} className="toast" data-leaving={t.leaving ? '' : undefined}><Icon name={t.icon} /><span>{t.text}</span></div>)}
+    <div className="fixed right-4 bottom-4 z-50 grid w-[min(24rem,calc(100vw-2rem))] gap-2.5 max-md:bottom-20" role="status" aria-live="polite">
+      {items.map((t) => <div key={t.id} className="toast flex items-start gap-3 rounded-small bg-ink px-4 py-3 text-page shadow-float" data-leaving={t.leaving ? '' : undefined}><Icon name={t.icon} /><span>{t.text}</span></div>)}
     </div>
   )
 }

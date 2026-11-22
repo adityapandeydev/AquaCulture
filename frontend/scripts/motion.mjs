@@ -19,6 +19,10 @@ for (const file of files) {
   if (/will-change/.test(text)) problems.push(`${file}: will-change is permanent here, remove it`)
 }
 
+// Motion lives in motion.css, where it is checked. Tailwind's motion utilities would bypass that.
+for (const file of readdirSync('src', { recursive: true }).map((f) => 'src/' + String(f).replaceAll('\\', '/')).filter((f) => /\.tsx?$/.test(f)))
+  for (const [match] of readFileSync(file, 'utf8').matchAll(/(?<![\w-])(?:transition|animate|duration|delay|will-change)-[\w[]+/g)) problems.push(`${file}: ${match} belongs in motion.css`)
+
 if (problems.length) {
   console.error(problems.join('\n'))
   process.exit(1)

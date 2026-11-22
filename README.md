@@ -42,7 +42,7 @@ Three terminals, from the repository root. The [backend guide](backend/README.md
 ```powershell
 python -B -m ml.service.app                 # 1. forecast service, in its own environment
 cd backend; go run ./cmd/server             # 2. backend
-cd frontend; npm install; npm run dev       # 3. app on http://127.0.0.1:5190
+cd frontend; bun install; bun run dev       # 3. app on http://127.0.0.1:5190
 ```
 
 ## Tests

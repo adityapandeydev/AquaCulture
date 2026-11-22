@@ -9,6 +9,7 @@ import { BackLink } from '../ui/shell'
 import { toast } from '../ui/toast'
 import { draftOf, limitsOf } from './draft'
 import { LimitFields } from './limits'
+import * as ui from '../ui/styles'
 
 const zones = Intl.supportedValuesOf('timeZone')
 const here = Intl.DateTimeFormat().resolvedOptions().timeZone
@@ -34,30 +35,30 @@ export function Component() {
   const list = zones.includes(zone) ? zones : [zone, ...zones]
   return (
     <>
-      <div className="head"><h1>Add a pond</h1><BackLink to="/">All ponds</BackLink></div>
-      <form className="stack" onSubmit={(e: FormEvent) => { e.preventDefault(); void save.run() }}>
-        <div className="two">
-        <section className="panel arrive">
+      <div className={ui.head}><h1>Add a pond</h1><BackLink to="/">All ponds</BackLink></div>
+      <form className={ui.stack} onSubmit={(e: FormEvent) => { e.preventDefault(); void save.run() }}>
+        <div className={ui.two}>
+        <section className={ui.cx(ui.panel, 'arrive')}>
           <h2>About the pond</h2>
-          <div className="form">
+          <div className={ui.form}>
             <Field label="Name" required maxLength={80} value={name} onChange={(e) => setName(e.target.value)} />
             <Segments legend="Data" value={mode} onChange={setMode} options={[{ value: 'live', label: 'Live sensor' }, { value: 'demo', label: 'Recorded demo' }]} />
-            <p className="note">{mode === 'live' ? 'A live pond receives device readings and a forecast each hour.' : 'A demo pond replays imported readings. It is always labelled as a demo.'} This cannot be changed later.</p>
+            <p className={ui.note}>{mode === 'live' ? 'A live pond receives device readings and a forecast each hour.' : 'A demo pond replays imported readings. It is always labelled as a demo.'} This cannot be changed later.</p>
             <Select label="Species" value={kind} onChange={(e) => setKind(e.target.value)} hint={chosen && !chosen.forecasts ? 'Monitoring and limit alerts only. There is no forecast model for this species.' : chosen ? 'Forecasts are available. They are for research and demonstration.' : undefined}>
               {species.data?.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
             </Select>
-            <div className="grid2">
+            <div className={ui.grid2}>
               <Select label="Timezone" value={zone} onChange={(e) => setZone(e.target.value)} hint="Fixed after creation.">{list.map((z) => <option key={z} value={z}>{z.replaceAll('_', ' ')}</option>)}</Select>
               <Select label="Time between readings" value={sampling} onChange={(e) => setSampling(e.target.value)} hint="Fixed after creation.">{['1', '5', '10', '15', '20', '30'].map((m) => <option key={m} value={m}>{m} min</option>)}</Select>
             </div>
           </div>
         </section>
-        <section className="panel arrive" style={{ '--i': 1 } as CSSProperties}>
+        <section className={ui.cx(ui.panel, 'arrive')} style={{ '--i': 1 } as CSSProperties}>
           <h2>Your limits</h2>
-          <div className="form"><LimitFields draft={draft} onChange={setDraft} species={chosen} /></div>
+          <div className={ui.form}><LimitFields draft={draft} onChange={setDraft} species={chosen} /></div>
         </section>
         </div>
-        {save.problem && <p className="form problem arrive" role="alert">{save.problem}</p>}
+        {save.problem && <p className={ui.cx(ui.form, ui.problem, 'arrive')} role="alert">{save.problem}</p>}
         <div><Button type="submit" state={save.state} icon="plus">Add pond</Button></div>
       </form>
     </>

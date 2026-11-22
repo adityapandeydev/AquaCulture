@@ -12,7 +12,7 @@ export function Trend({ values, low }: { values: (number | null)[]; low: number 
   const known = values.filter((v): v is number => v !== null)
   const label = known.length ? `Last 24 hours: ${Math.min(...known).toFixed(1)} to ${Math.max(...known).toFixed(1)} mg/L` : 'No hourly values'
   return (
-    <svg className="trend draw" viewBox="0 0 200 44" preserveAspectRatio="none" role="img" aria-label={label}>
+    <svg className="block h-11 w-full overflow-visible draw" viewBox="0 0 200 44" preserveAspectRatio="none" role="img" aria-label={label}>
       {low !== null && <line x1="0" x2="200" y1={y(low)} y2={y(low)} stroke="var(--line-strong)" vectorEffect="non-scaling-stroke" />}
       <path d={path} fill="none" stroke="var(--series-observed)" strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" vectorEffect="non-scaling-stroke" />
     </svg>

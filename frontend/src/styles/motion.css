@@ -47,6 +47,7 @@ main { view-transition-name: page; }
 .column .wave { animation: drift 5s linear infinite; animation-play-state: paused; }
 .column.seen .wave { animation-play-state: running; }
 .column .body { transition: opacity 400ms ease; }
+.sea svg { animation: drift 9s linear infinite; }
 @keyframes drift { to { transform: translateX(-50%); } }
 
 /* Charts draw once, from left to right. */
@@ -54,7 +55,7 @@ main { view-transition-name: page; }
 @keyframes draw { from { clip-path: inset(-10px 100% -10px -10px); } to { clip-path: inset(-10px -10px -10px -10px); } }
 .pop { animation: pop 360ms var(--ease-out) both; animation-delay: calc(500ms + var(--i, 0) * 70ms); transform-box: fill-box; transform-origin: center; }
 @keyframes pop { from { opacity: 0; transform: scale(0.6); } }
-.grow { transform-origin: left center; transition: transform 800ms var(--ease-out); }
+.bar { transform-origin: left center; transition: transform 800ms var(--ease-out); }
 .cross { transition: transform 90ms linear, opacity 120ms ease; }
 
 /* Placeholders shimmer while data loads. */
@@ -64,8 +65,8 @@ main { view-transition-name: page; }
 
 /* Sliding choices. */
 .segments .thumb { transition: transform 260ms var(--ease-out); }
-.field .underline { transform: scaleX(0); transition: transform 240ms var(--ease-out); }
-.field:focus-within .underline { transform: scaleX(1); }
+.field .rule { transform: scaleX(0); transition: transform 240ms var(--ease-out); }
+.field:focus-within .rule { transform: scaleX(1); }
 .field .problem { animation: arrive 220ms var(--ease-out) both; }
 
 /* Dialogs, notices and disclosure. */
@@ -96,8 +97,8 @@ dialog[open]::backdrop { opacity: 1; }
   ::view-transition-group(*) { animation-duration: 1ms; }
   ::view-transition-new(page), .arrive, .pop, .draw, .field .problem { animation-name: fade; animation-duration: 180ms; animation-delay: 0ms; }
   ::view-transition-old(page) { animation: none; opacity: 0; }
-  .column .wave, .skeleton::after, .beacon { animation: none; }
-  .column .level, .roll > span, .segments .thumb, .grow, .cross { transition-duration: 1ms; }
+  .column .wave, .sea svg, .skeleton::after, .beacon { animation: none; }
+  .column .level, .roll > span, .segments .thumb, .bar, .cross { transition-duration: 1ms; }
   .btn:active:not(:disabled), .press:active, .btn:hover:not(:disabled):not(:active) { transform: none; }
   .toast, dialog, dialog[open] { transform: none; }
 }

@@ -1,10 +1,10 @@
 # Frontend
 
-A React app for ponds, forecasts and alerts. It talks only to the [Go backend](../backend/README.md).
+A React and TypeScript app for ponds, forecasts and alerts, built with Bun, Vite and Tailwind CSS. It talks only to the [Go backend](../backend/README.md).
 
 ```powershell
-npm install
-npm run dev
+bun install
+bun run dev
 ```
 
 It opens on `http://127.0.0.1:5190` and passes `/api` to `http://127.0.0.1:8090`. Set `API_URL` to use another backend.
@@ -15,8 +15,8 @@ It opens on `http://127.0.0.1:5190` and passes `/api` to `http://127.0.0.1:8090`
 | `src/charts` | Water column, oxygen chart, trend, all plain SVG |
 | `src/lib` | Time, pond states, scales, motion helpers |
 | `src/pages` | One file per page, loaded when opened |
-| `src/styles` | Colours and type, layout, motion |
-| `src/ui` | Buttons, fields, dialogs, notices, page frame |
+| `src/styles` | Tailwind theme with both colour sets, and motion |
+| `src/ui` | Buttons, fields, dialogs, notices, page frame, shared utility groups |
 | `e2e` | Browser tour with measurements |
 
 ## Rules the interface keeps
@@ -29,9 +29,9 @@ It opens on `http://127.0.0.1:5190` and passes `/api` to `http://127.0.0.1:8090`
 
 ## Motion
 
-There is no animation library. Effects are CSS, the Web Animations API and browser view transitions.
+There is no animation library. Layout uses Tailwind utilities. All movement is in `src/styles/motion.css`, the Web Animations API and browser view transitions.
 
-- Only `transform`, `opacity`, `clip-path` and colours animate. `npm run lint` fails on anything that moves layout.
+- Only `transform`, `opacity`, `clip-path` and colours animate. `bun run lint` fails on anything that moves layout, and on Tailwind motion utilities that would bypass the check.
 - The boot story plays once per visit and any key or tap skips it. It waits for real loading, not the reverse.
 - Endless motion is limited to water waves, which rest when off screen.
 - The app times its own page transitions. A device that is slow twice keeps the lighter entrances only.
@@ -41,7 +41,7 @@ Measured in Chrome on 22 November 2026 on a 144 Hz laptop, on a production build
 
 | | Result |
 | --- | ---: |
-| JavaScript to first page, compressed | 116 KB, plus 1 to 5 KB per page |
+| JavaScript to first page, compressed | 118 KB, plus 1 to 5 KB per page |
 | Frame time during page changes and chart drawing, 95th percentile | 7.1 ms |
 | Tasks over 50 ms during the tour | 0 |
 | Main thread in use when idle | 0.2 to 0.4% |
@@ -52,9 +52,9 @@ Measured in Chrome on 22 November 2026 on a 144 Hz laptop, on a production build
 ## Checks
 
 ```powershell
-npm run lint
-npm test
-npm run build
+bun run lint
+bun run test
+bun run build
 ```
 
-`node e2e/tour.mjs <folder> <file.csv>` drives the whole product in an installed Chrome, saves screenshots and prints the measurements. Run it against `npm run preview` and an empty test database. It creates accounts and ponds.
+`node e2e/tour.mjs <folder> <file.csv>` drives the whole product in an installed Chrome, saves screenshots and prints the measurements. Run it against `bun run preview` and an empty test database. It creates accounts and ponds.
