@@ -1,0 +1,45 @@
+{
+  "version": "carp-forecast-criteria-v1",
+  "date": "2026-11-22",
+  "release": "fwi-do-release-v2",
+  "horizons_hours": [1, 3, 6, 12],
+  "quantiles": [0.02, 0.05, 0.1, 0.25, 0.5, 0.75, 0.9, 0.95, 0.98],
+  "naive_models": ["persistence", "yesterday", "profile"],
+  "selection": {
+    "sets": ["validation_seen_pond", "validation_unseen_pond"],
+    "score": "mean over sets and horizons of pond-macro MAE divided by the strongest naive MAE on that set and horizon",
+    "maximum_settings_per_family": 4,
+    "seeds": [17, 29, 43],
+    "neural_artifact": "mean of the quantile forecasts of all three seeds",
+    "neural_minimum_relative_gain_over_best_simple": 0.02,
+    "maximum_epochs": 200,
+    "patience": 20
+  },
+  "primary_test": "test_unseen_pond",
+  "secondary_tests": ["test_seen_pond", "test_unseen_pond_concurrent"],
+  "point_gates": {
+    "minimum_mae_gain_over_strongest_naive": {"1": 0.05, "3": 0.1, "6": 0.1, "12": 0.1},
+    "maximum_pond_mae_ratio_to_strongest_naive": 1.1,
+    "maximum_absolute_bias_mgL": {"1": 0.5, "3": 0.5, "6": 0.75, "12": 0.75},
+    "minimum_prediction_coverage": 1.0
+  },
+  "interval_gates": {
+    "nominal": 0.9,
+    "method": "conformalized quantile regression on the calibration partition",
+    "pond_macro_coverage": [0.85, 0.95],
+    "minimum_pond_coverage": 0.75
+  },
+  "alert_gates": {
+    "thresholds_mgL": [2.0, 3.0],
+    "gated_threshold_mgL": 3.0,
+    "reference": "fitting-set frequency by target hour of day",
+    "minimum_brier_skill": 0.0,
+    "minimum_events_to_assess": 30
+  },
+  "resource_limits": {
+    "maximum_single_forecast_p95_ms": 150,
+    "maximum_load_and_first_forecast_seconds": 15,
+    "maximum_artifact_mib": 20,
+    "maximum_peak_rss_mib": 1024
+  }
+}
