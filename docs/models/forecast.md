@@ -42,3 +42,23 @@ The interval calibration ponds also form the unseen-pond validation set at earli
 A 90% interval covers the sensor reading. It does not include the sensor's own error, which is [substantial](../data/carp.md#measurement-limits).
 
 The point, interval and alert gates are separate. A model that fails one may still be used for the others, and the product must show which are available. The alert thresholds are diagnostics for this dataset and carry no biological claim.
+
+## Validation results and amendment
+
+Scores are error relative to the strongest naive forecast, as registered. Lower is better.
+
+| Model | Score |
+| --- | ---: |
+| Persistence | 2.4147 |
+| Yesterday | 1.4506 |
+| Profile | 1.0833 |
+| GRU, three-seed mean | 0.8684 |
+| TCN, three-seed mean | 0.8662 |
+| Ridge | 0.8654 |
+| Boosted trees | 0.8611 |
+
+A neural model needed 0.8439 or less. Neither reached it, so the registered rule selects boosted trees.
+
+The four learned families make partly different errors. Their equal average scores 0.8418. This was found after the validation results were known, as the best of four blends tried, and it passes the 2% margin narrowly. On 22 November 2026, before calibration or test data were opened, it was adopted as the shipping candidate in [amendment.json](amendment.json). The acceptance limits did not change. The blend and the trees are both tested once, and only the blend can be released.
+
+Validation already shows two risks. Dates after the fitting period are harder than new ponds, and gains there are near the limits at +1 h and +3 h. Uncalibrated 90% intervals cover only 75–84% of readings on those dates with the blend.

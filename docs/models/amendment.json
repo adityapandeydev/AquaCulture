@@ -1,0 +1,32 @@
+{
+  "version": "carp-forecast-amendment-v1",
+  "date": "2026-11-22",
+  "amends": "carp-forecast-criteria-v1",
+  "reason": "The registered rule selects boosted trees. No neural family reached the required 2% gain. An equal average of the four learned families scored better on validation and was adopted after that result was seen.",
+  "shipping_candidate": "blend",
+  "comparison": "trees",
+  "blend": {
+    "weights": {"ridge": 0.25, "trees": 0.25, "gru": 0.25, "tcn": 0.25},
+    "combination": "weighted mean of each quantile"
+  },
+  "validation_scores": {
+    "trees": 0.8611, "ridge": 0.8654, "tcn": 0.8662, "gru": 0.8684,
+    "ridge+trees": 0.8488, "trees+gru": 0.8467, "trees+tcn": 0.8459, "blend": 0.8418
+  },
+  "calibration": {
+    "method": "conformalized quantile regression per horizon",
+    "pairs": [[0.02, 0.98], [0.05, 0.95], [0.1, 0.9], [0.25, 0.75]],
+    "median": "unchanged",
+    "order": "each adjusted quantile is limited by its neighbour nearer the median"
+  },
+  "final_rules": {
+    "test_openings": 1,
+    "shipping_decision": "Only the blend is gated for release. The comparison is reported and cannot replace it after the test.",
+    "gates": "Unchanged from carp-forecast-criteria-v1, applied to calibrated forecasts",
+    "strongest_naive": "Lowest pond-macro MAE among the three naive forecasts on the same test set and horizon"
+  },
+  "added_diagnostics_without_gates": {
+    "onset": "Alert metrics restricted to windows whose latest hour is at or above the threshold",
+    "gain_interval": "95% percentile interval of the MAE gain from 2000 resamples of whole pond-days within each pond, seed 17"
+  }
+}
