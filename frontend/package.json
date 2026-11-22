@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint . && node scripts/motion.mjs",
+    "lint": "eslint . && bun scripts/motion.mjs",
     "test": "vitest run",
     "preview": "vite preview"
   },
@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",
+    "@tailwindcss/vite": "4.3.5",
     "@types/node": "24.19.2",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
@@ -28,6 +29,7 @@
     "eslint-plugin-react-refresh": "0.5.8",
     "globals": "17.14.0",
     "playwright-core": "1.65.1",
+    "tailwindcss": "4.3.5",
     "typescript": "5.9.3",
     "typescript-eslint": "8.73.0",
     "vite": "8.3.8",
