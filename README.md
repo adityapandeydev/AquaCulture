@@ -7,7 +7,7 @@ AquaTech is a pond monitoring and early-warning system for aquaculture. It is be
 | Part | State |
 | --- | --- |
 | Data | A 17-pond carp dataset is prepared. [Dataset record](docs/data/carp.md) |
-| Forecast models | In development. No model is approved for use. [Experiment plan](docs/models/forecast.md) |
+| Forecast models | Tested for research and demonstration use: point forecasts to +6 h, an interval at +1 h and low-oxygen probabilities. [Results](docs/models/results.md) |
 | Model service | Planned, Python |
 | Backend | The Python backend in `backend/` no longer runs and will be replaced by a Go service. |
 | Frontend | The existing React app in `frontend/` will be rebuilt. |
@@ -24,7 +24,7 @@ AquaCulture/
 │   ├── data/       Acquisition, audit and dataset preparation
 │   ├── models/     Naive, ridge, tree and neural forecasters
 │   ├── training/   Training runs
-│   ├── evaluation/ Forecast metrics
+│   ├── evaluation/ Metrics, calibration and testing
 │   └── tests/      Python tests
 └── docs/
     ├── data/       Current dataset, sources and policy
