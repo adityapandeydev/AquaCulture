@@ -1,0 +1,161 @@
+{
+ "version": "carp-forecast-candidate-v1",
+ "shipping_candidate": "blend",
+ "created_at_utc": "2026-11-22T10:53:36.356819+00:00",
+ "git_revision": "a927dc425b432c7e7600efb0f95fc8ec5cf9cf2c",
+ "amendment_sha256": "1cf9353b2ac0edd9f82a2360a5b2ac12808cc4150b8ca02accfdad77e6a0c957",
+ "criteria_sha256": "fb5b9588ea87fecc06c452a740f6ca3ce2fb2ae19057a8bacf05b572d29a9997",
+ "release_descriptor_sha256": "abd490537ddfda33cb7b49d43dff6a1c5528daee9b8f332686a2db583a8ae69a",
+ "artifacts": {
+  "ridge": {
+   "ml/runs/carp-simple/ridge.pkl": "5d12f0106be97d82e6b89e49f8b516e9e197ec9d0d88e881a0282ea4736167e6"
+  },
+  "trees": {
+   "ml/runs/carp-simple/trees.pkl": "993f8d34382a8927a394b5f3a90d03498770b893c2a50c90f5428ffbfd5599f4"
+  },
+  "gru": {
+   "ml/runs/carp-neural/gru/setting4/seed17.pt": "b298e968a056d94cbded4397fab4880d428bf657242e19f63a0b76e71d1211c1",
+   "ml/runs/carp-neural/gru/setting4/seed29.pt": "cbd9f1667cad7bb4a079cb93b9ccc7f1dcf8b2cea749de6ba8b6a920c10e9516",
+   "ml/runs/carp-neural/gru/setting4/seed43.pt": "374716b4f533630bf5474492803309694ddb73e2c7b991afc47a418b55aa0ebd"
+  },
+  "tcn": {
+   "ml/runs/carp-neural/tcn/setting4/seed17.pt": "ceb305ebecb056717bf6f1b2104561dcc9fb21e54c086eed0626551250202644",
+   "ml/runs/carp-neural/tcn/setting4/seed29.pt": "d61f0122dd9e2db2bf2b12e63c4ada1bcf0f8c9716e949c4085d271a6b3a477d",
+   "ml/runs/carp-neural/tcn/setting4/seed43.pt": "ff2f693c9d5816064969f8e9ea8bb4b3b522073abc2d28753a6cb98ed2338031"
+  }
+ },
+ "weights": {
+  "ridge": 0.25,
+  "trees": 0.25,
+  "gru": 0.25,
+  "tcn": 0.25
+ },
+ "quantiles": [
+  0.02,
+  0.05,
+  0.1,
+  0.25,
+  0.5,
+  0.75,
+  0.9,
+  0.95,
+  0.98
+ ],
+ "pairs": [
+  [
+   0.02,
+   0.98
+  ],
+  [
+   0.05,
+   0.95
+  ],
+  [
+   0.1,
+   0.9
+  ],
+  [
+   0.25,
+   0.75
+  ]
+ ],
+ "calibration_windows": 515,
+ "validation_scores": {
+  "blend": 0.8418371284355662,
+  "trees": 0.861072747310897
+ },
+ "candidates": {
+  "blend": {
+   "offsets_by_horizon_and_pair": [
+    [
+     0.0598029483323721,
+     0.12373006986269286,
+     0.13797256673477554,
+     0.01440477773427462
+    ],
+    [
+     1.4227529837662765,
+     0.7579427792886229,
+     0.39124927452268565,
+     0.10007170604868487
+    ],
+    [
+     2.3315812333512493,
+     1.1748183011553106,
+     0.7062372722683676,
+     0.2333387623855998
+    ],
+    [
+     2.967274426814181,
+     1.739975326780523,
+     0.7760964733274989,
+     0.17388635833989508
+    ]
+   ],
+   "calibration_coverage_before": [
+    0.8719217940529416,
+    0.8059238510218902,
+    0.7700785087258487,
+    0.7787272727272727
+   ],
+   "calibration_coverage_after": [
+    0.8988764588615558,
+    0.899460524950721,
+    0.8921289240712015,
+    0.8946666666666667
+   ],
+   "calibration_width_after": [
+    2.902287286328285,
+    5.7109361838053445,
+    7.124471799050191,
+    8.415338770829601
+   ]
+  },
+  "trees": {
+   "offsets_by_horizon_and_pair": [
+    [
+     0.4945819778372895,
+     0.2260932446792694,
+     0.1278035888629443,
+     0.0054650275856230335
+    ],
+    [
+     1.6304225599678013,
+     0.8639866586365157,
+     0.5279207443242393,
+     0.16362615243744627
+    ],
+    [
+     2.4649093820331553,
+     1.3413356761991064,
+     0.7265026692186769,
+     0.245
+    ],
+    [
+     3.415593256079122,
+     2.166183619747514,
+     1.0829037959228547,
+     0.32899532401385123
+    ]
+   ],
+   "calibration_coverage_before": [
+    0.8303075464029265,
+    0.7476916692602966,
+    0.7157693595295199,
+    0.7035151515151515
+   ],
+   "calibration_coverage_after": [
+    0.8998912910239288,
+    0.9011930698205207,
+    0.8899010958760701,
+    0.8935151515151515
+   ],
+   "calibration_width_after": [
+    2.920420019113186,
+    5.628866459636498,
+    7.272152218637763,
+    8.861050545100882
+   ]
+  }
+ }
+}
