@@ -65,12 +65,17 @@ def probability_below(forecast, quantiles, threshold):
     return result
 
 
-def alert_metrics(samples, forecast, quantiles, threshold, hourly_rate):
-    """Brier skill against the fitting-set event frequency of the target hour."""
+def alert_metrics(samples, forecast, quantiles, threshold, hourly_rate, onset=False):
+    """Brier skill against the fitting-set event frequency of the target hour.
+
+    With onset, only windows whose latest hour is at or above the threshold count.
+    """
     probability = probability_below(forecast, quantiles, threshold)
     rows = []
     for j, horizon in enumerate(HORIZONS):
         keep = np.isfinite(samples.y[:, j])
+        if onset:
+            keep &= samples.last >= threshold
         event, pond = (samples.y[keep, j] < threshold).astype(float), samples.pond[keep]
         reference = hourly_rate[(samples.hour[keep] + horizon) % 24]
         brier, base = macro((probability[keep, j] - event) ** 2, pond), macro((reference - event) ** 2, pond)
@@ -94,3 +99,24 @@ def relative_score(forecast_mae, naive_maes):
     ratios = [forecast_mae[s][j] / min(m[j] for m in naive_maes[s].values())
               for s in forecast_mae for j in range(len(HORIZONS))]
     return float(np.mean(ratios))
+
+
+def gain_interval(samples, forecast, reference, resamples=2000, seed=17):
+    """Percentile interval of the MAE gain, resampling whole pond-days within each pond."""
+    rng, rows = np.random.default_rng(seed), []
+    day = samples.issue.astype('datetime64[D]')
+    for j in range(len(HORIZONS)):
+        keep = np.isfinite(samples.y[:, j])
+        errors = np.abs(np.stack([forecast[keep, j], reference[keep, j]]) - samples.y[keep, j])
+        pond, date = samples.pond[keep], day[keep]
+        tables = []
+        for p in np.unique(pond):
+            blocks = [(pond == p) & (date == d) for d in np.unique(date[pond == p])]
+            tables.append(np.array([[*errors[:, b].sum(axis=1), b.sum()] for b in blocks]))
+        gains = []
+        for _ in range(resamples):
+            totals = [t[rng.integers(0, len(t), len(t))].sum(axis=0) for t in tables]
+            model, base = np.mean([t[:2] / t[2] for t in totals], axis=0)
+            gains.append(1 - model / base)
+        rows.append([float(v) for v in np.quantile(gains, [0.025, 0.975])])
+    return rows

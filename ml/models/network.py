@@ -69,3 +69,22 @@ def pinball(forecast, target, quantiles, scale):
     error = torch.where(present, target, torch.zeros_like(target))[:, :, None] - forecast
     loss = torch.maximum(quantiles * error, (quantiles - 1) * error).mean(dim=2)
     return (loss * present).sum() / present.sum() / scale
+
+
+def tensors(samples, mean, scale, device):
+    return (torch.as_tensor(inputs(samples, mean, scale), device=device),
+            torch.as_tensor(samples.last, dtype=torch.float32, device=device),
+            torch.as_tensor(samples.y, dtype=torch.float32, device=device))
+
+
+def predict(model, x, last):
+    model.eval()
+    with torch.inference_mode():
+        return model(x, last).clamp_min(0).cpu().numpy().astype(float)
+
+
+def load_network(path, device='cpu'):
+    record = torch.load(path, map_location='cpu', weights_only=True)
+    model = QuantileNetwork(record['kind'], record['width'], record['quantiles'], record['scale'][0])
+    model.load_state_dict(record['state'], strict=True)
+    return model.to(device).eval(), np.array(record['mean']), np.array(record['scale'])

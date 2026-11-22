@@ -10,7 +10,7 @@ import torch
 
 from ml.data.arrays import CHANNELS
 from ml.data.files import digest
-from ml.models.network import QuantileNetwork, inputs, pinball
+from ml.models.network import QuantileNetwork, load_network, pinball, predict, tensors
 
 from .common import Development, provenance, summary, write_json
 
@@ -21,18 +21,6 @@ BATCH, RATE = 128, 1e-3
 def scaling(samples):
     rows = samples.x.reshape(-1, len(CHANNELS))
     return np.nanmean(rows, axis=0), np.nanstd(rows, axis=0)
-
-
-def tensors(samples, mean, scale, device):
-    return (torch.as_tensor(inputs(samples, mean, scale), device=device),
-            torch.as_tensor(samples.last, dtype=torch.float32, device=device),
-            torch.as_tensor(samples.y, dtype=torch.float32, device=device))
-
-
-def predict(model, x, last):
-    model.eval()
-    with torch.inference_mode():
-        return model(x, last).clamp_min(0).cpu().numpy().astype(float)
 
 
 def seed_everything(seed):
@@ -78,13 +66,6 @@ def fit_one(kind, setting, seed, data, arrays, mean, scale, device, epochs, pati
             break
     return state, {**best, 'epochs_run': epoch, 'seconds': time.perf_counter() - started, 'history': history,
                    'parameters': sum(p.numel() for p in model.parameters())}
-
-
-def load_network(path, device='cpu'):
-    record = torch.load(path, map_location='cpu', weights_only=True)
-    model = QuantileNetwork(record['kind'], record['width'], record['quantiles'], record['scale'][0])
-    model.load_state_dict(record['state'], strict=True)
-    return model.to(device).eval(), np.array(record['mean']), np.array(record['scale'])
 
 
 def check_resume(output, identity):
