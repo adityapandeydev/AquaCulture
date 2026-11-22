@@ -10,7 +10,7 @@
       "publisher_context": "https://www.fishwelfareinitiative.org/post/cm-data",
       "status": "downloaded_audit_requires_session_and_lineage_review",
       "training_approved": false,
-      "species": "Farmed fish; per-pond species unresolved",
+      "species": "Rohu and Catla in all 17 ponds, from the companion stocking records (fwi_farm_data_india)",
       "cadence": "Approximately 15 minutes; exact seconds and gaps vary",
       "reuse_evidence": "Pinned README invites research use with citation. Publisher page states website information is freely usable. No SPDX/CC identifier or separate LICENSE file in the pinned repository.",
       "raw_redistribution": "Not included in Git; precise redistribution/model-publication terms remain to be clarified",
@@ -199,6 +199,77 @@
           "sha256": "507091226aa25c1d03c6cdb925fa7658013d0c2ec8d89bdb50d386e1b6af2085",
           "git_blob_sha1": "ad0ada61ab9fa270c4cf19ed3f6d742add627e53",
           "bytes": 178932
+        }
+      ]
+    },
+    {
+      "id": "fwi_farm_data_india",
+      "title": "FWI Farm Data - India (June 2021 - August 2026), v3.1.0",
+      "url": "https://github.com/fish-welfare-initiative/fwi-farm-data-india",
+      "version": "2013b52dfd7f04f54410c813c1fe64f76ec04a3c",
+      "status": "acquired_context_only",
+      "training_approved": false,
+      "species": "Per-pond species, stocking and harvest events for all 17 monitored FWI ponds",
+      "cadence": "Farm visits; not continuous",
+      "reuse_evidence": "LICENSE file declares CC BY 4.0. Applies to this repository only.",
+      "limitations": "The publisher retracted Nellore water-quality records from 1 November 2024 after finding fabricated data. The retracted file is not acquired. All 17 monitored ponds are in Eluru.",
+      "review": "docs/data/fwi-release.md",
+      "downloads": [
+        {
+          "relative_path": "fwi_farm_data_india/README.md",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/fwi-farm-data-india/2013b52dfd7f04f54410c813c1fe64f76ec04a3c/README.md",
+          "sha256": "10aa328d63fb31c4f701ef3d4a840c39c9873f7f329b46441c4b46837170d6a1",
+          "git_blob_sha1": "6b54363c63c003fc117cbaa47b317e421c6b9082",
+          "bytes": 4514
+        },
+        {
+          "relative_path": "fwi_farm_data_india/LICENSE",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/fwi-farm-data-india/2013b52dfd7f04f54410c813c1fe64f76ec04a3c/LICENSE",
+          "sha256": "58232b281447e86dd7fee81b8c3b2d67a40de7385af3491ea3cdbc4225379445",
+          "git_blob_sha1": "b689f45b0af9e0cb1c1123a07cf225a9d64788aa",
+          "bytes": 773
+        },
+        {
+          "relative_path": "fwi_farm_data_india/CHANGELOG.md",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/fwi-farm-data-india/2013b52dfd7f04f54410c813c1fe64f76ec04a3c/CHANGELOG.md",
+          "sha256": "963dd93cd8c34f7527999beaaedc349b15a42967589b80635f4354907c745d4a",
+          "git_blob_sha1": "dadc2f1a24a0e0a76c09a57642416127173d0f10",
+          "bytes": 4294
+        },
+        {
+          "relative_path": "fwi_farm_data_india/docs/data_dictionary.md",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/fwi-farm-data-india/2013b52dfd7f04f54410c813c1fe64f76ec04a3c/docs/data_dictionary.md",
+          "sha256": "179355c41608f22eea8f7c21a2c080224f99a1c6a0db25b6d5bcba751916f48b",
+          "git_blob_sha1": "516916d181478075d9744713bd50f1f90037b806",
+          "bytes": 22963
+        },
+        {
+          "relative_path": "fwi_farm_data_india/data/enrolled_ponds.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/fwi-farm-data-india/2013b52dfd7f04f54410c813c1fe64f76ec04a3c/data/enrolled_ponds.csv",
+          "sha256": "9c87a9172342f134536d5917fd728aea033c91bb3ea2a35cd9ef3186fd757ff0",
+          "git_blob_sha1": "31e4bc5722096ae24288a61886078d6280d98f4a",
+          "bytes": 82460
+        },
+        {
+          "relative_path": "fwi_farm_data_india/data/stocking_harvest.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/fwi-farm-data-india/2013b52dfd7f04f54410c813c1fe64f76ec04a3c/data/stocking_harvest.csv",
+          "sha256": "55e55a7a790d7ac8ca74e770783a86ca1c1012aa7e6821631bb6ca8c0e823c27",
+          "git_blob_sha1": "ffe63923b83871a060a72279e014dd21b464668c",
+          "bytes": 391815
+        },
+        {
+          "relative_path": "fwi_farm_data_india/data/water_quality.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/fwi-farm-data-india/2013b52dfd7f04f54410c813c1fe64f76ec04a3c/data/water_quality.csv",
+          "sha256": "41e70a84a8b45c6884cff805d1a4270260320b78c0b25bbeb48ca90e54fa8ebd",
+          "git_blob_sha1": "c19511e21e08b00f8b442848ae7173ceb9268746",
+          "bytes": 3295066
+        },
+        {
+          "relative_path": "fwi_farm_data_india/data/dropouts.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/fwi-farm-data-india/2013b52dfd7f04f54410c813c1fe64f76ec04a3c/data/dropouts.csv",
+          "sha256": "7932b2f0802431f32041fd7e680206f7d3631d88ce27925411fbeac65628617f",
+          "git_blob_sha1": "d4b2ba553ec5d7fb572618a81df4fac87d510fe1",
+          "bytes": 19479
         }
       ]
     },

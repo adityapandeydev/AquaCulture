@@ -49,7 +49,7 @@ The source remains under scientific review. Device transfer, harvest/reinstallat
 | Zambia WorldFish reference ponds | Four ponds over six months, with twice-daily sampling and a restricted file. Useful as a contextual lead with access restrictions. Cadence is insufficient for the hourly task. [Publisher record](https://doi.org/10.7910/DVN/XJCD0Z). |
 | Mexico RAS operational logbook | Automatic monitoring covers other variables, while DO has only 17 manual observations. Excluded from hourly DO forecasting candidates. [Publisher record](https://zenodo.org/records/20277084). |
 
-This search batch establishes no additional eligible hourly shrimp recording. The next admission review should start with FWI device/session chronology, cross-pond lineage and the monitor-reference comparisons. That evidence will determine whether enough independent, defensible recordings support a second training release.
+This search batch establishes no additional eligible hourly shrimp recording. The FWI admission questions raised here are resolved in the [carp pond release](fwi-release.md).
 
 ## Reproduce the audit
 
