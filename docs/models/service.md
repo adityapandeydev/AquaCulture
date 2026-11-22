@@ -81,6 +81,10 @@ This replaces the [pilot's proposed v1 contract](../pilot/pilot-closeout.md#fore
 
 `ml.training.export` writes the bundle to `ml/bundles/carp-1`. Networks are ONNX files, and the tree and ridge models are plain arrays. Nothing in it executes on loading. [release.json](release.json) records every hash, and the service refuses a bundle that differs from it. Exported forecasts match the tested models within 1.3e-6 mg/L on all 2,657 validation histories. A further 300 histories sent through the service, including time conversion, matched to the three decimals returned.
 
+## Rounding
+
+Hourly means often lie exactly on a tree's split point. Rounding noise as small as 1e-13 can then choose the other branch, which moved some test forecasts by up to 0.11 mg/L. The service therefore rounds every input to 10 significant digits, as the prepared dataset was. This reproduces the tested forecasts exactly and removes noise from the caller. It does not change the model. A genuine small change in a reading can still cause a step of this size.
+
 ## Run
 
 Python 3.10, from the repository root.

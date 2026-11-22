@@ -57,6 +57,13 @@ class SchemaTest(unittest.TestCase):
         body = request()
         self.assertAlmostEqual(s.x[0, -1, 0], body['history'][-1]['do_mgL'])
 
+    def test_rounding_noise_is_removed(self):
+        body, noisy = request(), request()
+        for item, other in zip(body['history'], noisy['history']):
+            item['do_mgL'] = round(item['do_mgL'], 3)
+            other['do_mgL'] = item['do_mgL'] * (1 + 2e-15)
+        self.assertTrue(np.array_equal(to_samples(ForecastRequest(**body)).x, to_samples(ForecastRequest(**noisy)).x))
+
     def test_low_coverage_counts_as_missing(self):
         body = request()
         body['history'][5]['coverage'] = 0.5

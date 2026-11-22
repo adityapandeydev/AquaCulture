@@ -6,3 +6,7 @@
 
 # The pilot evaluation lock recorded this file with CRLF endings.
 docs/pilot/prepared-release.json text eol=crlf
+
+# Go and SQL sources
+*.go text eol=lf
+*.sql text eol=lf

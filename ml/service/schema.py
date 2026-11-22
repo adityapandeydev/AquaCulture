@@ -49,6 +49,15 @@ def local_zone(name):
         raise invalid('unknown_timezone')
 
 
+def canonical(value):
+    """Round to the 10 significant digits of the prepared dataset.
+
+    Hourly means often lie exactly on a tree split. Without this, rounding noise from the caller
+    could change the branch and move a forecast.
+    """
+    return np.nan if value is None else float(f'{value:.10g}')
+
+
 def to_samples(request):
     """Place hourly values on the 24-hour grid that ends at the issue time."""
     zone = local_zone(request.timezone)
@@ -71,7 +80,7 @@ def to_samples(request):
         if steps > HISTORY:
             raise invalid('history_too_old')
         if item.coverage >= MINIMUM_COVERAGE and item.do_mgL is not None:
-            x[0, HISTORY - steps] = [np.nan if v is None else v for v in (item.do_mgL, item.ph, item.temperature_c)]
+            x[0, HISTORY - steps] = [canonical(v) for v in (item.do_mgL, item.ph, item.temperature_c)]
     present, reasons = np.isfinite(x[0]), []
     if present[:, 0].sum() < MINIMUM_HOURS:
         reasons.append('insufficient_do_history')

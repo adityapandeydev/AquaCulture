@@ -63,6 +63,10 @@ On known ponds the +6 h gain is below 10% and one pond is 29% worse than naive. 
 
 Boosted trees were reported alongside and cannot replace the blend. On the primary test their MAE was 0.650, 1.085, 1.343 and 1.562 mg/L. They were better than the blend at +1 h and +6 h and worse at +3 h and +12 h. They also passed the +6 h interval gate. The blend's 2% validation advantage did not carry over clearly to the test.
 
+## Numerical sensitivity
+
+Found after the test, while building the backend. Rounding noise of 1e-13 in the inputs can move the trees by up to 0.44 mg/L and the blend by up to 0.11 mg/L, because hourly means often lie on split points. The service rounds its inputs as the dataset was rounded, which reproduces the tested forecasts. The results above are unchanged. [Details](service.md#rounding)
+
 ## Records
 
 Outputs are in `ml/runs/carp-final/`. `run.json` has SHA-256 `7cf6cd2e3c4a4231b43a25c971a18eb773a418bfc47cb9699ea6fa99823adcf7`. It identifies the candidate by `190fdf2b6c4c302b3500ba61b07c5bc37d7afa252dca1396dfd55d0e16902026`, the hash of the file with Windows line endings as it was when tested. With the repository's LF endings the hash is `ac8d87237900594a72e6a2a781a3a8a5b9a3af89f3f2296eca70a042e789f1da`. The content is the same.
