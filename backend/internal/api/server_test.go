@@ -256,6 +256,10 @@ func TestOtherUsersSeeNothing(t *testing.T) {
 		c.client = other
 		e.send(c, 404)
 	}
+	if list := e.send(call{method: "GET", path: "/summary", client: other}, 200)["ponds"].([]any); len(list) != 0 {
+		t.Fatalf("summary leaked %v", list)
+	}
+	e.send(call{method: "GET", path: "/ponds/" + id, client: e.visitor()}, 401)
 	for _, path := range []string{"/ponds", "/alerts"} {
 		if list := e.send(call{method: "GET", path: path, client: other}, 200)["list"].([]any); len(list) != 0 {
 			t.Fatalf("%s leaked %v", path, list)
@@ -267,6 +271,10 @@ func TestOtherUsersSeeNothing(t *testing.T) {
 func TestPondValidation(t *testing.T) {
 	e := setup(t)
 	e.signUp("a@example.com", nil)
+	e.pond("live")
+	if s := e.get("/summary")["ponds"].([]any)[0].(map[string]any); s["latest_at"] != nil || s["trend_do_mgL"] != nil || s["open_alerts"] != 0.0 {
+		t.Fatal("an empty pond must have an empty summary", s)
+	}
 	base := map[string]any{"name": "P", "species": "rohu_catla", "timezone": "Asia/Kolkata", "mode": "live", "sampling_minutes": 15}
 	for field, value := range map[string]any{"name": " ", "species": "whale", "timezone": "Mars/Base", "mode": "test", "sampling_minutes": 0,
 		"do_low": 99, "do_critical": 3, "alert_probability": 1.5} {
@@ -421,6 +429,10 @@ func TestDemoForecasts(t *testing.T) {
 	last := values[3].(map[string]any)
 	if len(values) != 4 || last["point_mgL"] != nil || last["probability"] != 0.8 || len(last["withheld"].([]any)) != 2 {
 		t.Fatal(values)
+	}
+	s := e.get("/summary")["ponds"].([]any)[0].(map[string]any)
+	if trend := s["trend_do_mgL"].([]any); len(trend) != 24 || trend[23] != 5.0 || s["highest_probability"] != 0.8 || s["open_alerts"] != 1.0 || s["name"] != "North" {
+		t.Fatal(s)
 	}
 	accuracy := e.get("/ponds/" + id + "/accuracy")["list"].([]any)
 	first := accuracy[0].(map[string]any)

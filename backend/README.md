@@ -22,7 +22,7 @@ Settings come from the environment or `backend/.env`. Only `DATABASE_URL` is req
 | `DATABASE_URL` | |
 | `ADDRESS` | `127.0.0.1:8090` |
 | `MODEL_URL`, `MODEL_TOKEN` | `http://127.0.0.1:8100`, none |
-| `ALLOWED_ORIGINS` | `http://localhost:5173,http://127.0.0.1:5173` |
+| `ALLOWED_ORIGINS` | `http://localhost:5190,http://127.0.0.1:5190` |
 | `SECURE_COOKIES` | `false`, set to `true` behind HTTPS |
 | `REGISTRATION` | `true` |
 | `TRUST_PROXY` | `false`, set to `true` only behind a proxy that sets `X-Forwarded-For` |

@@ -77,6 +77,7 @@ func (s *Server) Handler() http.Handler {
 	user("GET /api/v1/alerts", s.openAlerts)
 	user("POST /api/v1/alerts/{id}/acknowledge", s.acknowledge)
 	user("GET /api/v1/ponds", s.listPonds)
+	user("GET /api/v1/summary", s.summary)
 	user("POST /api/v1/ponds", s.createPond)
 	user("DELETE /api/v1/devices/{id}", s.revokeDevice)
 	pond("GET /api/v1/ponds/{id}", s.getPond)
@@ -223,17 +224,21 @@ func (s *Server) withUser(h userHandler) handler {
 
 // withPond resolves a pond that belongs to the signed-in user. Others see "not found".
 func (s *Server) withPond(h pondHandler) handler {
-	return s.withUser(func(w http.ResponseWriter, r *http.Request, u store.User) error {
-		id, err := pathID(r)
-		if err != nil {
-			return err
+	return func(w http.ResponseWriter, r *http.Request) error {
+		if c, err := r.Cookie(sessionCookie); err == nil {
+			if id, err := pathID(r); err == nil {
+				p, err := s.Store.SessionPond(r.Context(), auth.HashSecret(c.Value), id)
+				if err == nil {
+					return h(w, r, p)
+				}
+				if !errors.Is(err, store.ErrNotFound) {
+					return err
+				}
+			}
 		}
-		p, err := s.Store.OwnedPond(r.Context(), u.ID, id)
-		if err != nil {
-			return err
-		}
-		return h(w, r, p)
-	})
+		// Signed-out visitors are told to sign in. Everyone else learns only that nothing is there.
+		return s.withUser(func(http.ResponseWriter, *http.Request, store.User) error { return store.ErrNotFound })(w, r)
+	}
 }
 
 // client identifies the caller for rate limits. Forwarded addresses count only behind a trusted proxy.

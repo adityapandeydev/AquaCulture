@@ -4,6 +4,7 @@ import (
 	"errors"
 	"net/http"
 	"strings"
+	"sync"
 	"time"
 	"unicode/utf8"
 
@@ -167,31 +168,46 @@ func (s *Server) deletePond(w http.ResponseWriter, r *http.Request, p store.Pond
 	return write(w, http.StatusOK, map[string]string{"status": "deleted"})
 }
 
+func (s *Server) summary(w http.ResponseWriter, r *http.Request, u store.User) error {
+	list, err := s.Store.Summaries(r.Context(), u.ID)
+	if err != nil {
+		return err
+	}
+	return write(w, http.StatusOK, map[string]any{"now": s.Now().UTC(), "ponds": list})
+}
+
+// overview reads its parts at the same time, because the database may be far away.
 func (s *Server) overview(w http.ResponseWriter, r *http.Request, p store.Pond) error {
-	out := map[string]any{"pond": p, "now": s.Now().UTC()}
-	extent, err := s.Store.Extent(r.Context(), p.ID)
-	if err != nil {
+	var (
+		extent    store.Extent
+		latest    *store.Reading
+		forecasts []store.Forecast
+		alerts    []store.Alert
+		work      sync.WaitGroup
+		failures  [4]error
+	)
+	ctx := r.Context()
+	work.Go(func() { extent, failures[0] = s.Store.Extent(ctx, p.ID) })
+	work.Go(func() {
+		reading, err := s.Store.LatestReading(ctx, p.ID)
+		if err == nil {
+			latest = &reading
+		} else if !errors.Is(err, store.ErrNotFound) {
+			failures[1] = err
+		}
+	})
+	work.Go(func() { forecasts, failures[2] = s.Store.Forecasts(ctx, p.ID, 1) })
+	work.Go(func() { alerts, failures[3] = s.Store.Alerts(ctx, p.ID, true, 50) })
+	work.Wait()
+	if err := errors.Join(failures[:]...); err != nil {
 		return err
 	}
-	out["extent"] = extent
-	out["latest"] = nil
-	if latest, err := s.Store.LatestReading(r.Context(), p.ID); err == nil {
-		out["latest"] = latest
-	} else if !errors.Is(err, store.ErrNotFound) {
-		return err
-	}
-	forecasts, err := s.Store.Forecasts(r.Context(), p.ID, 1)
-	if err != nil {
-		return err
-	}
-	out["forecast"] = nil
+	var forecast *store.Forecast
 	if len(forecasts) == 1 {
-		out["forecast"] = forecasts[0]
+		forecast = &forecasts[0]
 	}
-	if out["alerts"], err = s.Store.Alerts(r.Context(), p.ID, true, 50); err != nil {
-		return err
-	}
-	return write(w, http.StatusOK, out)
+	return write(w, http.StatusOK, map[string]any{"pond": p, "now": s.Now().UTC(), "extent": extent, "latest": latest,
+		"forecast": forecast, "alerts": alerts})
 }
 
 func (s *Server) listDevices(w http.ResponseWriter, r *http.Request, p store.Pond) error {

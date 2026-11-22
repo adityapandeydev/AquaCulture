@@ -42,7 +42,7 @@ func Load(file string) (Config, error) {
 		ModelURL:   strings.TrimRight(get("MODEL_URL", "http://127.0.0.1:8100"), "/"),
 		ModelToken: get("MODEL_TOKEN", ""),
 	}
-	for _, o := range strings.Split(get("ALLOWED_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173"), ",") {
+	for _, o := range strings.Split(get("ALLOWED_ORIGINS", "http://localhost:5190,http://127.0.0.1:5190"), ",") {
 		if o = strings.TrimRight(strings.TrimSpace(o), "/"); o != "" {
 			c.Origins = append(c.Origins, o)
 		}
