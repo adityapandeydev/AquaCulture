@@ -4,6 +4,5 @@
 *.md text eol=lf
 *.csv text eol=lf
 
-# The pilot evaluation lock recorded these two files with CRLF endings.
-ml/evaluation/metrics.py text eol=crlf
-docs/data/prepared-release.json text eol=crlf
+# The pilot evaluation lock recorded this file with CRLF endings.
+docs/pilot/prepared-release.json text eol=crlf

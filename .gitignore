@@ -1,37 +1,23 @@
-__pycache__
+# Python
+__pycache__/
 .venv
-Datasets
-Pictures
-.env
-X1_test.npy
-X1_train.npy
-y1_test.npy
-y1_train.npy
-X2_test.npy
-X2_train.npy
-y2_test.npy
-y2_train.npy
-imputation
 
-# Generated experiment records, checkpoints and training logs
+# Local data, runs and credentials
+/Datasets/
 /ml/runs/
-
+.env
 
 # Logs
 logs
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
 
+# Frontend
 node_modules
 dist
 dist-ssr
 *.local
 
-# Editor directories and files
+# Editors
 .vscode/*
 !.vscode/extensions.json
 .idea

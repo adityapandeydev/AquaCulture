@@ -1,4 +1,4 @@
-"""Download only reviewed public files from docs/data/sources.json.
+"""Download only reviewed public files listed in a source catalog.
 
 Existing bytes must match expected SHA-256; changed raw data is never overwritten.
 No archives are extracted and no downloaded code is executed.

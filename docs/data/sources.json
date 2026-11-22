@@ -1,479 +1,354 @@
 {
+  "review_date": "2026-11-18",
+  "scope": "Second-release discovery and initial audits",
   "sources": [
     {
-      "id": "oman_tilapia",
-      "title": "Dissolved Oxygen Forecasting Dataset for Nile Tilapia Aquaculture",
-      "url": "https://github.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset",
-      "version": "d95207b6f129c3de1f426ec90eed5a38f46832b8",
-      "license": "CC BY 4.0 (LICENSE file retrieved)",
-      "status": "downloaded_not_training_approved",
-      "species": "Nile tilapia",
-      "role": "DO forecasting candidate; separate offline pond and controlled-tank live validation",
-      "limitations": [
-        "Short study; does not validate shrimp transfer.",
-        "Repository attribution and calibration must be reviewed against the original publication.",
-        "Author aggregates overlap raw data; never treat as independent validation.",
-        "Dictionary documents local Oman GMT+4; clock synchronization and received times remain unverified.",
-        "Only stated March26-April1 pond dates advance to preparation; 3207 later raw rows excluded pending context.",
-        "65 pond and 188 live hourly bins pass 11/12 subslot occupancy; candidate windows are very limited before partitioning.",
-        "Five pond/two tank one-hour-gap continuity candidates; earliest 5714-row pond group excluded pending source-order evidence. Physical site independence unknown.",
-        "High-frequency rapid DO changes and temperature plateaus are diagnostic review flags; broad numeric validity is not proof of independent calibration accuracy. Final target/input quality and bin policy pending."
-      ],
-      "review_date": "2026-11-05",
+      "id": "fwi_campaign_2026",
+      "title": "Continuous Water Quality Monitoring Data - Fish Welfare Initiative",
+      "url": "https://github.com/fish-welfare-initiative/Data-Campaign-Data",
+      "version": "4cfa138e725db541e7ae14b89170909bef7dafb1",
+      "publisher_context": "https://www.fishwelfareinitiative.org/post/cm-data",
+      "status": "downloaded_audit_requires_session_and_lineage_review",
+      "training_approved": false,
+      "species": "Rohu and Catla in all 17 ponds, from the companion stocking records (fwi_farm_data_india)",
+      "cadence": "Approximately 15 minutes; exact seconds and gaps vary",
+      "reuse_evidence": "Pinned README invites research use with citation. Publisher page states website information is freely usable. No SPDX/CC identifier or separate LICENSE file in the pinned repository.",
+      "raw_redistribution": "Not included in Git; precise redistribution/model-publication terms remain to be clarified",
+      "review": "docs/data/sources.md",
+      "local_audit": "Datasets/processed/fwi-discovery-2026-11-18-v2/audit.json",
+      "local_audit_sha256": "42bc549d2c7b24469ce117f16090d11017253a07cde6d387c099694c063bf70a",
       "downloads": [
         {
-          "relative_path": "oman_tilapia/LICENSE",
-          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/LICENSE",
-          "sha256": "8c9cb0592825dd1593eaef5530568035ddb384a14c3d3badb56595a20eda6cd9",
-          "bytes": 905
+          "relative_path": "fwi_campaign_2026/Analysis ProDSS vs Continuous Monitors.xlsx",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/Analysis%20ProDSS%20vs%20Continuous%20Monitors.xlsx",
+          "sha256": "9107cc6b99fce0cf94323e6c030a00a82011d30070b20496c07667c7d6e1148a",
+          "git_blob_sha1": "7d9587bcd042ece6d33ed1889ead2407b439d547",
+          "bytes": 12883
         },
         {
-          "relative_path": "oman_tilapia/README.md",
-          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/README.md",
-          "sha256": "2188cd14f04ed4d4aa01dadaf6a0519f1f967fae5dd6b6457c197daa0f268c16",
-          "bytes": 9123
+          "relative_path": "fwi_campaign_2026/Comparison ProDSS vs Continuous Monitors.xlsx",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/Comparison%20ProDSS%20vs%20Continuous%20Monitors.xlsx",
+          "sha256": "235d35922bdb7000fd38df77488ad9ab49aa8da94ec365d7f972dc1586aa9c8f",
+          "git_blob_sha1": "22d43cdd98aa3cd2c0a397920b8476e40d9c7b69",
+          "bytes": 10775
         },
         {
-          "relative_path": "oman_tilapia/docs/data_dictionary.md",
-          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/docs/data_dictionary.md",
-          "sha256": "30469bf17eca6ea36f76c25af3da2f63beb85bf238b4c5c8b066851a1a821cd6",
-          "bytes": 8660
+          "relative_path": "fwi_campaign_2026/Data Campaign Data.xlsx",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/Data%20Campaign%20Data.xlsx",
+          "sha256": "f0eb128bcc48efd2ae9b5f0ac6a09dea1ef039dce92e8d11f346cd9190a18094",
+          "git_blob_sha1": "98ad094d506e7128c7a85480ec42c69810232d4f",
+          "bytes": 1901653
         },
         {
-          "relative_path": "oman_tilapia/data/calibration/calibration_do.json",
-          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/data/calibration/calibration_do.json",
-          "sha256": "cdc16cfa9b71b6a040114ddcf9f03b030ed450129fbac1e0ff060621950763e6",
-          "bytes": 213
+          "relative_path": "fwi_campaign_2026/README.md",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/README.md",
+          "sha256": "a799ff086738a5771ca98806e0b40533d50943459525b8a156cc0abde161c0f7",
+          "git_blob_sha1": "edeb3d3630e0bcfb5afce5383a9c2dbaf036e031",
+          "bytes": 6452
         },
         {
-          "relative_path": "oman_tilapia/data/calibration/calibration_ph.json",
-          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/data/calibration/calibration_ph.json",
-          "sha256": "286f7d216fb8a6e0c20642d1d3005fadcddad442619418a3eaf44917da594e41",
-          "bytes": 574
+          "relative_path": "fwi_campaign_2026/csv/Continuous_Monitor_vs_ProDSS_Comparison.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/Continuous_Monitor_vs_ProDSS_Comparison.csv",
+          "sha256": "3bd7c665bc2f9a1cdc00590c4db256b76a5b56ff5e7b9e238aeb92532552e5f7",
+          "git_blob_sha1": "a47e30b3061409cb518226e3a5e5e8b2777df8d1",
+          "bytes": 3532
         },
         {
-          "relative_path": "oman_tilapia/data/calibration/calibration_temp.json",
-          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/data/calibration/calibration_temp.json",
-          "sha256": "d142dcc183f61959b415c0900320cc844ebd4a1ec41364791496d54c906ab2bc",
-          "bytes": 107
+          "relative_path": "fwi_campaign_2026/csv/Key_Events.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/Key_Events.csv",
+          "sha256": "9f39301daef6697639872f55777b684bc8dd021dc52c65d5d5546b20b387324e",
+          "git_blob_sha1": "96d68b6862d1928fe2add54581da4f39d807d017",
+          "bytes": 2105
         },
         {
-          "relative_path": "oman_tilapia/data/events/event_logs_new.csv",
-          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/data/events/event_logs_new.csv",
-          "sha256": "663d26dd938c7df39d52bf17bbb96a3f6b23ca2bd5bd36620d712f23c2929421",
-          "bytes": 5310
+          "relative_path": "fwi_campaign_2026/csv/ProDSS_and_Photometer.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/ProDSS_and_Photometer.csv",
+          "sha256": "265d91722024ce17d8653d5bb268b2bab52eb6863cd85a2c9d733e8c4166c7b1",
+          "git_blob_sha1": "975c7e93802d8fdc7b61a21e738dc3bea962e4bd",
+          "bytes": 11659
         },
         {
-          "relative_path": "oman_tilapia/data/processed/aggregated_data.csv",
-          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/data/processed/aggregated_data.csv",
-          "sha256": "4c5c8631799f28c87d7cf5861b12e62348713716e18f7b514ae117b69d3eed98",
-          "bytes": 130779
+          "relative_path": "fwi_campaign_2026/csv/ProDSS_vs_Continuous_Monitors_Comparison.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/ProDSS_vs_Continuous_Monitors_Comparison.csv",
+          "sha256": "7653b3558558739d14df4ded6b92a31a927b2d56383f5285282ba8c77a17fbf9",
+          "git_blob_sha1": "b2e21aae70006abd82c9116d2fce55e3b507627e",
+          "bytes": 6917
         },
         {
-          "relative_path": "oman_tilapia/data/raw/live/raw_readings_new.csv",
-          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/data/raw/live/raw_readings_new.csv",
-          "sha256": "2bcac5df93a84eaec2d4be477254673d2aa72bdd37c3b76d3d4b27ed29969f95",
-          "bytes": 5719435
+          "relative_path": "fwi_campaign_2026/csv/QC_Flags.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/QC_Flags.csv",
+          "sha256": "0385494f85c04e9c0df866ed92e5fc8591d63d00d23f01d767b4491960af3b31",
+          "git_blob_sha1": "8dd225524d7beaee2c08045acbc3be49c7670703",
+          "bytes": 2094
         },
         {
-          "relative_path": "oman_tilapia/data/raw/offline/raw_readings.csv",
-          "url": "https://raw.githubusercontent.com/AhmedTheNetCoder/DO-Forecasting-Tilapia-Dataset/d95207b6f129c3de1f426ec90eed5a38f46832b8/data/raw/offline/raw_readings.csv",
-          "sha256": "8ecfdaaeba6d996a6000503a7323d82e26087bc2cf6fe3b6d0c9fe0bf477c73b",
-          "bytes": 2320462
+          "relative_path": "fwi_campaign_2026/csv/ara2_0677080b.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/ara2_0677080b.csv",
+          "sha256": "e69a7dc69382dfa667145d6c1b7df83d4321466f5952edc858e167e8f3815d12",
+          "git_blob_sha1": "50a1de266889fb2acdcf11511fac02186f3baf32",
+          "bytes": 121285
+        },
+        {
+          "relative_path": "fwi_campaign_2026/csv/ara2_0f143c64.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/ara2_0f143c64.csv",
+          "sha256": "7b9f7e1665b61da56cd0642867f7eecbd9bf699cb59247baecf3a115b13fbdb7",
+          "git_blob_sha1": "a82fbd3a321afe1fac7c846841da5822df201889",
+          "bytes": 182347
+        },
+        {
+          "relative_path": "fwi_campaign_2026/csv/ara2_148f1633.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/ara2_148f1633.csv",
+          "sha256": "cd555a71f0f8fa29b48ab75cd80843146360e6dd7fc99524ac67fb937bf2bf99",
+          "git_blob_sha1": "2e71848b4dc78c982413e86e32cf874c5dcb9654",
+          "bytes": 94838
+        },
+        {
+          "relative_path": "fwi_campaign_2026/csv/ara2_176528d3.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/ara2_176528d3.csv",
+          "sha256": "8eba754832eadd72da88c98d00eddf077a3c04322856f5c510a688be6a1407a9",
+          "git_blob_sha1": "3cc22b9880d2cc74fd5e20d3ffd339bea0e7bae9",
+          "bytes": 168038
+        },
+        {
+          "relative_path": "fwi_campaign_2026/csv/ara2_29660d32.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/ara2_29660d32.csv",
+          "sha256": "8d6269575efa48f356215654c9eec6ee73c5f50acbbb79cf9b9277f75f2afca4",
+          "git_blob_sha1": "03bc40fdf3ca91cd7a4057d8bf632f49a11e7373",
+          "bytes": 223333
+        },
+        {
+          "relative_path": "fwi_campaign_2026/csv/ara2_3b2f3973.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/ara2_3b2f3973.csv",
+          "sha256": "d22ef53090f710fac8b44701d95dbac056207c30c60b5e420f3446752451a2c2",
+          "git_blob_sha1": "da25c26a6e14c0f40baed78651d7bc44917e3d95",
+          "bytes": 204582
+        },
+        {
+          "relative_path": "fwi_campaign_2026/csv/ara2_3eab831e.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/ara2_3eab831e.csv",
+          "sha256": "4b4877713f8b90fce73d16f8dcd29c7feb7ef05c4181707a3a851e1910659a7c",
+          "git_blob_sha1": "8218e6894e3a869efdf196365e1fb55599b5cb2a",
+          "bytes": 227932
+        },
+        {
+          "relative_path": "fwi_campaign_2026/csv/ara2_3ed4df8e.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/ara2_3ed4df8e.csv",
+          "sha256": "35f18e11cb25a2e6158cdf6fd376d2b03e0387d4b57e536ec2fcdbde16520c13",
+          "git_blob_sha1": "254c1f0f3442ec32a8bc1d3401464335938fa747",
+          "bytes": 188465
+        },
+        {
+          "relative_path": "fwi_campaign_2026/csv/ara2_45e1cde5.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/ara2_45e1cde5.csv",
+          "sha256": "24ae63279d940069a4c04fd633e6864ea25ce6289460edfa1244abfc76628539",
+          "git_blob_sha1": "203b92eeede7031f2c21592210dc3fae1c639a3f",
+          "bytes": 178369
+        },
+        {
+          "relative_path": "fwi_campaign_2026/csv/ara2_4f79fc8d.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/ara2_4f79fc8d.csv",
+          "sha256": "2042ce218795c7c87a1c78916789ace760217f458d6df05ccf60ec7514d774cd",
+          "git_blob_sha1": "d0b9dd8c5c5380cf38fae9dae2b7a13e22e3686a",
+          "bytes": 177750
+        },
+        {
+          "relative_path": "fwi_campaign_2026/csv/ara2_573a2826.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/ara2_573a2826.csv",
+          "sha256": "ff5e6f179005cae545bd0d76281f7a1d025a1b4ef4286f6ff6bc10b9f6486dda",
+          "git_blob_sha1": "90208306fe08dcbcc859291fc67fc89559fca264",
+          "bytes": 183105
+        },
+        {
+          "relative_path": "fwi_campaign_2026/csv/ara2_6ca69422.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/ara2_6ca69422.csv",
+          "sha256": "7b53eae09f8e38893c432aced38e02d4592d6651b878a633b9bbe63d7c7e0a43",
+          "git_blob_sha1": "ba8bc3d06f97c5e01f1241769507bb373e299781",
+          "bytes": 155416
+        },
+        {
+          "relative_path": "fwi_campaign_2026/csv/ara2_858b914c.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/ara2_858b914c.csv",
+          "sha256": "1e0cfb075cf85607061b873a0948533ac1d9955a9777f29800a3dbcfaba1d45e",
+          "git_blob_sha1": "b7eaf9a97c2e34b5bf6cf788e33b6b63ce77f4f4",
+          "bytes": 92786
+        },
+        {
+          "relative_path": "fwi_campaign_2026/csv/ara2_b3d128ac.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/ara2_b3d128ac.csv",
+          "sha256": "38a25bb701103222037891d47e79881df712cd47cec748d52e16726f1aad9f55",
+          "git_blob_sha1": "8d83580711b087ac93850785d2ddef8210e202d8",
+          "bytes": 177314
+        },
+        {
+          "relative_path": "fwi_campaign_2026/csv/ara2_c9cdacda.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/ara2_c9cdacda.csv",
+          "sha256": "e9284db18fe004fb36b679b76a7f561b6e501c9e185a833bb587da8ef3240d3a",
+          "git_blob_sha1": "38230b4530505b768043bf164999e4863969413d",
+          "bytes": 220288
+        },
+        {
+          "relative_path": "fwi_campaign_2026/csv/ara2_ca187575.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/ara2_ca187575.csv",
+          "sha256": "099a3296f51239033999ea129ca4644d959a6a98f751f6ca01aefcfabcb68f4e",
+          "git_blob_sha1": "781884e2a7bb7873efd3e8a37a45b8030255179e",
+          "bytes": 175796
+        },
+        {
+          "relative_path": "fwi_campaign_2026/csv/ara2_d52ddb31.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/Data-Campaign-Data/4cfa138e725db541e7ae14b89170909bef7dafb1/csv/ara2_d52ddb31.csv",
+          "sha256": "507091226aa25c1d03c6cdb925fa7658013d0c2ec8d89bdb50d386e1b6af2085",
+          "git_blob_sha1": "ad0ada61ab9fa270c4cf19ed3f6d742add627e53",
+          "bytes": 178932
         }
-      ],
-      "disposition": "eligible_candidate",
-      "identity_evidence": "verified_pinned_repository_download",
-      "reuse_evidence": "declared_cc_by_4_0",
-      "benchmark_status": "restricted_candidate_pending_quality_and_split_sufficiency",
-      "training_approved": false,
-      "local_path_patterns": [
-        "external/oman_tilapia/**"
-      ],
-      "decision_reason": "Traceable raw recordings and pinned license; usable sessions, calibration and timezone remain under scientific review.",
-      "raw_redistribution_approved": true,
-      "scientific_review": "docs/data/oman-review.md",
-      "session_review": "docs/data/session-review.md",
-      "lineage_group_id": "oman_single_study_unverified_site_independence",
-      "quality_review": "docs/data/quality-review.md",
-      "aggregation_policy": {
-        "version": "oman-hourly-v1",
-        "report": "docs/data/aggregation-policy.md",
-        "output": "Datasets/processed/oman-aggregation-2026-11-05",
-        "candidate_pond_hours": 58,
-        "candidate_tank_hours": 188,
-        "filling": "none",
-        "training_approved": false
-      },
-      "release_selection": {
-        "version": "oman-first-release-selection-v1",
-        "report": "docs/data/eligibility-review.md",
-        "policy": "docs/data/release-selection.json",
-        "primary_session": "oman-2cbad87a2dbd2a81d6e1",
-        "primary_eligible_hours": 188,
-        "history_hours": 6,
-        "primary_horizon_hours": 1,
-        "pre_split_primary_examples": 182,
-        "training_approved": false
-      },
-      "partition_review": {
-        "freeze_date": "2026-11-07",
-        "policy": "docs/data/partition-policy.json",
-        "report": "docs/data/partition-review.md",
-        "output": "Datasets/processed/oman-partitions-2026-11-07-v2",
-        "version": "oman-tank-chronological-v1",
-        "evaluation_claim": "chronological_within_study",
-        "hourly_bins": 188,
-        "raw_parent_rows": 101666,
-        "interval_release_status": "deferred_insufficient_independent_calibration_evidence",
-        "training_approved": false
-      },
-      "supervised_contract": {
-        "version": "oman-do-supervised-v1",
-        "date": "2026-11-07",
-        "contract": "docs/data/supervised-contract.json",
-        "report": "docs/data/supervised-data.md",
-        "output": "Datasets/processed/oman-supervised-2026-11-07",
-        "observations": 188,
-        "window_references": 640,
-        "paired_issue_records": 312,
-        "training_approved": false
-      },
-      "evaluation_protocol": {
-        "version": "oman-do-evaluation-v1",
-        "date": "2026-11-07",
-        "policy": "docs/data/evaluation-policy.json",
-        "report": "docs/data/evaluation-protocol.md",
-        "output": "Datasets/processed/oman-evaluation-plan-2026-11-07",
-        "prediction_scores_computed": false,
-        "training_approved": false
-      },
-      "pilot_criteria": {
-        "version": "oman-do-pilot-criteria-v1",
-        "date": "2026-11-07",
-        "policy": "docs/data/release-criteria.json",
-        "report": "docs/data/release-criteria.md",
-        "output": "Datasets/processed/oman-criteria-2026-11-07-v2",
-        "model_qualification": "not_assessed_no_new_model_results",
-        "training_approved": false
-      },
-      "prepared_release": {
-        "release_id": "oman-do-pilot-data-v1",
-        "descriptor": "docs/data/prepared-release.json",
-        "report": "docs/data/readiness-report.md",
-        "date": "2026-11-07",
-        "scoped_training_approved": true,
-        "source_wide_training_approved": false,
-        "production_approved": false,
-        "scope": "Only the exact checksum-anchored six-hour-history tank DO pilot at 1/3-hour horizons."
-      }
+      ]
     },
     {
-      "id": "cure4aqua",
-      "title": "Dataset of water quality parameters (WP6 Cure4Aqua)",
-      "url": "https://zenodo.org/records/17278396",
-      "doi": "10.5281/zenodo.17278396",
-      "version": "v2",
-      "license": "CC BY 4.0 (Zenodo record metadata retrieved)",
-      "status": "downloaded_not_training_approved",
-      "role": "Tank-level chemistry reference; establish cadence before forecasting",
-      "limitations": [
-        "Flow-through/RAS tanks; species not established in downloaded metadata.",
-        "Parameter units differ; no automatic mmol/L, mg/L or percent-saturation conversion.",
-        "Zero values may be legitimate or missing placeholders; not reinterpreted."
-      ],
-      "review_date": "2026-11-05",
+      "id": "fwi_farm_data_india",
+      "title": "FWI Farm Data - India (June 2021 - August 2026), v3.1.0",
+      "url": "https://github.com/fish-welfare-initiative/fwi-farm-data-india",
+      "version": "2013b52dfd7f04f54410c813c1fe64f76ec04a3c",
+      "status": "acquired_context_only",
+      "training_approved": false,
+      "species": "Per-pond species, stocking and harvest events for all 17 monitored FWI ponds",
+      "cadence": "Farm visits; not continuous",
+      "reuse_evidence": "LICENSE file declares CC BY 4.0. Applies to this repository only.",
+      "limitations": "The publisher retracted Nellore water-quality records from 1 November 2024 after finding fabricated data. The retracted file is not acquired. All 17 monitored ponds are in Eluru.",
+      "review": "docs/data/carp.md",
       "downloads": [
         {
-          "relative_path": "cure4aqua/environmental_parameters.xlsx",
-          "url": "https://zenodo.org/api/records/17278396/files/Cure4Aqua%20WP6%20-%20environmental%20parameters.xlsx/content",
-          "sha256": "06d565a3a9fbd39af24b50e43b69fc05aa2c4ea908554389eb09f1d3d05fb584",
-          "bytes": 60219
+          "relative_path": "fwi_farm_data_india/README.md",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/fwi-farm-data-india/2013b52dfd7f04f54410c813c1fe64f76ec04a3c/README.md",
+          "sha256": "10aa328d63fb31c4f701ef3d4a840c39c9873f7f329b46441c4b46837170d6a1",
+          "git_blob_sha1": "6b54363c63c003fc117cbaa47b317e421c6b9082",
+          "bytes": 4514
         },
         {
-          "relative_path": "cure4aqua/record.json",
-          "url": "https://zenodo.org/api/records/17278396",
-          "sha256": "98575d74dfcc1620604413275120ae6f1f5d1916cc056e698a0693831ecafbf3",
-          "bytes": 4626
+          "relative_path": "fwi_farm_data_india/LICENSE",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/fwi-farm-data-india/2013b52dfd7f04f54410c813c1fe64f76ec04a3c/LICENSE",
+          "sha256": "58232b281447e86dd7fee81b8c3b2d67a40de7385af3491ea3cdbc4225379445",
+          "git_blob_sha1": "b689f45b0af9e0cb1c1123a07cf225a9d64788aa",
+          "bytes": 773
+        },
+        {
+          "relative_path": "fwi_farm_data_india/CHANGELOG.md",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/fwi-farm-data-india/2013b52dfd7f04f54410c813c1fe64f76ec04a3c/CHANGELOG.md",
+          "sha256": "963dd93cd8c34f7527999beaaedc349b15a42967589b80635f4354907c745d4a",
+          "git_blob_sha1": "dadc2f1a24a0e0a76c09a57642416127173d0f10",
+          "bytes": 4294
+        },
+        {
+          "relative_path": "fwi_farm_data_india/docs/data_dictionary.md",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/fwi-farm-data-india/2013b52dfd7f04f54410c813c1fe64f76ec04a3c/docs/data_dictionary.md",
+          "sha256": "179355c41608f22eea8f7c21a2c080224f99a1c6a0db25b6d5bcba751916f48b",
+          "git_blob_sha1": "516916d181478075d9744713bd50f1f90037b806",
+          "bytes": 22963
+        },
+        {
+          "relative_path": "fwi_farm_data_india/data/enrolled_ponds.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/fwi-farm-data-india/2013b52dfd7f04f54410c813c1fe64f76ec04a3c/data/enrolled_ponds.csv",
+          "sha256": "9c87a9172342f134536d5917fd728aea033c91bb3ea2a35cd9ef3186fd757ff0",
+          "git_blob_sha1": "31e4bc5722096ae24288a61886078d6280d98f4a",
+          "bytes": 82460
+        },
+        {
+          "relative_path": "fwi_farm_data_india/data/stocking_harvest.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/fwi-farm-data-india/2013b52dfd7f04f54410c813c1fe64f76ec04a3c/data/stocking_harvest.csv",
+          "sha256": "55e55a7a790d7ac8ca74e770783a86ca1c1012aa7e6821631bb6ca8c0e823c27",
+          "git_blob_sha1": "ffe63923b83871a060a72279e014dd21b464668c",
+          "bytes": 391815
+        },
+        {
+          "relative_path": "fwi_farm_data_india/data/water_quality.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/fwi-farm-data-india/2013b52dfd7f04f54410c813c1fe64f76ec04a3c/data/water_quality.csv",
+          "sha256": "41e70a84a8b45c6884cff805d1a4270260320b78c0b25bbeb48ca90e54fa8ebd",
+          "git_blob_sha1": "c19511e21e08b00f8b442848ae7173ceb9268746",
+          "bytes": 3295066
+        },
+        {
+          "relative_path": "fwi_farm_data_india/data/dropouts.csv",
+          "url": "https://raw.githubusercontent.com/fish-welfare-initiative/fwi-farm-data-india/2013b52dfd7f04f54410c813c1fe64f76ec04a3c/data/dropouts.csv",
+          "sha256": "7932b2f0802431f32041fd7e680206f7d3631d88ce27925411fbeac65628617f",
+          "git_blob_sha1": "d4b2ba553ec5d7fb572618a81df4fac87d510fe1",
+          "bytes": 19479
         }
-      ],
-      "disposition": "reference_only",
-      "identity_evidence": "publisher_checksum_matched",
-      "reuse_evidence": "declared_cc_by_4_0",
-      "benchmark_status": "not_selected_for_initial_forecasting",
-      "training_approved": false,
-      "local_path_patterns": [
-        "external/cure4aqua/**"
-      ],
-      "decision_reason": "Downloaded workbook MD5 matches the saved Zenodo record; retain as tank-chemistry reference, not the initial hourly pond benchmark.",
-      "raw_redistribution_approved": true,
-      "publisher_checksum_verification": {
-        "algorithm": "md5",
-        "expected": "512e950c7137facc4372214c3b9873b7",
-        "matched": true,
-        "evidence_file": "Datasets/external/cure4aqua/record.json"
-      },
-      "lineage_group_id": "cure4aqua_wp6_tank_study"
+      ]
     },
     {
-      "id": "shrimp_buoy",
-      "title": "Tiny ML Based Reconfigurable Water Buoy for Intensive Brackishwater Aquaculture",
-      "url": "https://data.mendeley.com/datasets/k2jpng5vy6/1",
-      "doi": "10.17632/k2jpng5vy6.1",
-      "license": "CC BY 4.0 listed by repository",
-      "status": "user_downloaded_under_review",
-      "role": "Priority shrimp candidate",
-      "file_url": "https://data.mendeley.com/public-files/datasets/k2jpng5vy6/files/e2d56ae5-0778-4a2a-ab5a-f798bb65d3ab/file_downloaded",
-      "limitations": [
-        "User supplied the downloaded archive from Downloads; publisher checksum not independently matched.",
-        "Data sheet contains malformed pH strings and values above 14, zero or large DO values, and a separate calculated-pH column requiring calibration review.",
-        "No explicit pond ID or timezone; exact species, concentration units and field-versus-calibration periods need confirmation.",
-        "Sheet2 appears to contain PH7/PH9 calibration readings and is retained as reference data.",
-        "77 timestamp-gap continuity groups are inspection candidates only; none establishes a verified pond or field/calibration session."
-      ],
-      "review_date": "2026-11-05",
-      "downloads": [],
-      "local_archive": "Datasets/external/shrimp_buoy/TestData_DBT6.xlsx.zip",
-      "archive_sha256": "165801341f3ba5546412637e0f8c8e2126ecd1ad4d0ba0e58d8aa6c37fb36e8f",
-      "disposition": "exploratory_only",
-      "identity_evidence": "user_supplied_named_repository_archive",
-      "reuse_evidence": "publisher_license_local_identity_not_independently_matched",
-      "benchmark_status": "excluded_from_current_forecasting_release",
+      "id": "pangaea_shrimp_889316",
+      "title": "Bacterial abundances and chemical water analysis from shrimp farming systems in Indonesia",
+      "url": "https://doi.pangaea.de/10.1594/PANGAEA.889316",
+      "version": "10.1594/PANGAEA.889316",
+      "license": "CC BY 3.0",
+      "status": "downloaded_reference_only_sparse_sampling",
       "training_approved": false,
-      "local_path_patterns": [
-        "external/shrimp_buoy/**"
+      "limitations": [
+        "60 table rows include biological fractions/replicates, not 60 independent time steps",
+        "Cultivation-day samples are too sparse for hourly forecasting",
+        "Publisher HDO parameter name requires chemical/semantic confirmation"
       ],
-      "decision_reason": "Channel/session review completed: no justified pH or DO conversion, units and field identities unverified. Retain for exploration, exclude all channels from current supervised forecasting.",
-      "raw_redistribution_approved": false,
-      "redistribution_note": "Await independent file identity confirmation; publisher page declares CC BY 4.0, but no publisher checksum was matched.",
-      "channel_review": "docs/data/shrimp-calibration.md",
-      "channel_model_use": {
-        "ph": "excluded",
-        "calculated_ph": "excluded",
-        "do": "excluded",
-        "turbidity": "excluded",
-        "tds": "excluded",
-        "humidity": "excluded",
-        "room_temperature": "excluded",
-        "water_temperature": "exploratory_only_not_model_approved"
-      },
-      "lineage_group_id": "shrimp_buoy_archive_and_workbook"
+      "downloads": [
+        {
+          "relative_path": "pangaea_shrimp_889316/889316.tsv",
+          "url": "https://doi.pangaea.de/10.1594/PANGAEA.889316?format=textfile",
+          "sha256": "ef3515f6017f60702c6904b53ff3587eb2fd77a77ba022d19ccef1aa7d173fad",
+          "bytes": 42968
+        }
+      ]
     },
     {
-      "id": "worldfish_vietnam_2016",
-      "title": "Nutritious Pond On-farm field experiment in Vietnam-2016",
-      "url": "https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/0RTJP3",
-      "doi": "10.7910/DVN/0RTJP3",
-      "status": "candidate_metadata_api_http_403",
-      "role": "Shrimp farm water quality and management candidate",
-      "limitations": [
-        "Publisher file API inaccessible in this run.",
-        "License, actual file schema and sampling cadence not yet verified."
-      ],
-      "review_date": "2026-11-05",
-      "downloads": [],
-      "disposition": "excluded",
-      "identity_evidence": "not_acquired",
-      "reuse_evidence": "unverified",
-      "benchmark_status": "not_available",
+      "id": "colombia_8s73jfvgr5",
+      "url": "https://data.mendeley.com/datasets/8s73jfvgr5/3",
+      "status": "discovery_only_version3_access_failed",
       "training_approved": false,
-      "local_path_patterns": [],
-      "decision_reason": "Candidate lead only; no acquired file or verified license/schema. Excluded from the current prepared release.",
-      "raw_redistribution_approved": false,
-      "lineage_group_id": "worldfish_vietnam_2016_not_acquired"
+      "evidence_url": "https://data.mendeley.com/datasets/8s73jfvgr5/2",
+      "limitations": [
+        "V2 publisher page visible with CC BY 4.0; V3 page fetch failed",
+        "May overlap earlier Colombia source variants; identity and transformations unresolved",
+        "No new workbook acquired in this batch"
+      ]
     },
     {
-      "id": "colombia_local",
-      "title": "IoT Monitoring Dataset of Water Quality and Tilapia Health in Monteria (2024)",
-      "url": "https://data.mendeley.com/datasets/3g2b4sh65m/1",
-      "license": "Unverified for local file; candidate publisher page license does not establish local-file identity",
-      "status": "local_file_candidate_identity_unverified",
-      "role": "Audit hourly water measurements; exclude rule-derived health/alert fields",
-      "limitations": [
-        "Publisher says already interpolated.",
-        "Related release 8s73jfvgr5/3 describes six-hour readings; versions are not independent sources.",
-        "Local source identity/hash has not been matched to publisher file.",
-        "Many consecutive unchanged measurement vectors; investigate construction/interpolation.",
-        "Hourly row grid is verified but original sensor cadence is not; 90 fractional case rows and zero observed DO values below 5 prevent independent disease/hypoxia benchmark claims."
-      ],
-      "review_date": "2026-11-05",
-      "downloads": [],
-      "local_provenance_note": "User confirms files were collected online; original source links are unavailable. Listed publisher is a candidate, not verified local-file provenance.",
-      "disposition": "exploratory_only",
-      "identity_evidence": "unverified_publisher_match",
-      "reuse_evidence": "unverified_for_local_file",
-      "benchmark_status": "excluded_from_current_forecasting_and_biological_outcome_release",
+      "id": "worldfish_zambia_xjcd0z",
+      "url": "https://doi.org/10.7910/DVN/XJCD0Z",
+      "status": "reference_lead_restricted_sparse",
       "training_approved": false,
-      "local_path_patterns": [
-        "O1D3/**"
-      ],
-      "decision_reason": "Cadence/label review found five 654-row and one 759-row constant water runs, fractional calendar/case fields and exact health-to-thermal-label mapping. Original measured-versus-filled status unknown; retain exploratory inspection only.",
-      "raw_redistribution_approved": false,
-      "url_relationship": "candidate_publisher_match_only",
-      "candidate_doi": "10.17632/3g2b4sh65m.1",
-      "candidate_publisher_license": "CC BY 4.0 listed on candidate page",
-      "scientific_review": "docs/data/colombia-review.md",
-      "lineage_group_id": "colombia_related_2024_releases"
+      "limitations": [
+        "Four ponds March-August 2022 at 09:00 and 17:00",
+        "Publisher lists a restricted file",
+        "Cadence does not support hourly targets"
+      ]
     },
     {
-      "id": "nigeria_aquaponics_local",
-      "title": "An internet of things labelled dataset for aquaponics fish pond water quality monitoring system",
-      "url": "https://doi.org/10.1016/j.dib.2022.108400",
-      "status": "local_files_resemble_published_data_identity_unverified",
-      "role": "Candidate source for local O1D2 multi-pond CSVs",
-      "limitations": [
-        "Local g/ml and mg/L headers conflict. No conversion is applied.",
-        "Chemical sensor calibration requires review; extreme concentration values remain flagged.",
-        "Cross-pond shared sequences must be checked before using a pond as holdout.",
-        "License of the exact local dataset release requires confirmation.",
-        "81,215 matching recorded timestamp/four-channel rows across Pond1/Pond2; longest adjacent source-order run is 54,501 rows. Local median positive source-order interval is 20 seconds, not proof of original cadence."
-      ],
-      "review_date": "2026-11-05",
-      "downloads": [],
-      "local_provenance_note": "User confirms files were collected online; original source links are unavailable. Listed publisher is a candidate, not verified local-file provenance.",
-      "disposition": "exploratory_only",
-      "identity_evidence": "unverified_publisher_match",
-      "reuse_evidence": "unverified_for_local_files",
-      "benchmark_status": "excluded_from_current_model_data_release",
+      "id": "ecuador_shrimp_anomaly_2026",
+      "url": "https://www.mdpi.com/2673-6470/6/2/27",
+      "status": "excluded_from_hourly_forecast_candidates",
       "training_approved": false,
-      "local_path_patterns": [
-        "O1D2/**"
-      ],
-      "decision_reason": "Unit/calibration/source identity unverified; faults and duplicated timestamp/four-water-channel segments documented. All channels exploratory-only; no nitrogen or DO model-target conversion approved.",
-      "raw_redistribution_approved": false,
-      "url_relationship": "candidate_publisher_match_only",
-      "license": "Unverified for local file; candidate publisher page license does not establish local-file identity",
-      "candidate_publisher_license": "Exact dataset release/license not verified",
-      "scientific_review": "docs/data/aquaponics-review.md",
-      "lineage_group_id": "aquaponics_local_collection_independence_unverified"
+      "limitations": [
+        "Static samples; raw commercial data proprietary",
+        "Public repository supplies a synthetic sample",
+        "Listed schema does not provide continuous DO targets"
+      ]
     },
     {
-      "id": "mendeley_wqd_local",
-      "title": "Aquaculture - Water Quality Dataset",
-      "url": "https://data.mendeley.com/datasets/y78ty2g293/1",
-      "license": "Unverified for local file; candidate publisher page license does not establish local-file identity",
-      "status": "local_file_candidate_identity_unverified",
-      "role": "Threshold-derived classification comparison only",
-      "limitations": [
-        "4,300 local rows with no timestamps; not a forecasting dataset.",
-        "Rule-generated labels cannot independently validate disease or mortality prediction.",
-        "Temperature unit and turbidity cm heading must not be silently interpreted as Celsius/NTU."
-      ],
-      "review_date": "2026-11-05",
-      "downloads": [],
-      "local_provenance_note": "User confirms files were collected online; original source links are unavailable. Listed publisher is a candidate, not verified local-file provenance.",
-      "disposition": "reference_only",
-      "identity_evidence": "unverified_publisher_match",
-      "reuse_evidence": "unverified_for_local_file",
-      "benchmark_status": "excluded_from_forecasting",
+      "id": "indonesia_shrimp_growth_2025",
+      "url": "https://www.mdpi.com/2673-9496/5/4/27",
+      "status": "request_only_daily_context_lead",
       "training_approved": false,
-      "local_path_patterns": [
-        "O3D1/**"
-      ],
-      "decision_reason": "Timestamp-free threshold-label table; the candidate publisher license has not been matched to the local workbook.",
-      "raw_redistribution_approved": false,
-      "url_relationship": "candidate_publisher_match_only",
-      "candidate_doi": "10.17632/y78ty2g293.1",
-      "candidate_publisher_license": "CC BY 4.0 listed on candidate page",
-      "lineage_group_id": "wqd_threshold_classification_local"
+      "limitations": [
+        "Daily operational records with DO, not demonstrated subhourly records",
+        "Data availability statement requires contacting author",
+        "No files acquired and no contact sent"
+      ]
     },
     {
-      "id": "pond_variants_local",
-      "title": "Local O1D1 pond dataset variants",
-      "status": "local_origin_unknown",
-      "role": "Exploratory lineage and preparation fixtures",
-      "limitations": [
-        "Original source links unavailable.",
-        "All 74,758 core measurement vectors in Fish Ponds occur in Ponds1 and Realtime-env2 at six-decimal comparison precision.",
-        "Timestamp/station provenance and any local transformations are unverified."
-      ],
-      "review_date": "2026-11-05",
-      "disposition": "exploratory_only",
-      "identity_evidence": "unknown_online_origin",
-      "reuse_evidence": "unverified",
-      "benchmark_status": "excluded_pending_provenance",
+      "id": "mexico_ras_2025",
+      "url": "https://zenodo.org/records/20277084",
+      "status": "excluded_from_hourly_do_candidates",
       "training_approved": false,
-      "local_path_patterns": [
-        "O1D1/**"
-      ],
-      "decision_reason": "Related local variants with unknown source and transformations; no independent benchmark or release approval.",
-      "raw_redistribution_approved": false,
-      "lineage_group_id": "local_pond_variants_and_compilation"
-    },
-    {
-      "id": "realtime_environment_local",
-      "title": "Local Realtime-env2 water and environmental table",
-      "status": "local_origin_unknown",
-      "role": "Exploratory overlap and timestamp-conflict analysis",
       "limitations": [
-        "Original source links and environmental-variable origins unavailable.",
-        "Lacks reliable pond identity; repeated times have conflicting water measurements.",
-        "Not independent of O1D1 variants."
-      ],
-      "review_date": "2026-11-05",
-      "disposition": "exploratory_only",
-      "identity_evidence": "unknown_online_origin",
-      "reuse_evidence": "unverified",
-      "benchmark_status": "excluded_pending_identity_and_quality_review",
-      "training_approved": false,
-      "local_path_patterns": [
-        "O2D3/**"
-      ],
-      "decision_reason": "Provenance and pond identity are unresolved; environmental variables are not approved covariates.",
-      "raw_redistribution_approved": false,
-      "lineage_group_id": "local_pond_variants_and_compilation"
-    },
-    {
-      "id": "shrimp_compilation_local",
-      "title": "Local compilation workbook labeled shrimp water sensor data",
-      "status": "mixed_source_compilation_origin_unknown",
-      "role": "Reference compilation and lineage comparison",
-      "limitations": [
-        "Contains summaries, examples, related pond records and river-monitoring data.",
-        "A compilation title is not evidence that its rows are shrimp observations.",
-        "Original sources and reuse terms unavailable."
-      ],
-      "review_date": "2026-11-05",
-      "disposition": "reference_only",
-      "identity_evidence": "unknown_mixed_origins",
-      "reuse_evidence": "unverified",
-      "benchmark_status": "excluded_from_forecasting",
-      "training_approved": false,
-      "local_path_patterns": [
-        "Copy of Shrimp water sensor data.xlsx"
-      ],
-      "decision_reason": "Keep for background/lineage inspection only; individual blocks cannot inherit the workbook title as species provenance.",
-      "raw_redistribution_approved": false,
-      "lineage_group_id": "local_pond_variants_and_compilation"
-    },
-    {
-      "id": "water_assessment_archive_local",
-      "title": "Local archive containing Water_Quality_Assessment.csv",
-      "status": "local_origin_unknown",
-      "role": "Exploratory tabular validation fixture",
-      "limitations": [
-        "No verified author, license, acquisition URL or timestamp provenance.",
-        "The 1,000-row table cannot establish chronological forecasting skill."
-      ],
-      "review_date": "2026-11-05",
-      "disposition": "exploratory_only",
-      "identity_evidence": "unknown_online_origin",
-      "reuse_evidence": "unverified",
-      "benchmark_status": "excluded_from_forecasting",
-      "training_approved": false,
-      "local_path_patterns": [
-        "archive.zip"
-      ],
-      "decision_reason": "Untraceable, timestamp-free table; no supervised forecasting role.",
-      "raw_redistribution_approved": false,
-      "lineage_group_id": "water_assessment_unknown_origin"
+        "7399 automatic records across other channels",
+        "Only 17 manual DO observations over approximately three days"
+      ]
     }
-  ],
-  "review_date": "2026-11-05",
-  "disposition_definitions": {
-    "eligible_candidate": "Traceable source/reuse evidence; eligible for scientific review, not approval for training.",
-    "exploratory_only": "Local inspection and preparation research only; not an approved benchmark, training release or raw-data redistribution.",
-    "reference_only": "Background or schema/chemistry reference; no role as a forecasting target dataset in the first experiment.",
-    "excluded": "Not part of the current prepared release. May be reconsidered with new evidence."
-  }
+  ]
 }

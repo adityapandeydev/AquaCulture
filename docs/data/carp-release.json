@@ -1,0 +1,37 @@
+{
+  "version": "fwi-do-release-v2",
+  "status": "ready_for_model_development",
+  "local_release": "Datasets/releases/carp-v2",
+  "manifest_sha256": "8a1aef01eb548e5ca6074279d712f4f55feedfe916a23c7a7c8dbda157566c23",
+  "files_sha256": {
+    "hours.csv": "e9ec251cbab918ccfde15e6288625152493ed648b8213c3bc609028e66267f50",
+    "windows.csv": "46f9346c1686853091460cb1f6ebb88e17b329f7af6a003aa21b1d298e5922c8",
+    "policy.json": "3421b0a5f6b7b65b5ee239efb479bec3db8433d469076386631ca986c889cda3"
+  },
+  "preparation_sha256": "bb86f2e70ca182b0e3c9cbe4d3546be9529bd59262f071820ef7784a97ce8a14",
+  "roles": {
+    "ara2_0677080b": "calibration",
+    "ara2_0f143c64": "test",
+    "ara2_148f1633": "development",
+    "ara2_176528d3": "calibration",
+    "ara2_29660d32": "development",
+    "ara2_3b2f3973": "development",
+    "ara2_3eab831e": "development",
+    "ara2_3ed4df8e": "development",
+    "ara2_45e1cde5": "test",
+    "ara2_4f79fc8d": "calibration",
+    "ara2_573a2826": "test",
+    "ara2_6ca69422": "test",
+    "ara2_858b914c": "development",
+    "ara2_b3d128ac": "development",
+    "ara2_c9cdacda": "development",
+    "ara2_ca187575": "development",
+    "ara2_d52ddb31": "development"
+  },
+  "reserved_partitions": [
+    "calibration",
+    "test_unseen_pond",
+    "test_seen_pond",
+    "test_unseen_pond_concurrent"
+  ]
+}
