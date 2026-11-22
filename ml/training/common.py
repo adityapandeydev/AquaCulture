@@ -62,8 +62,7 @@ def provenance():
 def write_json(path, value):
     """Write completely before replacing, so an interrupted run leaves no partial record."""
     temporary = Path(str(path) + '.part')
-    temporary.write_bytes((json.dumps(value, indent=1, allow_nan=False, default=float) + '
-').encode())
+    temporary.write_bytes((json.dumps(value, indent=1, allow_nan=False, default=float) + '\n').encode())
     temporary.replace(path)
 
 
