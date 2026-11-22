@@ -75,7 +75,7 @@ Errors have the form `{"error": {"code": "...", "message": "...", "reasons": []}
 
 `GET /health` reports that the process is alive. `GET /ready` reports that a verified model is loaded. `GET /v2/model` describes the model.
 
-This replaces the [pilot's proposed v1 contract](../pilot/pilot-closeout.md#forecast-interface-v1), which was never implemented. There is no compatibility between them.
+This is the first implemented contract. An earlier v1 design from the pilot was never built.
 
 ## Model bundle
 

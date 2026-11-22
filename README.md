@@ -12,7 +12,19 @@ AquaTech is a pond monitoring and early-warning system for aquaculture. It is fo
 | Backend | Working on localhost, Go. [Guide](backend/README.md) |
 | Frontend | Working on localhost, React. [Guide](frontend/README.md) |
 
-The first forecasting experiment, on a single tilapia tank, failed its acceptance criteria. Its record is in the [pilot archive](docs/pilot/README.md). No suitable shrimp dataset has been found, so shrimp ponds will have monitoring and threshold alerts without forecasts.
+An earlier experiment on a single tilapia tank failed its limits. [Pilot record](docs/pilot/README.md). No suitable shrimp data has been found, so shrimp ponds have monitoring and limit alerts without forecasts.
+
+## Documents
+
+| Question | Page |
+| --- | --- |
+| What data is used, and what was rejected? | [Sources](docs/data/sources.md), [carp dataset](docs/data/carp.md) |
+| How were the models chosen and tested? | [Plan](docs/models/forecast.md), [results](docs/models/results.md) |
+| How does the forecast service work? | [Service](docs/models/service.md) |
+| How do the backend and app work? | [Backend](backend/README.md), [frontend](frontend/README.md) |
+| What was the first experiment? | [Pilot](docs/pilot/README.md) |
+
+JSON files beside these pages hold fixed policies, limits and checksums. Results depend on their exact content, so they are changed only as a new version.
 
 ## Layout
 
