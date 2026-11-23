@@ -1,7 +1,7 @@
 import type { Hour } from '../api/types'
 import { HOUR, localHour } from './time'
 
-export type Point = { t: number; v: number }
+type Point = { t: number; v: number }
 
 /** An hour needs three quarters of its readings to count, as in the forecast model. */
 export const FULL = 0.75

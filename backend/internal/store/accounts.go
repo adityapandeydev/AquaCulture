@@ -93,12 +93,6 @@ func (s *Store) UpdatePond(ctx context.Context, p Pond) (Pond, error) {
 	return single[Pond](rows, err)
 }
 
-// OwnedPond returns a pond only to its owner.
-func (s *Store) OwnedPond(ctx context.Context, owner, id string) (Pond, error) {
-	rows, err := s.pool.Query(ctx, "SELECT "+pondColumns+" FROM ponds WHERE id = $1 AND owner_id = $2", id, owner)
-	return single[Pond](rows, err)
-}
-
 // SessionPond returns a pond if it belongs to the session's user, in one round trip.
 func (s *Store) SessionPond(ctx context.Context, tokenHash []byte, id string) (Pond, error) {
 	rows, err := s.pool.Query(ctx, "SELECT "+pondColumns+` FROM ponds WHERE id = $2 AND owner_id =

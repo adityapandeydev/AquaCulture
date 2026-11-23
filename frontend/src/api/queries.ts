@@ -1,6 +1,6 @@
 import { QueryCache, QueryClient, useQuery } from '@tanstack/react-query'
 import { api, ApiError } from './client'
-import type { Accuracy, Alert, Device, Forecast, Hour, ModelInfo, Overview, Pond, Reading, Species, Summary, User } from './types'
+import type { Accuracy, Alert, Device, Forecast, Hour, ModelInfo, Overview, Reading, Species, Summary, User } from './types'
 
 const LIVE = 30_000
 
@@ -69,4 +69,3 @@ export const refreshPond = (id: string) =>
     queryClient.invalidateQueries({ queryKey: ['alerts'] }),
   ])
 
-export type { Pond }

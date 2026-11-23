@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-export const calm = () => matchMedia('(prefers-reduced-motion: reduce)').matches
+const calm = () => matchMedia('(prefers-reduced-motion: reduce)').matches
 
 /** One listener for every button. The ripple starts where the finger lands. */
 export function installRipples() {

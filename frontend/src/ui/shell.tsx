@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query'
 import { api } from '../api/client'
 import { queryClient, useMe, useOpenAlerts } from '../api/queries'
 import { finishBoot } from '../lib/motion'
-import { Button, Failed, Icon, type IconName } from './kit'
+import { Failed, Icon, type IconName } from './kit'
 import * as ui from './styles'
 
 export const Drop = () => (
@@ -27,7 +27,7 @@ function useTheme() {
   return { dark, toggle }
 }
 
-export function ThemeButton() {
+function ThemeButton() {
   const { dark, toggle } = useTheme()
   return (
     <button type="button" className={ui.cx(ui.btn('ghost'), 'justify-start max-md:px-2.5')} onClick={toggle} aria-label={dark ? 'Use the light theme' : 'Use the dark theme'}>
@@ -104,12 +104,7 @@ function Inside({ name }: { name: string }) {
   )
 }
 
-export const PageFailed = ({ error }: { error: unknown }) => (
-  <main className={ui.page}><Failed error={error} retry={() => location.reload()} /></main>
-)
-
 export const BackLink = ({ to, children }: { to: string; children: string }) => (
   <NavLink to={to} viewTransition className={ui.btn('quiet')}><span className={ui.face}><Icon name="back" />{children}</span></NavLink>
 )
 
-export { Button }

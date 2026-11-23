@@ -4,7 +4,7 @@ import { HOUR } from './time'
 export const STALE = 2 * HOUR
 
 export type Tone = 'neutral' | 'warning' | 'critical' | 'demo'
-export type State = { label: string; tone: Tone; rank: number }
+type State = { label: string; tone: Tone; rank: number }
 
 /** Colour of one reading against the operator's own limits. No limit means no judgement. */
 export function toneOf(value: number | null, limits: Pick<Limits, 'do_low' | 'do_critical'>): 'none' | 'warning' | 'critical' {

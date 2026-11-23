@@ -1,4 +1,4 @@
-import type { Limits, Species } from '../api/types'
+import type { Species } from '../api/types'
 import { Button, Field } from '../ui/kit'
 import { limitKeys, type Draft } from './draft'
 import * as ui from '../ui/styles'
@@ -36,4 +36,3 @@ export function LimitFields({ draft, onChange, species }: { draft: Draft; onChan
   )
 }
 
-export type { Limits }
